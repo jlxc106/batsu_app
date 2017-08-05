@@ -7,6 +7,7 @@
 .topbar-menu{
     text-align: center;
 }
+.error { border: 1px solid red; }
 
 .topbar-links{
     margin: 0 15px;
@@ -179,7 +180,7 @@ input{
 .login_trouble-signup{
     font-size: 13px;
     text-align: center;
-    margin: 55px 0 5px;
+    margin: 46px 0 5px;
     color: red;
 }
 
@@ -196,14 +197,12 @@ input{
     margin:0 25px;
 }
 
-.fb_button{
-    margin: 20px 0 0;
-    width: 250px;
-    height: auto;
-    padding-left: 0px;
-    padding-right: 0px;
-    border-right-width: 0px;
-    border-left-width: 0px;
+.fb_button_outer{
+    /*background: url("./imgs/fb_login.png");*/
+    background-size: contain;
+    height: 44px;
+    width: 229px;
+    margin-top:13px;
 }
 
 /*@media screen and (min-width: 700px) {*/

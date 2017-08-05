@@ -31,8 +31,8 @@
 
 $output['data'] = [];
 
-$stmt = $conn->prepare("INSERT INTO events (Creator_ID, Event_Name, Event_DateTime, Event_Location, Event_Description) VALUES (?,?,?,?,?)");
-
+$stmt = $conn->prepare("INSERT INTO events (Creator_ID, Event_Name, Event_DateTime, Event_Location, Event_Address, Event_Description) VALUES (?,?,?,?,?,?)");
+$stmt->bind_param("ssssss", $_POST[], $_POST["event_name"], $_POST["event_date"] + $_POST["event_time"], $_POST["location"], $_POST["address"], $_POST["description"]);
 $stmt = $conn->prepare("INSERT INTO accounts (first_name, last_name, email, phone, password, DOB) VALUES (?,?,?,?,?,?)");
 $stmt->bind_param("ssssss", $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phone'], $encryped_pw, $_POST['dob']);
 

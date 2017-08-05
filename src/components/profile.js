@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class Profile extends React.Component{
-    constructor(props){
-        super(props);
+class Profile extends Component{
+    componentWillMount(){
 
-        this.state = {
+    }
 
-        }
+    handleEdit(id){
+
     }
     render(){
         return(
@@ -39,4 +39,9 @@ class Profile extends React.Component{
         )
     }
 }
-export default Profile;
+function mapStateToProps(state){
+    return{
+
+    }
+}
+export default connect(mapStateToProps, {getTodos, deleteTodo})();

@@ -1,5 +1,12 @@
 <?php
 
+require("mysql_connect.php");
+
+$output = [
+    'success'=> false, //we assume we will fail
+    'errors'=>[]
+];
+
 $encryped_pw = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $email = $_POST['email'];
 $phone = $_POST['phone'];

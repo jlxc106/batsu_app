@@ -44,20 +44,20 @@ else if($_GET['operation'] === "insertEvent"){
     include("./php/insertEvent.php");
 }
 else if($_GET['operation'] === "readAll"){
-    include("http://localhost/Website/accountability_db/c5.17_accountability/php/read.php");
+    include("./php/read.php");
 }
 else if($_GET['operation'] === "delete"){
-    include("http://localhost/Website/accountability_db/c5.17_accountability/php/delete1.php");
+    include("./php/delete1.php");
 }
 else if($_GET['operation'] === "update"){
-    include("http://localhost/Website/accountability_db/c5.17_accountability/php/update1.php");
+    include("./php/update1.php");
 }
 
 
 
 
 if($output['success'] === false){
-    array_push($output['errors'], mysqli_error($conn));
+    array_push($output['errors'] = mysqli_error($conn));
 }
 
 $outputJSON = json_encode($output);
