@@ -52,6 +52,9 @@ else if($_GET['operation'] === "delete"){
 else if($_GET['operation'] === "update"){
     include("./php/update1.php");
 }
+else if($_GET['operation'] === "authenticateUser"){
+    include("./authenticate_login.php");
+}
 
 
 if($output['success'] === false){
