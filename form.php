@@ -10,7 +10,7 @@ $output = [
 ];
 
 $_POST = json_decode(file_get_contents('php://input'), true);
-//
+
 //echo '<pre>';
 //print_r($_POST);
 //echo '</pre>';
@@ -54,6 +54,9 @@ else if($_GET['operation'] === "update"){
 }
 else if($_GET['operation'] === "authenticateUser"){
     include("./authenticate_login.php");
+}
+else if($_GET['operation'] === "uploadImage"){
+    include("./updateProfilePic.php");
 }
 
 

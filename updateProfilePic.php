@@ -5,7 +5,7 @@ $directory_needed = 'upload_images';
 
 $upload_dir = 'upload_images/'; //variable to hold images directory on server
 
-$target_file = $upload_dir.$_FILES['upload_file']['name'];
+$target_file = $upload_dir.$_FILES['profile']['name'];
 
 $uploadOK = true;
 
@@ -17,17 +17,19 @@ $uploadOK = true;
 
 $output = ['success' => false];
 
-$file = $_FILES['upload_file']['tmp_name'];
+$file = $_FILES['profile']['tmp_name'];
 
-    if(isset($_POST['submit'])){
+//print_r('what is this?'.$file);
+
+//    if(isset($_POST['submit'])){
 
         // Check file size
-        if($_FILES['upload_file']['size'] == 0){
+        if($_FILES['profile']['size'] == 0){
             $output['errors'][] = 'The selected file is too large (2MB)';
         }
         // Allow certain file formats
         else{
-            $extension_info = pathinfo($_FILES['upload_file']['name'],PATHINFO_EXTENSION);
+            $extension_info = pathinfo($_FILES['profile']['name'],PATHINFO_EXTENSION);
             // Check the file extension
                 if($extension_info == gif || $extension_info ==jpeg || $extension_info ==jpg || $extension_info ==png ){
                     $output['uploaded image'] = 'correct file type';
@@ -36,9 +38,9 @@ $file = $_FILES['upload_file']['tmp_name'];
 
                 //Begin inserting image into file
                 if($uploadOK){
-                    if(move_uploaded_file($_FILES['upload_file']['tmp_name'], $target_file)){
+                    if(move_uploaded_file($_FILES['profile']['tmp_name'], $target_file)){
                         $output['success'] = true;
-                        $output['success msg'] = "The file".$_FILES['upload_file']['name']."has been uploaded.";
+                        $output['success msg'] = "The file".$_FILES['profile']['name']."has been uploaded.";
 
                         //begin insertion into the database
                         $query = " INSERT INTO `upload_images`(`path`) VALUES ('$target_file')";
@@ -68,11 +70,11 @@ $file = $_FILES['upload_file']['tmp_name'];
             }
         }
 
-    }
-    else{
-        $uploadOK = false;
-        $output['errors'][] = 'No file to upload';
-    }
+//    }
+//    else{
+//        $uploadOK = false;
+//        $output['errors'][] = 'No file to upload';
+//    }
 
 
 // $image = $_FILES['upload_file']['tmp_name']; //can wrap in addslashes() to prevent sql injections

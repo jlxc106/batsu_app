@@ -99,6 +99,26 @@ div.card{
     margin: 10px 0 2px;
 }
 
+.fileInput {
+    width:auto;
+    border:0;
+    font-size:10px;
+    line-height: normal;
+}
+.fileButton{
+    font-size:10px;
+    border-radius:0px;
+}
+/***changing CSS3 for google places module***/
+
+#PlacesAutocomplete__root {
+    width:100%!important;
+}
+#PlacesAutocomplete__root > input {
+    height:41px!important;
+}
+
+/********************************************/
 .login-button{
     font-family: crowbar;
     width: 100px;
@@ -361,11 +381,35 @@ nav.bm-item-list{
 
 div.bm-menu{
     background-color: #cc0000;
-    box-shadow: inset -8px 0 18px -7px #000000,
-    inset 0 20px 20px -20px #000000;
+    box-shadow: inset -8px 0 18px -7px #000000, inset 0 20px 20px -20px #000000;
 }
 
 
+/* my_events page css */
+
+.myEvents_title{
+    margin: 30px 0 5px;
+    font-size: 50px;
+    color: red;
+    text-shadow:
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 6px black;
+}
+
+.myEvents_subtitle{
+    color: orange;
+    font-size: 20px;
+    margin: 5px 0 30px;
+    text-shadow:
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 3px black;
+}
 /* my_events page css */
 
 .myEvents_title{
@@ -395,7 +439,6 @@ div.bm-menu{
 .events_box_title{
     margin-top: 15px;
     color: black;
-
 }
 
 .my_created_events_box{
@@ -523,10 +566,32 @@ div.bm-menu{
             2px 2px 0 black,
             2px 2px 6px black;
 }
+.card-title {
+    margin: 20px 0 20px !important;
+}
 
-friends_picture_container{
+.profile_parent {
+    align-items:center!important;
+}
+
+.friends_picture_container{
     overflow: auto;
     white-space: nowrap;
+}
+.profile_picture_preview{
+    padding: 0 0 20px;
+    height: 30vh;
+    width: 60vw;
+}
+.profile_picture_preview > img {
+    height:200px;
+    border:1px solid black;
+    box-shadow:
+            0 0 0 black,
+            0 0 0 black,
+            0 0 0 black,
+            0 0 0 black,
+            1px 1px 20px black;
 }
 
 .bk_image{
