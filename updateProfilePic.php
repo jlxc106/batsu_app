@@ -19,13 +19,9 @@ $output = ['success' => false];
 
 $file = $_FILES['profile']['tmp_name'];
 
-//print_r('what is this?'.$file);
-
-//    if(isset($_POST['submit'])){
-
         // Check file size
         if($_FILES['profile']['size'] == 0){
-            $output['errors'][] = 'The selected file is too large (2MB)';
+            $output['errors'][] = 'No file uploaded or the selected file is too large (2MB)';
         }
         // Allow certain file formats
         else{
@@ -42,8 +38,8 @@ $file = $_FILES['profile']['tmp_name'];
                         $output['success'] = true;
                         $output['success msg'] = "The file".$_FILES['profile']['name']."has been uploaded.";
 
-                        //begin insertion into the database
-                        $query = " INSERT INTO `upload_images`(`path`) VALUES ('$target_file')";
+                        //begin UPDATE into the database
+                        $query = " UPDATE `upload_images` SET `path` = '$target_file' WHERE id=4 ";
                         $result = mysqli_query($conn,$query);
 
                         if(mysqli_affected_rows($conn)>0){
@@ -69,13 +65,6 @@ $file = $_FILES['profile']['tmp_name'];
                 $output['uploaded image'] = 'incorrect file type';
             }
         }
-
-//    }
-//    else{
-//        $uploadOK = false;
-//        $output['errors'][] = 'No file to upload';
-//    }
-
 
 // $image = $_FILES['upload_file']['tmp_name']; //can wrap in addslashes() to prevent sql injections
 

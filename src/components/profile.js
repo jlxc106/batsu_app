@@ -29,12 +29,12 @@ class Profile extends Component {
             this.setState({userData: resp.data.data});
         })
     }
-
+    //axios call needed to upload image
     postPic(){
         let filepic = this.state.file;
-
         const formData = new FormData();
         formData.append('profile', filepic);
+        console.log(formData);
 
         axios.post('http://localhost/c5.17_accountability/form.php?operation=uploadImage', formData).then((resp) => {
             console.log('Add resp:', resp)
