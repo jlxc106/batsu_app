@@ -1,8 +1,11 @@
-// import React, { Component } from 'react';
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import axios from 'axios';
 import './app.css';
+
+
+const BASE_URL = "http://localhost/c5.17_accountability/UpdateProfilePic.php"; //http://localhost/c5.17_accountability/form.php?operation=authenticateUser`
+
 class Profile extends Component {
     constructor(props){
         super(props);
@@ -17,9 +20,9 @@ class Profile extends Component {
         }
         // this.handleAxios();
     }
-
-
-
+    componentWillMount(){
+        this.handleAxios();
+    }
     handleAxios(){
         // const {form} = this.state;
         // console.log(form);
@@ -29,13 +32,13 @@ class Profile extends Component {
             this.setState({userData: resp.data.data});
         })
     }
-
-
-    componentWillMount(){
-        this.handleAxios();
+    postProfAxios(){
+        const {userData} = this.userData.profile_pic
+        console.log(userData);
+        axios.post(`${BASE_URL}`, userData).then((resp) => {
+            console.log('Add resp:', resp)
+        })
     }
-
-
     render() {
         return (
             <div>
@@ -46,7 +49,7 @@ class Profile extends Component {
                         <form encType="multipart/form-data">
                             Select image to upload:
                             <input type="file" name="fileToUpload" id="fileToUpload" />
-                            <input type="submit" value="Upload File" name="submit"></input>
+                            <input type="submit" value="Upload File" name="submit" onClick={this.postProfAxios} />
                         </form>
                         <div className="card-block">
                             <ul className="list-group list-group-flush container">
@@ -62,5 +65,4 @@ class Profile extends Component {
         )
     }
 }
-
 export default Profile;
