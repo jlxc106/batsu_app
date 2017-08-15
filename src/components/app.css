@@ -131,7 +131,7 @@ h1.card-title{
     text-align: center;
 }
 
-input, select{
+input, select {
     width: 185px;
     border: 2px solid black;
     border-radius: 5px;
@@ -298,6 +298,12 @@ input, select{
   background: rgba(0, 0, 0, 0.3);
 }
 
+/************friends list(brian)************/
+.friends_picture_container {
+    overflow: auto;
+    white-space: nowrap;
+}
+
 a.menu-item{
     font-family: BarleyScript;
     color: white;
@@ -320,8 +326,40 @@ div.bm-menu{
     background-color: #cc0000;
     border-right: 1px solid black;
 }
+.friends_picture_container img {
+    height:100px;
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
 
+}
+.msg_container {
+    border:1px solid black;
+    display:inline-block;
+}
+.msg_container > p {
+    border-bottom: 1px solid black;
+}
+#loading{
+    bottom: 20vh;
+    position:absolute;
+    
+    width:100vw;
 
+}
+.hi div:nth-child(2){
+    position: absolute;
+}
+
+#eventmap{
+    border:2px solid black;
+    width:92vw;
+    height:24.7vh;
+    display: inline-block; 
+    margin-bottom:3vh;
+}
+
+/************************************/
 /*@media screen and (min-width: 700px) {*/
     /*.batsu-app{*/
         /*font-family: Arial;*/
