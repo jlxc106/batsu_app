@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Maps  from './event_marker';
 // import List from './list_of_events';
+import Timer from './timer';
 
 class CreatedEvent extends Component{
       constructor(props){
@@ -82,7 +83,7 @@ class CreatedEvent extends Component{
             <form className="after_creating_event" onSubmit={(e) => this.handleCheckIn(e)}>
                 <h1>{this.state.list.eventName}</h1>
                 <h3>{this.state.list.eventDateTime}</h3>
-                <h3>12:32:22</h3>
+                <Timer eventID={this.state.eventID}/>
                 <h5>{this.state.list.eventAddress}</h5>
                 <div className="line_space"></div>
                 <div>list of invitee</div>
