@@ -48,11 +48,11 @@ class LogInForm extends Component {
                 <form onSubmit={(event) => {this.handleFormSubmit(event)}}>
                     <div>
                         <h6 className="login-subtitles">E-mail</h6>
-                        <input name="email" type="email" value={email} onChange={ (event) => this.handleChange(event) } />
+                        <input name="email" placeholder="E-mail" type="email" value={email} onChange={ (event) => this.handleChange(event) } />
                     </div>
                     <div>
                         <h6 className="login-subtitles">Password</h6>
-                        <input name="password" type="password" value={password} onChange={ (event) => this.handleChange(event) } />
+                        <input name="password" placeholder="Password" type="password" value={password} onChange={ (event) => this.handleChange(event) } />
                     </div>
                     <button type="submit" className="login-button">Log In</button>
                 </form>

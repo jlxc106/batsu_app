@@ -99,7 +99,7 @@ div.card{
     margin: 10px 0 2px;
 }
 
-.fileInput {
+.profileInput {
     width:auto;
     border:0;
     font-size:10px;
@@ -328,9 +328,9 @@ button:hover, button:visited, button:link, button:active{
 
 /* General sidebar styles */
 .bm-menu {
-    background: #373a47;
-    padding: 31px;
-    font-size: 14px;
+  background: #373a47;
+  padding: 31px;
+  font-size: 14px;
 }
 
 .bm-menu-wrap{
@@ -434,6 +434,36 @@ div.bm-menu{
             2px 2px 0 black,
             2px 2px 0 black,
             2px 2px 3px black;
+}
+
+.events_box_title {
+    margin-top: 15px;
+    color: black;
+}
+/* my_events page css */
+
+.myEvents_title{
+    margin: 30px 0 5px;
+    font-size: 50px;
+    color: red;
+    text-shadow:
+        2px 2px 0 black,
+        2px 2px 0 black,
+        2px 2px 0 black,
+        2px 2px 0 black,
+        2px 2px 6px black;
+}
+
+.myEvents_subtitle{
+    color: orange;
+    font-size: 20px;
+    margin: 5px 0 30px;
+    text-shadow:
+        2px 2px 0 black,
+        2px 2px 0 black,
+        2px 2px 0 black,
+        2px 2px 0 black,
+        2px 2px 3px black;
 }
 
 .events_box_title{
@@ -569,12 +599,11 @@ div.bm-menu{
 .card-title {
     margin: 20px 0 20px !important;
 }
-
 .profile_parent {
     align-items:center!important;
 }
 
-.friends_picture_container{
+friends_picture_container{
     overflow: auto;
     white-space: nowrap;
 }
@@ -597,6 +626,7 @@ div.bm-menu{
 .bk_image{
     height: 100px;
 }
+
 /*@media screen and (min-width: 700px) {*/
 /*.batsu-app{*/
 /*font-family: Arial;*/

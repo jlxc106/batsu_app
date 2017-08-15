@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import './app.css'
-// import NavBar from './nav_bar';
+
 
 class Events extends Component {
     constructor(props) {

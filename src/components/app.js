@@ -8,6 +8,7 @@ import HowTo from './how_to';
 import CreatedEvent from './preview_event';
 import AboutUs from './about_us';
 import Map from './map';
+
 const App = () => (
     <div className="topbar-menu">
         <Route exact path="/" component={Home} />
@@ -16,8 +17,8 @@ const App = () => (
         <Route path="/my_events" component={MyEvents} />
         <Route path="/how_to" component={HowTo} />
         <Route path="/about_us" component={AboutUs} />
-            <Route path="/preview_event" component={CreatedEvent} />
+        <Route path="/preview_event" component={CreatedEvent} />
         <Route path="/map" component={Map} />
     </div>
-)
+);
 export default App;

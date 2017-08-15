@@ -17,6 +17,7 @@ class NavBar extends Component {
     logOut() {
         console.log("~log out~");
         document.cookie = ";" + new Date(0);
+        console.log("document.cookie: ",document.cookie)
     }
 
     render() {
@@ -24,8 +25,8 @@ class NavBar extends Component {
             <div className="topHeader">
                 <h3 className="topHeaderTitle">_Batsu</h3>
                 <Menu width={'175px'} className="bm-menu">
-                    <a className="menu-item" href="/">Home</a>
-                    <a className="menu-item" href="/profile">Profile</a>
+                    <a className="menu-item" href="/map">Home</a>
+                    <a className="menu-item" href="/profile">My Profile</a>
                     <a className="menu-item" href="/map">Map</a>
                     <a className="menu-item" href="/my_events">My Events</a>
                     <a className="menu-item" href="/how_to">How To</a>

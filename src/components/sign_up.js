@@ -59,7 +59,7 @@ class Sign_Up extends Component {
         const {fname, lname, phone, email, password, password_conf, dob} = this.state.form;
         return (
             <div className="signup-page">
-                <h1 className="batsu-title-signup">_Sign-Up</h1>
+                <h1 className="batsu-title-signup">Sign Up</h1>
                 <form onSubmit={(event) => {this.handleFormSubmit(event)}} >
                     <div>
                         <h6 className="signin-subtitles">First Name</h6>
@@ -89,7 +89,7 @@ class Sign_Up extends Component {
                         <h6 className="signin-subtitles">Date of Birth</h6>
                         <input className="signup_info" name="dob" type="date" value={dob} onChange={(event) => this.handleChange(event)}/>
                     </div>
-                    <Link to="/" className="signup-button">Back</Link>
+                    <button className="back-signup-button"><Link to="/">Back</Link></button>
                     <button className="submit-signup-button" type="submit">Submit</button>
                 </form>
             </div>

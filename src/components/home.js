@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-// import NavBar from './navbar';
 import LogInForm from './title_input';
 import Sign_Up from './sign_up.js';
-import Event from './events';
 import './app.css';
 
 
@@ -11,7 +9,6 @@ const Home = () => {
     return (
         
         <div className="batsu-app">
-            {/* <NavBar /> */}
             <h1 className="batsu-title">_Batsu</h1>
             <div>
                 <LogInForm />
