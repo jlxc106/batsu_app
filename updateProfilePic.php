@@ -1,19 +1,13 @@
 <?php
 require('mysql_connect.php');
 
-$directory_needed = 'upload_images';
+//****$directory_needed ON SERVER = 'upload_images';***
 
 $upload_dir = 'upload_images/'; //variable to hold images directory on server
 
-$target_file = $upload_dir.$_FILES['profile']['name'];
+$target_file = $upload_dir; //.$_FILES['profile']['name'];
 
 $uploadOK = true;
-
-// if(is_dir($directory_needed)){
-// 	echo 'the file exists';
-// }else{
-// 	echo 'the file does not exists';
-// }
 
 $output = ['success' => false];
 
@@ -32,6 +26,11 @@ $file = $_FILES['profile']['tmp_name'];
                     $output['success'] = true;
                     $uploadOK = true;
 
+                    //****************USING UNIQUE ID TO STORE FILES && AVOID DUPLICATES**********************
+                    $file_name_new = uniqid('',true).".".$extension_info;
+                    $target_file = $upload_dir.$file_name_new;
+
+
                 //Begin inserting image into file
                 if($uploadOK){
                     if(move_uploaded_file($_FILES['profile']['tmp_name'], $target_file)){
@@ -39,7 +38,7 @@ $file = $_FILES['profile']['tmp_name'];
                         $output['success msg'] = "The file".$_FILES['profile']['name']."has been uploaded.";
 
                         //begin UPDATE into the database
-                        $query = " UPDATE `upload_images` SET `path` = '$target_file' WHERE id=4 ";
+                        $query = " UPDATE `upload_images` SET `path` = '$target_file' WHERE id=4 "; // NEED TO KNOW WHICH USER IS LOGGED IN TO KNOW WHERE TO UPDATE
                         $result = mysqli_query($conn,$query);
 
                         if(mysqli_affected_rows($conn)>0){
@@ -57,7 +56,6 @@ $file = $_FILES['profile']['tmp_name'];
                     }
                 }
 
-
             }
             else{
                 $uploadOK = false;
@@ -66,14 +64,6 @@ $file = $_FILES['profile']['tmp_name'];
             }
         }
 
-// $image = $_FILES['upload_file']['tmp_name']; //can wrap in addslashes() to prevent sql injections
-
-// $image_name = $_FILES['upload_file']['name'];
-
-
-
             print_r(json_encode($output));
-
-
 
 ?>
