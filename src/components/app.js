@@ -8,7 +8,6 @@ import HowTo from './how_to';
 import CreatedEvent from './preview_event';
 import AboutUs from './about_us';
 import Map from './map';
-
 const App = () => (
     <div className="topbar-menu">
         <Route exact path="/" component={Home} />

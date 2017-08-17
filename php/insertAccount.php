@@ -1,12 +1,5 @@
 <?php
-//session_id('mq5ahmjq95jr5nsjbb4fhvcv52');
-session_start();
 require("mysql_connect.php");
-
-//$output = [
-//    'success'=> false, //we assume we will fail
-//    'errors'=>[]
-//];
 
 $encryped_pw = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $email = $_POST['email'];
@@ -45,15 +38,26 @@ if(count($output['errors']) === 0 ){
 
     if (mysqli_affected_rows($conn) === 1) {
         $output['success'] = true;
-        $output['sesh_id'] = session_id();
+        $id = mysqli_stmt_insert_id($stmt);
+        $time = time();
+        $hash_input = (string)$id . (string)$time;
+        $hash_output = password_hash($hash_input, PASSWORD_DEFAULT);
+        $output['token'] = $hash_output;
+        $stmt->close();
+
+        $stmt1 = $conn->prepare("UPDATE accounts SET token=? WHERE ID=?");
+        $stmt1->bind_param("si", $hash_output, $id);
+        $stmt1->execute();
+        $stmt1->close();
+
     } else {
         array_push($output["errors"], 'insert error');
         array_push($output['errors'], mysqli_error($conn));
     }
 
-    $_SESSION['user']=mysqli_stmt_insert_id($stmt);
+//    $_SESSION['user']=mysqli_stmt_insert_id($stmt);
     ///$id = session_id();
 
-    $stmt->close();
+//    $stmt->close();
 }
 ?>

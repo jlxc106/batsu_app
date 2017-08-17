@@ -11,34 +11,15 @@ $output = [
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 
-//echo '<pre>';
-//print_r($_POST);
-//echo '</pre>';
-//
-//exit;
-
-
-//echo("get superglobal check");
-//$query = sprintf("INSERT INTO accounts SET first_name='%s', last_name='%s', email='%s', phone='%s'", $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phone']);
-//
-//$result = mysqli_query($conn, $query);
-//
-//if(empty($result)){
-//    array_push($output["errors"], 'database error');
-//}
-//else{
-//    if(mysqli_affected_rows($conn) === 1){
-//        $output['success'] = true;
-//    }
-//    else{
-//        array_push($output["errors"], 'insert error');
-//    }
-//}
-//print("inside php file");
-//echo('sdjfksdlf');
 
 if($_GET['operation'] === "insertUser"){
     include("./php/insertAccount.php");
+}
+else if($_GET['operation'] === "getTime"){
+    include("./php/getTime.php");
+}
+else if($_GET['operation'] === "signin"){
+    include("./php/authenticate_login.php");
 }
 else if($_GET['operation'] === "insertEvent"){
     include("./php/insertEvent.php");
@@ -52,11 +33,13 @@ else if($_GET['operation'] === "delete"){
 else if($_GET['operation'] === "update"){
     include("./php/update1.php");
 }
+
 else if($_GET['operation'] === "authenticateUser"){
     include("./authenticate_login.php");
 }
 else if($_GET['operation'] === "uploadImage"){
     include("./updateProfilePic.php");
+
 }
 
 

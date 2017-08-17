@@ -24,7 +24,9 @@ class Profile extends Component {
 
     handleAxios(){
         console.log(this.state);
-        axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/getData.php?operation=profile&session='+document.cookie).then((resp) => {
+        // console.log("0: "+ document.cookie.split('=')[0]);
+        // console.log("1: "+ document.cookie.split('=')[1]);
+        axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/getData.php?operation=profile&token='+document.cookie.split('=')[1]).then((resp) => {
             console.log(resp);
             this.setState({userData: resp.data.data});
         })
@@ -59,25 +61,25 @@ class Profile extends Component {
         reader.readAsDataURL(file)
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        console.log('Uploading', this.state);
-        this.setState({
-            canEdit:false
-        })
-        this.postPic();
-    }
 
+    handleSubmit(e) {
+    e.preventDefault();
+    console.log('Uploading', this.state);
+    this.setState({
+    canEdit:false
+    })
+    this.postPic();
+}
 
     render() {
-        let data  = this.state.file;
-        console.log(data);
+
         if(this.state.canEdit === false){
             return (
                 <div>
                     <h1 className="card-title">Profile</h1>
                     <div className="card profile_parent">
                         <div className="profile_picture_preview">
+
                             <img src={this.state.imagePreviewUrl} alt=""/>
                         </div>
                         <div className="card-block">
@@ -89,6 +91,7 @@ class Profile extends Component {
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         </div>
                         <button onClick={() => this.setState({canEdit: true})} className="btn btn-outline-danger">Edit</button>
+
                     </div>
                 </div>
             )

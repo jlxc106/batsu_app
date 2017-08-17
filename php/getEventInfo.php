@@ -9,18 +9,22 @@ if(isset($_GET['eventID'])){
     $stmt->bind_result($creatorid, $eventid, $eventname, $eventdatetime, $eventlat, $eventlong, $eventaddress, $eventdesc);
     $stmt->fetch();
     $stmt->close();
-    $query1 = "SELECT Attendee_ID, Attendee_First_Name, Attendee_Last_Name, isCreator FROM event_attendees WHERE Event_ID = ?";
+    $query1 = "SELECT ea.Attendee_ID, ea.Attendee_First_Name, ea.Attendee_Last_Name, ea.isCreator, ea.Punishment, a.path FROM event_attendees AS ea INNER JOIN accounts AS a ON ea.Attendee_ID = a.ID WHERE Event_ID = ?";
+
+
     if($stmt1 = $conn->prepare($query1)){
         $stmt1->bind_param("i", $eventID);
         $stmt1->execute();
-        $stmt1->bind_result($attendeeID, $attendeeFName, $attendeeLName, $isCreator);
+        $stmt1->bind_result($attendeeID, $attendeeFName, $attendeeLName, $isCreator, $Punishment, $imagePath);
         $eventinvitees = [];
         while($stmt1->fetch()){
-            array_push($eventinvitees, (object)["attendeeID" => $attendeeID, "attendeeFName" => $attendeeFName, "attendeeLName" => $attendeeLName, "isCreator" => $isCreator]);
+            array_push($eventinvitees, (object)["account_ID" => $attendeeID, "fName" => $attendeeFName, "lName" => $attendeeLName, "isCreator" => $isCreator,  "path" => $imagePath]);
+
         }
         $stmt1->close();
     }
-    $output["data"] = (object)["eventName" =>$eventname, "eventDateTime"=>$eventdatetime , "eventinvitees"=>$eventinvitees, "eventAddress"=> $eventaddress, "eventDescription"=>$eventdesc, "eventLat"=>$eventlat, "eventLong"=>$eventlong];
+    $output['success'] = true;
+    $output["data"] = (object)["eventName"=>$eventname, "eventDateTime"=>$eventdatetime , "eventinvitees"=>$eventinvitees, "eventPunishment"=>$Punishment, "eventAddress"=>$eventaddress, "eventDescription"=>$eventdesc, "eventLat"=>$eventlat, "eventLong"=>$eventlong];
 }
 else{
     array_push($ouput['errors'], "event ID isn't set.");

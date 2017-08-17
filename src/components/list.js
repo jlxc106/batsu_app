@@ -7,7 +7,8 @@ const List = (props) => {
     const list = props.createdEventsList.map((item, index) => {
         return (
             <li className="list-group-item" key={index}>
-                <span className="col-2">{item.title}</span>
+                <span className="col-2">{item.event_name}</span>
+
             </li>
         )
     })

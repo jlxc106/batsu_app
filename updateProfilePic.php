@@ -38,7 +38,7 @@ $file = $_FILES['profile']['tmp_name'];
                         $output['success msg'] = "The file".$_FILES['profile']['name']."has been uploaded.";
 
                         //begin UPDATE into the database
-                        $query = " UPDATE `upload_images` SET `path` = '$target_file' WHERE id=4 "; // NEED TO KNOW WHICH USER IS LOGGED IN TO KNOW WHERE TO UPDATE
+                        $query = " UPDATE `accounts` SET `path` = '$target_file' WHERE id=67 "; // NEED TO KNOW WHICH USER IS LOGGED IN TO KNOW WHERE TO UPDATE
                         $result = mysqli_query($conn,$query);
 
                         if(mysqli_affected_rows($conn)>0){

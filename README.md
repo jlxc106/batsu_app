@@ -41,14 +41,6 @@ Prototype Instructions:
 
 A. Prerequisite: 
 
-<<<<<<< HEAD
-   All prototypes require npm to be installed on your local machine because our project is using React. Please take following steps to set up the project environment (enter without quotation marks): 
-        * npm install
-        * npm install --save react-router-dom
-        * npm install --save axios
-        * npm install --save react-burger-menu
-        * npm install --save react-modal
-=======
    All prototypes require npm to be installed on your local machine because our project is using React. Please take following steps to set up the project environment:
    1. npm install
    2. npm install --save react-router-dom
@@ -56,8 +48,8 @@ A. Prerequisite:
    4. npm install --save react-modal
    5. npm install --save react-burger-menu
    6. npm install --save react-image-slider
+   7. npm install --save react-places-autocomplete
 
->>>>>>> 5dfad545c73db7ec5b959ae2deb32d963030565f
 
    The prototypes also require a LAMP/MAMP stack. Rename "mysql_connect.php.config" to "mysql_connect.php" and fill out your MySQL username and password credentials. 
 

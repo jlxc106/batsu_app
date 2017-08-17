@@ -1,13 +1,17 @@
 import React from 'react';
 import Event from './events';
 import Modal from 'react-modal';
+import Maps from './map_component';
+// import axios from 'axios';
+
 
 class Map extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            position: {}
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -24,10 +28,24 @@ class Map extends React.Component {
     render(){
         return(
             <div>
+
+                <Maps
+                    center={{lat:33.6904288, lng:-117.8330699}}
+                    containerElement={<div className='hi' style={{ height: `82vh` , width: `100vw`}} />}
+                    mapElement={<div style={{ height: `82vh` , width: `100vw`}} />}
+                    markers={[{
+                        position: {
+                            lat:33.6904288,
+                            lng:-117.8330699
+                        },
+
+                    }]}
+                />
+
                 <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Event Modal">
                     <Event onCancel={(e)=>this.closeModal(e)} />
                 </Modal>
-                <button className="btn btn-default btn-circle" onClick={this.openModal}>+</button>
+                <button className="btn btn-default btn-circle" onClick={this.openModal} >Create Event!</button>
             </div>
         )
     }
