@@ -4,7 +4,7 @@ import Maps from './event_marker';
 import axios from 'axios';
 import './app.css';
 import Timer from './timer';
-import Pics from './rendering_profile';
+import images from './rendering_profile';
 
 
 class CreatedEvent extends Component{
@@ -81,9 +81,21 @@ class CreatedEvent extends Component{
     return deg * (Math.PI/180)
     }
 
-
-
-
+    getImage(path) {
+        let imagesKeys = Object.keys(images);
+        let imageUrl = images['example_profile.png'];
+        if(!path) {return imageUrl;}
+        for(let i = 0; i < imagesKeys.length; i++) {
+            // console.log("path",path)
+            // console.log("imagesKeys",imagesKeys[i]);
+            // console.log("imagelength: ",imagesKeys.length);
+            if(`upload_images/${imagesKeys[i]}` === path) {
+                imageUrl = images[imagesKeys[i]];
+                // console.log("imageUrl is",imageUrl);
+            }
+        }
+        return imageUrl;
+    }
 
     handleAxios(){
         axios.get('http://localhost/c5.17_accountability/php/getData.php?operation=eventinfo&eventID='+this.state.eventID).then((resp) => {
@@ -110,6 +122,7 @@ class CreatedEvent extends Component{
                 lat:parseFloat(this.state.list.eventLat),
                 lng:parseFloat(this.state.list.eventLong)
             }
+            const invitee = this.state.list.eventinvitees[0];
             return (
                 <div>
                     {this.state.list.eventName}
@@ -119,7 +132,8 @@ class CreatedEvent extends Component{
                     <div className="line_space"></div>
                     <div>list of invitees</div>
                     <div className="friends_picture_container">
-                        <Pics profilePic={this.state.list}/>
+                        <img src={this.getImage(invitee.path)}/>
+                        <p>{invitee.fName}</p>
                     </div>
                     <div className="line_space"></div>
                     <div className="punishment_div">Punishment</div>
