@@ -53,7 +53,6 @@ class Profile extends Component {
         let filepic = this.state.file;
         const formData = new FormData();
         formData.append('profile', filepic);
-        formData.append('token', this.state.token);
         // const sendThisShit = {"formData": formData, "token" : this.state.token};
         console.log(formData);
         axios.post('http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=uploadImage&token='+ this.state.token, formData).then((resp) => {
@@ -94,8 +93,7 @@ class Profile extends Component {
                     <h1 className="card-title">Profile</h1>
                     <div className="card profile_parent">
                         <div className="profile_picture_preview">
-
-                            <img src={this.state.imagePreviewUrl} alt=""/>
+                            <img className="profile_picture" src={this.state.imagePreviewUrl} alt=""/>
                         </div>
                         <div className="card-block">
                             <ul className="list-group list-group-flush container">
@@ -113,7 +111,7 @@ class Profile extends Component {
             let {imagePreviewUrl, userData} = this.state;
             let profilePic = null;
             if (imagePreviewUrl) {
-                profilePic = (<img src={imagePreviewUrl}/>);
+                profilePic = (<img className="profile_picture" src={imagePreviewUrl}/>);
             } else {
                 profilePic = (<div className="previewText">Please select an Image for Preview</div>);
             }

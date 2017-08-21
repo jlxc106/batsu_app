@@ -632,4 +632,8 @@ div.bm-menu{
     white-space: nowrap;
 }
 
+.profile_picture{
+    height: 180px;
+    width: 180px;
+}
 /*@media screen and (min-width: 700px)*/
