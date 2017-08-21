@@ -30,7 +30,7 @@ class Profile extends Component {
         axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/getData.php?operation=profile&token='+document.cookie.split('=')[1]).then((resp) => {
             // console.log(resp);
             this.setState({userData: resp.data.data});
-            this.setState({imagePreviewUrl: 'http://localhost/Website/accountability_db/c5.17_accountability/php/' + resp.data.path.imagePreviewUrl});
+            this.setState({imagePreviewUrl: 'http://localhost/Website/accountability_db/c5.17_accountability/php' + resp.data.path.imagePreviewUrl.substr(1)});
         })
     }
 
@@ -55,9 +55,9 @@ class Profile extends Component {
         formData.append('profile', filepic);
         formData.append('token', this.state.token);
         // const sendThisShit = {"formData": formData, "token" : this.state.token};
-        // console.log(formData);
+        console.log(formData);
         axios.post('http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=uploadImage&token='+ this.state.token, formData).then((resp) => {
-            // console.log('Axios call update profile resp: ', resp)
+            console.log('Axios call update profile resp: ', resp)
 
         })
     }
