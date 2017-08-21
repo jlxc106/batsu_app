@@ -8,7 +8,7 @@ import './app.css';
 const Login_Page = (props) => {
     return (
         <div className="batsu-app">
-            <h1 className="batsu-title">_Batsu</h1>
+            <h1 className="batsu-title">Batsu</h1>
             <div>
                 <SignIn history={props.history} />
                 <div className="line_space"></div>

@@ -1,14 +1,9 @@
 @font-face {
-    font-family: BarleyScript;
-    src: url(fonts/BarleyScript.ttf);
-}
-
-@font-face {
     font-family: crowbar;
     src: url(fonts/crowbar.otf);
 }
 
 @font-face{
-    font-family: Gloss_And_Bloom;
-    src: url(fonts/Gloss_And_Bloom.ttf);
+    font-family: rocks_rg;
+    src: url(fonts/rocks_rg.ttf);
 }

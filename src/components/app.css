@@ -5,11 +5,19 @@
 }
 
 .signup-main{
-    width: 350px;
+    width: 300px;
     margin: 0 auto;
     height: 430px;
-    /* border: 2px black solid;  */
+    border: 2px solid black;
     overflow-y: auto;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow:
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 0 black,
+            2px 2px 6px black;
 }
 
 .topHeader{
@@ -58,11 +66,11 @@ div.card{
 
 .batsu-title{
     text-align: center;
-    font-family: BarleyScript;
+    font-family: rocks_rg;
     color: red;
     font-style: oblique;
     font-size: 100px;
-    margin: 50px 0 20px;
+    margin: 70px 0 20px;
     text-shadow:
             2px 2px 0 black,
             2px 2px 0 black,
@@ -73,11 +81,11 @@ div.card{
 
 .batsu-title-signup{
     text-align: center;
-    font-family: crowbar;
+    font-family: rocks_rg;
     color: red;
     font-style: oblique;
-    font-size: 50px;
-    margin: 10px 0 20px;
+    font-size: 70px;
+    margin: 50px 0 20px;
     text-shadow:
             2px 2px 0 black,
             2px 2px 0 black,
@@ -127,7 +135,11 @@ div.card{
     height:41px !important;
 }
 
-/********************************************/
+/* .map_loading_img{
+    height: 50px;
+    width: 50px;
+} */
+
 .login-button{
     font-family: crowbar;
     width: 100px;
@@ -148,11 +160,11 @@ div.card{
 
 .topHeaderTitle{
     text-align: center;
-    font-size: 30px;
-    font-family: BarleyScript;
+    font-size: 39px;
+    font-family: rocks_rg;
     color: red;
     font-style: oblique;
-    margin: 0 0 16px;
+    margin-bottom:6px;
     padding-top: 6px;
     text-shadow:
             1px 1px 0 black,
@@ -161,6 +173,8 @@ div.card{
             1px 1px 0 black,
             1px 1px 3px black;
 }
+
+
 
 .signup-top-div{
     text-align: center;
@@ -239,6 +253,45 @@ input, select{
     width: 100px;
     font-size: 15px;
     margin: 18px 10px 25px;
+    padding: 5px 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow:
+            1px 1px 0 black,
+            1px 1px 0 black,
+            1px 1px 0 black,
+            1px 1px 0 black,
+            1px 1px 6px black;
+}
+
+.my_events_loading{
+    margin: 165px 0 0;
+    font-size: 40px;
+    text-shadow:
+            1px 1px 0 grey,
+            1px 1px 0 grey,
+            1px 1px 0 grey,
+            1px 1px 0 grey,
+            1px 1px 3px grey;
+}
+
+.preview_loading{
+    margin: 165px 0 0;
+    font-size: 40px;
+    text-shadow:
+            1px 1px 0 grey,
+            1px 1px 0 grey,
+            1px 1px 0 grey,
+            1px 1px 0 grey,
+            1px 1px 3px grey;
+}  
+
+.profile_button{
+    margin: 0 auto;
+    font-family: crowbar;
+    color: black;
+    width: 100px;
+    font-size: 15px;
     padding: 5px 15px;
     border: 2px solid black;
     border-radius: 5px;
@@ -329,8 +382,8 @@ button:hover, button:visited, button:link, button:active{
             1px 1px 6px black;
 }
 
-/* burger menu  */
 
+/* burger menu  */
 /* Position and sizing of burger button */
 .bm-burger-button {
     position: fixed;
@@ -414,34 +467,7 @@ div.bm-menu{
     box-shadow: inset -8px 0 18px -7px #000000, inset 0 20px 20px -20px #000000;
 }
 
-
 /* my_events page css */
-
-.myEvents_title{
-    margin: 30px 0 5px;
-    font-size: 50px;
-    color: red;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
-}
-
-.myEvents_subtitle{
-    color: orange;
-    font-size: 20px;
-    margin: 5px 0 30px;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 3px black;
-}
-            /* my_events page css */
-
 .myEvents_title{
     margin: 30px 0 5px;
     font-size: 50px;
@@ -506,9 +532,7 @@ div.bm-menu{
     height: 80vh;
 }
 
-
 /* How To Page */
-
 .howto_title_top{
     margin: 30px 0 0px;
     font-size: 50px;
@@ -572,7 +596,6 @@ div.bm-menu{
     margin: 20px 0 20px !important;
 }
 
-
 #loading{
     bottom: 20vh;
     position:absolute;
@@ -608,3 +631,5 @@ div.bm-menu{
     overflow: auto;
     white-space: nowrap;
 }
+
+/*@media screen and (min-width: 700px)*/

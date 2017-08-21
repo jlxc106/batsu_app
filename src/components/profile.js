@@ -104,7 +104,7 @@ class Profile extends Component {
                                 <li className="list-group-item">Phone: {this.state.userData.phone}</li>
                             </ul>
                         </div>
-                        <button onClick={() => this.setState({canEdit: true})} className="btn btn-outline-danger">Edit</button>
+                        <button onClick={() => this.setState({canEdit: true})} className="btn btn-danger profile_button">Edit</button>
 
                     </div>
                 </div>
@@ -128,13 +128,13 @@ class Profile extends Component {
                             <input id="file" className="profileInput" type="file" name="profile" onChange={(e)=>this.handleImageChange(e)}/>
                             <div className="card-block">
                                 <ul className="list-group list-group-flush container">
-                                    <li className="list-group-item">Email: {userData.email}</li>
+                                    {/* <li className="list-group-item">Email: {userData.email}</li> */}
                                     <li className="list-group-item">Email: {this.state.userData.email}</li>
                                     <li className="list-group-item">Name: {this.state.userData.fname.concat(" ").concat(this.state.userData.lname)}</li>
                                     <li className="list-group-item">Phone: {this.state.userData.phone}</li>
                                 </ul>
                             </div>
-                            <button type="button" onClick={(e) => this.handleSubmit(e)} className="btn btn-outline-info">Save</button>
+                            <button type="button" onClick={(e) => this.handleSubmit(e)} className="btn btn-info profile_button">Save</button>
                         </form>
                     </div>
                 </div>

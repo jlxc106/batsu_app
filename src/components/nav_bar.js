@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu'
-// import Home from './home';
-// import Profile from './profile';
-// import MyEvents from './my_events';
-// import WhatIsBatsu from './what_is_batsu';
-// import CreatedEvent from './preview_event';
 import './app.css';
 
 
@@ -24,7 +19,7 @@ class NavBar extends Component {
         } else {
             return (
                 <div className="topHeader">
-                    <h3 className="topHeaderTitle">_Batsu</h3>
+                    <h3 className="topHeaderTitle">Batsu</h3>
                     <Menu width={'222px'} className="bm-menu">
                         {/* <a className="menu-item" href="/">Home</a> */}
                         <a className="menu-item" href="/home">Home</a>

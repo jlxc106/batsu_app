@@ -151,7 +151,7 @@ class CreatedEvent extends Component{
         // console.log(this.state);
         if(this.pageLoaded === false){
             return(
-                <h1>Page Loading...</h1>
+                <h1 className="preview_loading">Page Loading...</h1>
             )
         }
         else{

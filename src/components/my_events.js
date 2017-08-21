@@ -38,7 +38,7 @@ class MyEvents extends Component {
             this.Loaded = true;
             this.setState({
                 createdEventsList: resp.data.data.createdEventList,
-                invitedEventsList: resp.data.data.invitedEventList
+                invitedEventsList: resp.data.data.invitedEventList  
             })
         });
     }
@@ -46,7 +46,7 @@ class MyEvents extends Component {
     render(){
         if(this.Loaded === false) {
             return (
-                <div> Loading....</div>
+                <div className="my_events_loading"> Loading....</div>
             )
         } else {
             return (
