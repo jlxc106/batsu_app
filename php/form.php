@@ -6,7 +6,8 @@ require("./mysql_connect.php");
 
 $output = [
     'success'=> false, //we assume we will fail
-    'errors'=>[]
+    'errors'=>[],
+    'data'=>[]
 ];
 
 $_POST = json_decode(file_get_contents('php://input'), true);
@@ -28,6 +29,19 @@ else if($_GET['operation'] === "insertEvent"){
 }
 else if($_GET['operation'] === "uploadImage"){
     include("./updateProfilePic.php");
+}
+elseif($_GET['operation'] === "profile"){
+    include("./getProfile.php");
+}
+elseif($_GET['operation'] === 'eventinfo'){
+    include("./getEventInfo.php");
+}
+elseif($_GET['operation'] === 'eventlist'){
+    include("./getEventList.php");
+}
+
+if($output['success'] === false){
+    array_push($output['errors'], mysqli_error($conn));
 }
 
 

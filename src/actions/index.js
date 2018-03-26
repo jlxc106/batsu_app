@@ -1,43 +1,40 @@
-import types from './types';
 import axios from 'axios';
 
+const BASE_URL = 'http://jayclim.com/php/form.php';
 
-// const BASE_URL = 'http://api.reactprototypes.com';
+export const SIGNUP = 'signup';
+export const ERROR = 'error';
+export const SIGNIN = 'signin';
 
-export function signin({email, password}){
+export function getSignIn({email, password}){
     return dispatch => {
-        axios.post(`http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=signin`, {email, password}).then((resp) => {
+        axios.post(`${BASE_URL}?operation=signin`, {email, password}).then((resp) => {
             console.log("Sign In resp:", resp);
-
-            // localStorage.setItem('token', resp.data.token)
             if(resp.data.success === true){
                 var now = new Date();
                 var time = now.getTime();
-                var expireTime = time + 86400000;   //24 hours
+                var expireTime = time + 86400000;   //token expires in 24 hours
                 now.setTime(expireTime);
                 document.cookie = "token="+resp.data.token+";expires="+now.toUTCString()+";path=/";
-                // history.push('/map');
             }
             else{
-                //stay on sign up page
-                console.log("don't call this");
-                throw new Error("you dun goofed");
+                console.log("signin failed");
+                throw new Error("invalid login credentials");
             }
             dispatch({
-                type: types.SIGNIN
+                type: SIGNIN
             });
         }).catch(error => {
-            console.log("errorss: ", error);
-            dispatch(sendError("Invalid username or password"));
+            console.log("errors: ", error);
+            dispatch(sendError(error.message));
         });
     };
 };
 
-export function signup({fname, lname, phone, email, password, password_conf, dob}, history){
+export function getSignUp({fname, lname, phone, email, password, password_conf, dob}, history){
     return (dispatch) => {
-        axios.post(`http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=insertUser`, {fname, lname, phone, email, password, password_conf, dob}).then((resp) => {
+        axios.post(`${BASE_URL}?operation=insertUser`, {fname, lname, phone, email, password, password_conf, dob}).then((resp) => {
             console.log("Sign Up resp", resp);
-            // localStorage.setItem('token', resp.data.token);
             if(resp.data.success === true){
                 var now = new Date();
                 var time = now.getTime();
@@ -51,26 +48,22 @@ export function signup({fname, lname, phone, email, password, password_conf, dob
                 resp.data.errors.map(function(error_msg, val){
                     message += error_msg + ". ";
                 })
-                // console.log(resp.data.errors);
 
                 throw new Error(message);
             }
             dispatch({
-                type: types.SIGNUP
+                type: SIGNUP
             });
         }).catch((error) => {
-             console.log("errorss: ", error);
+             console.log("errors: ", error);
             dispatch(sendError(error.message));
         });
     };
 };
-export function clearError(){
-    return {type:types.clearError};
-}
 
 function sendError(msg){
     return{
-        type: types.ERROR,
+        type: ERROR,
         error: msg
     }
 }

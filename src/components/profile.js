@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './app.css';
-// import NavBar from './nav_bar';
-
-
 
 class Profile extends Component {
     constructor(props){
@@ -26,11 +23,11 @@ class Profile extends Component {
     }
 
     handleAxios(){
-        // console.log(this.state);
-        axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/getData.php?operation=profile&token='+document.cookie.split('=')[1]).then((resp) => {
-            // console.log(resp);
+         console.log(this.state);
+        axios.get('http://jayclim.com/php/getData.php?operation=profile&token='+document.cookie.split('=')[1]).then((resp) => {
+             console.log(resp);
             this.setState({userData: resp.data.data});
-            this.setState({imagePreviewUrl: 'http://localhost/Website/accountability_db/c5.17_accountability/php' + resp.data.path.imagePreviewUrl.substr(1)});
+            this.setState({imagePreviewUrl: 'http://jayclim.com/php' + resp.data.path.imagePreviewUrl.substr(1)});
         })
     }
 
@@ -55,7 +52,7 @@ class Profile extends Component {
         formData.append('profile', filepic);
         // const sendThisShit = {"formData": formData, "token" : this.state.token};
         console.log(formData);
-        axios.post('http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=uploadImage&token='+ this.state.token, formData).then((resp) => {
+        axios.post('http://jayclim.com/php/form.php?operation=uploadImage&token='+ this.state.token, formData).then((resp) => {
             console.log('Axios call update profile resp: ', resp)
 
         })

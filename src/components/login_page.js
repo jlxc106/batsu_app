@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import SignIn from './login_component';
+import SignIn from './sign_in';
 import SignUp from './sign_up';
 import './app.css';
 
@@ -18,4 +18,3 @@ const Login_Page = (props) => {
 }
 
 export default Login_Page;
-{/*<div className="fb-login-button" data-button-type="login_with" data-size="large" scope="public_profile,email" data-onlogin="checkLoginState();"></div>*/}

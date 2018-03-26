@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import {  Link } from 'react-router-dom';
-import { signup } from '../actions';
+import { getSignUp } from '../actions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { renderInput } from './helper_functions';
 import './app.css';
-// import NavBar from './nav_bar';
-
-
 
 class SignUp extends Component {
     handleSignup(vals){
-        // console.log('Form values:', vals);
-        this.props.signup(vals, this.props.history);
+        this.props.getSignUp(vals, this.props.history);
     }
 
     render() {
@@ -99,4 +95,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {signup})(SignUp);
+export default connect(mapStateToProps, {getSignUp})(SignUp);

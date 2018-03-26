@@ -6,7 +6,7 @@ import InvitedEventsData from './list_two';
 import './app.css';
 
 
-class MyEvents extends Component {
+export default class EventList extends Component {
     constructor(props){
         super(props);
         this.Loaded = false;
@@ -33,7 +33,7 @@ class MyEvents extends Component {
     }
 
     getData(){
-        axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/getData.php?operation=eventlist&token='+document.cookie.split('=')[1]).then((resp) => {
+        axios.get('http://jayclim.com/php/getData.php?operation=eventlist&token='+document.cookie.split('=')[1]).then((resp) => {
             // console.log('this is the response:', resp);
             this.Loaded = true;
             this.setState({
@@ -68,5 +68,3 @@ class MyEvents extends Component {
         }  
     }
 }
-
-export default MyEvents;

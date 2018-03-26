@@ -40,10 +40,7 @@ class CreatedEvent extends Component{
         }
     }
 
-    componentWillMount(){
-       this.getUrl(); 
 
-    }
 
 
 
@@ -56,9 +53,6 @@ class CreatedEvent extends Component{
     }
 
     getUser(position) {
-        // console.log("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
-        // console.log("This is the state lat/lon", this.state.list);
-
         let lat1=parseFloat(this.state.list.eventLat);
         let lon1=parseFloat(this.state.list.eventLong);
         let lat2=position.coords.latitude;
@@ -77,11 +71,10 @@ class CreatedEvent extends Component{
             }
             else{
                 const object = {"token": this.state.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
-                axios.post('http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=checkIn', object).then((resp) => {
+                axios.post('http://jayclim.com/php/form.php?operation=checkIn', object).then((resp) => {
                     if(resp.data.success === true){
                         this.setState({myStatus: 'Checked In'});
                         console.log("You Checked in");
-                        // console.log("resp: ",resp);
                     }
                 })
             }
@@ -94,13 +87,7 @@ class CreatedEvent extends Component{
         return deg * (Math.PI/180)
     }
 
-    // Invitees(){
-    //     let l = "";
-    //     for(i=0; i<this.state.list.eventinvitees.length; i++){
-    //         l += this.state.list.eventinvitees[i].fName + " ";
-    //     }
-    //     return l;
-    // }
+  
 
     getImage(path) {
         let imagesKeys = Object.keys(images);
@@ -109,18 +96,13 @@ class CreatedEvent extends Component{
         for(let i = 0; i < imagesKeys.length; i++) {
             if(`upload_images/${imagesKeys[i]}` === path) {
                 imageUrl = images[imagesKeys[i]];
-                // console.log("imageUrl is",imageUrl);
             }
         }
-        // console.log(imageUrl);
         return imageUrl;
     }
 
     handleAxios(){
-        // console.log("this.state: ",this.state);
-        axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/getData.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.state.token).then((resp) => {
-            // console.log('this is the response:', resp);
-
+        axios.get('http://jayclim.com/php/getData.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.state.token).then((resp) => {
             if(resp.data.data.myStatus === "Checked In"){
                 this.checkedIn = true;
             }
@@ -128,19 +110,16 @@ class CreatedEvent extends Component{
             this.setState({
                 list: resp.data.data
             })
-            // console.log("list: ", this.state.list);
         });
     }
 
-    getUrl(){
+    componentWillMount(){
         let url = location.pathname;
         let fields = url.split('/');
         let id = parseInt(fields[2]);
-        // console.log('id', id);
         this.setState({
             eventID:id
         }, this.handleAxios);
-        // this.handleAxios();
     }
 
     countDown(){
@@ -148,14 +127,12 @@ class CreatedEvent extends Component{
     }
 
     render(){
-        // console.log(this.state);
         if(this.pageLoaded === false){
             return(
                 <h1 className="preview_loading">Page Loading...</h1>
             )
         }
         else{
-            // let x = Invitees();
             const eventLocation ={
                 lat:parseFloat(this.state.list.eventLat),
                 lng:parseFloat(this.state.list.eventLong)
@@ -228,9 +205,3 @@ class CreatedEvent extends Component{
 }
 
 export default CreatedEvent;
-
-{/*<img src='http://localhost/Website/accountability_db/c5.17_accountability/php/upload_images/default.png'/>*/}
-{/*<p>{invitee.fName}</p>*/}
-//
-// <img src={this.getImage(invitee.path)}/>
-// <p>{invitee.fName}</p>

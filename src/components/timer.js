@@ -24,7 +24,7 @@ class Timer extends Component {
 
 //finish axios call
     handleAxios(){
-        axios.get('http://localhost/Website/accountability_db/c5.17_accountability/php/form.php?operation=getTime&event='+this.state.eventID).then((resp) => {
+        axios.get('http://jayclim.com/php/form.php?operation=getTime&event='+this.state.eventID).then((resp) => {
             // console.log('this is the response:', resp);
             this.setState({
                 eventTime: new Date(resp.data.data.dateTime).getTime()

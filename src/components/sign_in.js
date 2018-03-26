@@ -4,21 +4,13 @@ import { Field, reduxForm } from 'redux-form';
 import SignUp from './sign_up.js';
 import { renderInput } from './helper_functions';
 import { connect } from 'react-redux';
-import { signin } from '../actions/index';
+import { getSignIn } from '../actions/index';
 import './app.css';
 
 
 class SignIn extends Component {
-    handleSignIn(vals){
-        // const history = new createBrowserHistory();
-        // console.log("Sign In vals:", vals);
-        this.props.signin(vals);
-    }
 
     componentWillReceiveProps(nextProps){
-        // console.log('The props are:', nextProps);
-
-        //const history = new createBrowserHistory();
         if(nextProps.auth){
             this.props.history.push('/home');
         }
@@ -28,7 +20,7 @@ class SignIn extends Component {
         const {handleSubmit, signinError} = this.props;
         return(
             <div className="login_page">
-                <form onSubmit={handleSubmit(vals => this.handleSignIn(vals))}> 
+                <form onSubmit={handleSubmit(vals => this.props.getSignIn(vals))}> 
                     <h6 className="login-subtitles">E-mail</h6>
                     <Field name="email" type="email" component={renderInput} />
                     <h6 className="login-subtitles">Password</h6>
@@ -66,10 +58,11 @@ SignIn = reduxForm({
 })(SignIn);
 
 function mapStateToProps(state){
+    console.log("state: ",state);
     return{
         signinError: state.auth.error,
         auth: state.auth.authorized
     }
 }
 
-export default connect(mapStateToProps, {signin})(SignIn);
+export default connect(mapStateToProps, {getSignIn})(SignIn);
