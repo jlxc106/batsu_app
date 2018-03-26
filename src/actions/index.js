@@ -53,7 +53,7 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
             }
             dispatch({
                 type: SIGNUP
-            });
+            }); 
         }).catch((error) => {
              console.log("errors: ", error);
             dispatch(sendError(error.message));
