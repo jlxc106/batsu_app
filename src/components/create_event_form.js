@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import './app.css'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { postNewEvent } from '../actions/index'
+import './app.css';
+import { connect } from 'react-redux';
 
 class CreateEventForm extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             token: document.cookie.split("=")[1],
             form: {
@@ -43,7 +44,6 @@ class CreateEventForm extends Component {
 
     handleFormSubmit(event) {
         event.preventDefault();
-        // console.log('Called handleFormSubmit', this.state.form);
         geocodeByAddress(this.state.form.address)
             .then(results => getLatLng(results[0]))
             .then(latLng => {
@@ -53,11 +53,10 @@ class CreateEventForm extends Component {
     };
 
     handleAxios(latLong) {
-        // console.log("Handle axios latLong:", latLong);
 
         const {form} = this.state;
         const sendData = {...form, location: latLong, token: this.state.token};
-
+        this.props.postNewEvent(sendData);
         const newState = {
             form: {
                 event_name: '',
@@ -70,18 +69,6 @@ class CreateEventForm extends Component {
             }
         };
         this.setState(newState);
-
-        // console.log('Data to send:', sendData);
-        axios.post(`http://jayclim.com/php/form.php?operation=insertEvent`, sendData).then((resp) => {
-            // console.log('this is the response:', resp);
-            if(resp.data.success === true){
-                //trigger axios call to the map
-                this.props.onCancel();
-            }
-            else{
-                //w/e error msg is
-            }
-        });
     };
 
     render() {
@@ -139,7 +126,7 @@ class CreateEventForm extends Component {
                             Confirm
                         </button>
 
-                        <button type="button" className="btn btn-outline-danger mr-2" onClick={this.props.onCancel}>
+                        <button type="button" className="btn btn-outline-danger mr-2" onClick={this.props.exitEventForm}>
                             Cancel
                         </button>
                     </form>
@@ -149,6 +136,11 @@ class CreateEventForm extends Component {
     }
 }
 
-export default CreateEventForm;
+function mapStateToProps(){
+    return{
+        // postNewEvent:postNewEvent
+    }
+}
 
-{/*<Link to="./after_event_creation"><button className="btn btn-outline-success">Confirm</button></Link>*/}
+
+export default connect (null, {postNewEvent})(CreateEventForm);

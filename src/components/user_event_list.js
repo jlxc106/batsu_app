@@ -34,7 +34,6 @@ export default class EventList extends Component {
 
     getData(){
         axios.get('http://jayclim.com/php/getData.php?operation=eventlist&token='+document.cookie.split('=')[1]).then((resp) => {
-            // console.log('this is the response:', resp);
             this.Loaded = true;
             this.setState({
                 createdEventsList: resp.data.data.createdEventList,

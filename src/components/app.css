@@ -602,7 +602,7 @@ div.bm-menu{
     width:100vw;
 }
 
-.hi div:nth-child(2){
+.map_element div:nth-child(2){
     position: absolute;
 }
 

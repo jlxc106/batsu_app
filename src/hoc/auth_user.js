@@ -1,8 +1,10 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 
 export default function(ComposedComponent) {
+    console.log('wutface');
     class Auth extends Component {
 
         componentWillMount() {

@@ -18,14 +18,12 @@ export function getSignIn({email, password}){
                 document.cookie = "token="+resp.data.token+";expires="+now.toUTCString()+";path=/";
             }
             else{
-                console.log("signin failed");
                 throw new Error("invalid login credentials");
             }
             dispatch({
                 type: SIGNIN
             });
         }).catch(error => {
-            console.log("errors: ", error);
             dispatch(sendError(error.message));
         });
     };
@@ -55,11 +53,14 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
                 type: SIGNUP
             }); 
         }).catch((error) => {
-             console.log("errors: ", error);
             dispatch(sendError(error.message));
         });
     };
 };
+
+
+
+
 
 function sendError(msg){
     return{
@@ -68,3 +69,14 @@ function sendError(msg){
     }
 }
 
+export function postNewEvent(sendData){
+    axios.post(`${BASE_URL}?operation=insertEvent`, sendData).then((resp) => {
+        if(resp.data.success === true){
+            //trigger axios call to the map
+            this.props.exitEventForm();
+        }
+        else{
+            //w/e error msg is
+        }
+    });
+};

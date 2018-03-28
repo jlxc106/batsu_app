@@ -29,7 +29,7 @@ export default class Home extends Component {
             <div>
                 <Maps
                     center={{lat:33.6904288, lng:-117.8330699}}
-                    containerElement={<div className='hi' style={{ height: `82vh` , width: `100vw`}} />}
+                    containerElement={<div className='map_element' style={{ height: `82vh` , width: `100vw`}} />}
                     mapElement={<div style={{ height: `82vh` , width: `100vw`}} />}
                     markers={[{
                         position: {
@@ -39,7 +39,7 @@ export default class Home extends Component {
                     }]} />
 
                 <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Event Modal">
-                    <CreateEventForm onCancel={(event)=>this.closeModal(event)} />
+                    <CreateEventForm exitEventForm={(event)=>this.closeModal(event)} />
                 </Modal>
 
                 <button className="btn btn-default btn-circle create_event_button" onClick={this.openModal} >Create Event!</button>

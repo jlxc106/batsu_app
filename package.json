@@ -4,9 +4,11 @@
   "description": "Starting setup for react redux project",
   "main": "index.js",
   "scripts": {
-    "start": "node dev_server.js",
+    "dev": "node dev_server.js",
     "bundle": "webpack --config webpack.deploy.config.js --progress --colors",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall":"webpack -p",
+    "start":"node server.js"
   },
   "author": "Scott Bowler",
   "license": "ISC",

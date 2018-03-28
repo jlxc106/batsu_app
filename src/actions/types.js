@@ -1,5 +1,5 @@
-export default {
-    SIGNUP: 'signup',
-    ERROR: 'error',
-    SIGNIN: 'signin'
+export default types = {
+    SIGNUP = 'signup',
+    ERROR = 'error',
+    SIGNIN = 'signin'
 }
