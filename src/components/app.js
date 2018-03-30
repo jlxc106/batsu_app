@@ -11,7 +11,7 @@ import authUser from '../hoc/auth_user';
 import hideFromAuthUser from '../hoc/hide_from_auth_user';
 import NavBar from './nav_bar';
 
-
+ 
 // const App = () => (
 //     <div className="topbar-menu">
 //         <NavBar /> 
