@@ -6,8 +6,6 @@ export default function(state = DEFAULT_STATE, action){
     switch(action.type){
         case SIGNIN:
         case SIGNUP:
-            console.log("state: ",state);
-            console.log("action", action);
             return { ...state, authorized: true, error: null };
         case ERROR:
             return { ...state, error:action.error };

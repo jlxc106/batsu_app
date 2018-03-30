@@ -25,18 +25,20 @@ export default class Home extends Component {
     }
 
     render(){
+        // console.log(this.props);
         return(
-            <div>
+            <div id="testt">
                 <Maps
-                    center={{lat:33.6904288, lng:-117.8330699}}
-                    containerElement={<div className='map_element' style={{ height: `82vh` , width: `100vw`}} />}
+                    // center={{lat:33.6904288, lng:-117.8330699}}
+                    containerElement={<div className='map_element' style={{ height: `82vh` , width: `100vw`, position: `relative`}} />}
                     mapElement={<div style={{ height: `82vh` , width: `100vw`}} />}
-                    markers={[{
-                        position: {
-                            lat:33.6904288,
-                            lng:-117.8330699
-                        },
-                    }]} />
+                    // markers={[{
+                    //     position: {
+                    //         lat:33.6904288,
+                    //         lng:-117.8330699
+                    //     },
+                    // }]} 
+                    />
 
                 <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Event Modal">
                     <CreateEventForm exitEventForm={(event)=>this.closeModal(event)} />

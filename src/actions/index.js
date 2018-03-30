@@ -5,7 +5,7 @@ const BASE_URL = 'http://jayclim.com/php/form.php';
 export const SIGNUP = 'signup';
 export const ERROR = 'error';
 export const SIGNIN = 'signin';
-
+export const LOCATION = 'location';
 export function getSignIn({email, password}){
     return dispatch => {
         axios.post(`${BASE_URL}?operation=signin`, {email, password}).then((resp) => {
@@ -59,7 +59,12 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
 };
 
 
-
+export function storeLocation(userLocation){
+    return {
+        type: LOCATION,
+        payload: userLocation
+    }
+}
 
 
 function sendError(msg){

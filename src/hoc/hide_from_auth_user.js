@@ -9,11 +9,11 @@ export default function(ComposedComponent) {
 
         componentWillMount() {
             // console.log(this.props);
-            if(!document.cookie){
+            if(document.cookie){
             // if(!this.props.authenticated){
                 console.log("props: ", this.props);
                 console.log("state: ", this.state);
-                this.props.history.push('/');
+                this.props.history.push('/home');
             }
         }
 
@@ -25,9 +25,9 @@ export default function(ComposedComponent) {
         // }
         componentWillUpdate(nextProps) {
             console.log("nextprops: ", nextProps);
-            if(!document.cookie){
+            if(document.cookie){
             // if(!nextProps.authenticated){
-                this.props.history.push('/');
+                this.props.history.push('/home');
             }
         }
         render() {
