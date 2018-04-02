@@ -5,9 +5,7 @@ import EventsListItems from './list_item';
 import { connect } from 'react-redux';
 import Maps from './event_marker';
 import ListOfAttendees from './listOfAttendees';
-import './app.css';
 import images from './rendering_profile';
-// import NavBar from './nav_bar';
 
 
 class CreatedEvent extends Component{

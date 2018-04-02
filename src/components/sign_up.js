@@ -4,7 +4,6 @@ import { getSignUp } from '../actions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { renderInput } from './helper_functions';
-import './app.css';
 
 class SignUp extends Component {
     handleSignup(vals){

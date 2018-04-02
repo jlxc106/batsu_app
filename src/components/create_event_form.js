@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { postNewEvent } from '../actions/index'
-import './app.css';
 import { connect } from 'react-redux';
 
 class CreateEventForm extends Component {
@@ -135,12 +134,5 @@ class CreateEventForm extends Component {
         )
     }
 }
-
-function mapStateToProps(){
-    return{
-        // postNewEvent:postNewEvent
-    }
-}
-
 
 export default connect (null, {postNewEvent})(CreateEventForm);

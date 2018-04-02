@@ -1,4 +1,4 @@
-import React ,{ Component } from 'react' ;
+import React, { Component } from 'react' ;
 import { withGoogleMap, GoogleMap, Marker, Circle} from "react-google-maps";
 import LoadingImg from './imgs/loading2.gif';
 import {storeLocation} from '../actions/index';
@@ -8,9 +8,7 @@ import {bindActionCreators} from 'redux';
 class Maps extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     counter: 0
-        // };
+
         this.getUserPermision = this.getUserPermision.bind(this);
     }
 
@@ -25,10 +23,7 @@ class Maps extends Component {
     getUserPermision(position) {
         console.log("position", position);
         this.props.storeLocation(position.coords);
-        // this.setState({position:{
-        //     lat:position.coords.latitude,
-        //     lng:position.coords.longitude
-        // }});
+
     }
 
     render(){
@@ -41,7 +36,6 @@ class Maps extends Component {
         // console.log(state);
         let { lat, lng } = this.props;
         console.log("this.props: ", this.props);
-        // console.log("lat: ", lat, "  long: ", long)
         if (!this.props.lat){
             return <img id="loading" className="map_loading_img" src={LoadingImg} alt=""/>
         }
@@ -63,8 +57,6 @@ function mapDispatchToProps(dispatch){
 function mapStateToProps(state){
     console.log(state);
     if(state.userLocation.lat){
-        // this.setState({counter: 1});
-        // this.forceUpdate();
         return {lng: state.userLocation.long, lat: state.userLocation.lat};
     }
     return {lng: 0, lat: 0};

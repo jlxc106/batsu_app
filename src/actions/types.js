@@ -1,5 +1,7 @@
 export default types = {
     SIGNUP = 'signup',
     ERROR = 'error',
-    SIGNIN = 'signin'
+    SIGNIN = 'signin',
+    LOCATION = 'location',
+    USERINFO = 'userinfo'
 }

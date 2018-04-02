@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import {Link} from 'react-router-dom';
-//import './app.css';
 
 
 class NavBar extends Component {
@@ -19,11 +18,11 @@ class NavBar extends Component {
         } else {
             return (
                 <div className="topHeader">
-                    <h3 className="topHeaderTitle">Batsu</h3>
+                    <h3 className="topHeaderTitle"><Link id="topHeaderLink" to="/home">Batsu</Link></h3>
                     <Menu width={'222px'} className="bm-menu">
                         <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/home">Home</Link>
                         <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/profile">Profile</Link>
-                        <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/my_events">My Events</Link>
+                        <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/events">My Events</Link>
                         <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/what_is_batsu">What's Batsu?</Link>
                         <Link className="menu-item" onClick={this.logOut} to="/">Log Off</Link>
                     </Menu>

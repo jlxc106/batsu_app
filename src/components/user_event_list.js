@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import CreatedEventsData from './list';
-import InvitedEventsData from './list_two';
-// import NavBar from './nav_bar';
-import './app.css';
+import ListOfEvents from './list_of_events';
+// import InvitedEventsData from './list_two';
 
 
 export default class EventList extends Component {
@@ -56,11 +54,11 @@ export default class EventList extends Component {
 
                     <h4 className="events_box_title">My Created Events</h4>
                     <div className="my_created_events_box">
-                        <CreatedEventsData className="list_info" createdEventsList={this.state.createdEventsList} />
+                        <ListOfEvents className="list_info" eventsList={this.state.createdEventsList} />
                     </div>
                     <h4 className="events_box_title">Other Created Events</h4>
                     <div className="other_created_events_box">
-                        <InvitedEventsData className="list_info" invitedEventsList={this.state.invitedEventsList} />
+                        <ListOfEvents className="list_info" eventsList={this.state.invitedEventsList} />
                     </div>
                 </div>
             )

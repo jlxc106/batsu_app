@@ -39,6 +39,9 @@ elseif($_GET['operation'] === 'eventinfo'){
 elseif($_GET['operation'] === 'eventlist'){
     include("./getEventList.php");
 }
+elseif($_GET['operation'] === 'getUserInfo'){
+    include('./getUserInfo.php');
+}
 
 if($output['success'] === false){
     array_push($output['errors'], mysqli_error($conn));

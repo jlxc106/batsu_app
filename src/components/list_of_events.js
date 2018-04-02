@@ -2,8 +2,8 @@ import React from 'react';
 import EventsListItems from './list_item';
 
 
-const InvitedEventsData = (props) => {
-    const listtwo = props.invitedEventsList.map((item, index) => {
+const ListOfEvents = (props) => {
+    const list = props.eventsList.map((item, index) => {
         return (
             <EventsListItems item={item} key={index}/>
         )
@@ -12,9 +12,9 @@ const InvitedEventsData = (props) => {
     return(
         <div>
             <ul className="list-group">
-                {listtwo}
+                {list}
             </ul>
         </div>
     )
 }
-export default InvitedEventsData;
+export default ListOfEvents;

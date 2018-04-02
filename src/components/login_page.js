@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import SignIn from './sign_in';
 import SignUp from './sign_up';
-import './app.css';
 
 
 const Login_Page = (props) => {
