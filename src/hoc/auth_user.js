@@ -1,44 +1,41 @@
-
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import {browserHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getUserInfo} from '../actions/index';
+import _ from 'lodash';
 
 export default function(ComposedComponent) {
-    // console.log('wutface');
     class Auth extends Component {
 
         componentWillMount() {
-            // console.log(this.props);
             if(!document.cookie){
-            // if(!this.props.authenticated){
-                console.log("props: ", this.props);
-                console.log("state: ", this.state);
                 this.props.history.push('/');
             }
         }
 
-        // componentWillUpdate(nextProps) {
-        //     console.log(nextProps);
-        //     if(!nextProps.authenticated){
-        //         this.props.history.push('/');
-        //     }
-        // }
         componentWillUpdate(nextProps) {
-            console.log("nextprops: ", nextProps);
             if(!document.cookie){
-            // if(!nextProps.authenticated){
                 this.props.history.push('/');
             }
         }
         render() {
+            if(document.cookie){
+                if(_.isEmpty(this.props.profile) || _.isEmpty(this.props.events)){
+                    this.props.getUserInfo({ token: document.cookie.split("=")[1]});
+                }
+            }
             return <ComposedComponent {...this.props}/>
         }
     }
 
-    function mapStateToProps(state) {
-        // console.log("state: ", state);
-        return { authenticated: state.auth.authorized };
+    function mapStateToProps(state){
+        return { profile: state.userInfo.profile, events: state.userInfo.events}
     }
 
-    return connect(mapStateToProps)(Auth);
+    function mapDispatchToProps(dispatch){
+        return bindActionCreators({ getUserInfo},dispatch);;
+    }
+
+    return connect(mapStateToProps, mapDispatchToProps)(Auth);
 }
+

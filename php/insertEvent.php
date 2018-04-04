@@ -72,7 +72,25 @@ if(mysqli_affected_rows($conn) === 1){
                 }
             }
         }
+        
+        $stmt4 = $conn -> prepare("SELECT e.EVENT_ID, e.Event_Name, e.Event_DateTime, e.Event_Address, ea.isCreator FROM events as e INNER JOIN event_attendees as ea on e.Event_ID = ea.Event_ID WHERE ea.Attendee_ID = ?");
+        $stmt4 -> bind_param("i", $id);
+        $stmt4 -> execute();
+        $stmt4 -> bind_result($event_id, $event_name, $event_datetime, $event_address, $isCreator);
+        while($stmt4->fetch()){
+            if($isCreator === 1){
+                $createdtemp = (object)["event_name"=>$event_name, "event_id"=>$eventID, "event_dateTime"=>$DateTime, "event_address"=>$event_address];
+                array_push($createdEventList, $createdtemp);
+            }
+            else{
+                $invitedtemp = (object)["event_name"=>$event_name, "event_id"=>$eventID, "event_dateTime"=>$DateTime, "event_address"=>$event_address];
+                array_push($invitedEventList, $invitedtemp);
+            }
+        }
+        $events = (object)["createdEvents"=> $createdEventList, "invitedEvents" => $invitedEventList];
+        $output['data'] = (object)["events"=> $events];
         $output['success'] = true;
+        $stmt4->close();
     }
     else{
         array_push($output['errors'], mysqli_error($conn));

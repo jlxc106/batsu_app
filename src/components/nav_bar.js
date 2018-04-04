@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import {Link} from 'react-router-dom';
-//import './app.css';
-
+import {getSignOut} from '../actions/index';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class NavBar extends Component {
-    // showSettings(event) {
-    //     event.preventDefault();
-    // }
+    constructor(props){
+        super(props);
+
+        this.logOut = this.logOut.bind(this);
+    }
 
     logOut() {
+        this.props.getSignOut();
         document.cookie = "token=" + ";expires=" + new Date(0);
+        $('.bm-cross-button > button').click();
     }
 
     render() {
-        if (location.pathname === "/" || location.pathname === "/sign_up"){
+        if(!this.props.logged_in){
+        // if (location.pathname === "/" || location.pathname === "/sign_up"){
             return null;
         } else {
             return (
                 <div className="topHeader">
-                    <h3 className="topHeaderTitle">Batsu</h3>
+                    <h3 className="topHeaderTitle"><Link id="topHeaderLink" to="/home">Batsu</Link></h3>
                     <Menu width={'222px'} className="bm-menu">
                         <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/home">Home</Link>
                         <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/profile">Profile</Link>
-                        <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/my_events">My Events</Link>
+                        <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/events">My Events</Link>
                         <Link className="menu-item" onClick={() => $('.bm-cross-button > button').click()} to="/what_is_batsu">What's Batsu?</Link>
                         <Link className="menu-item" onClick={this.logOut} to="/">Log Off</Link>
                     </Menu>
@@ -33,4 +39,12 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({getSignOut},dispatch);
+}
+
+function mapStateToProps(state){
+    return {logged_in: state.userInfo.logged_in}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

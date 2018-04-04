@@ -5,23 +5,22 @@ import SignUp from './sign_up.js';
 import { renderInput } from './helper_functions';
 import { connect } from 'react-redux';
 import { getSignIn } from '../actions/index';
-import './app.css';
 
 
 class SignIn extends Component {
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.auth){
-            this.props.history.push('/home');
-        }
-    }
+    // componentWillReceiveProps(nextProps){
+    //     if(document.cookie && nextProps.logged_in){
+    //         this.props.history.push('/home');
+    //     }
+    // }
 
     render(){
 
         const {handleSubmit, signinError} = this.props;
         return(
             <div className="login_page">
-                <form onSubmit={handleSubmit(vals => this.props.getSignIn(vals))}> 
+                <form onSubmit={handleSubmit(vals => this.props.getSignIn(vals, this.props.history))}> 
                     <h6 className="login-subtitles">E-mail</h6>
                     <Field name="email" type="email" component={renderInput} />
                     <h6 className="login-subtitles">Password</h6>
@@ -59,10 +58,10 @@ SignIn = reduxForm({
 })(SignIn);
 
 function mapStateToProps(state){
-    // console.log("state: ",state);
+    console.log(state);
     return{
-        signinError: state.auth.error,
-        auth: state.auth.authorized
+        signinError: state.userInfo.error,
+        // auth: state.userInfo.authorized
     }
 }
 

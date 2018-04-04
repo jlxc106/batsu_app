@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import CreateEventForm from './create_event_form';
 import Modal from 'react-modal';
 import Maps from './map_component';
+import {connect} from 'react-redux';
 
-
-export default class Home extends Component {
+class Home extends Component {
     constructor(props){
         super(props);
 
@@ -27,17 +27,15 @@ export default class Home extends Component {
     render(){
         // console.log(this.props);
         return(
-            <div id="testt">
+            <div>
                 <Maps
-                    // center={{lat:33.6904288, lng:-117.8330699}}
+                    center={this.props.position}
+                    // position = {this.props.position}
                     containerElement={<div className='map_element' style={{ height: `82vh` , width: `100vw`, position: `relative`}} />}
                     mapElement={<div style={{ height: `82vh` , width: `100vw`}} />}
-                    // markers={[{
-                    //     position: {
-                    //         lat:33.6904288,
-                    //         lng:-117.8330699
-                    //     },
-                    // }]} 
+                    markers={[{
+                        position: this.props.position,
+                    }]} 
                     />
 
                 <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Event Modal">
@@ -49,3 +47,8 @@ export default class Home extends Component {
         )
     }
 }
+function mapStateToProps(state){
+    return {position: state.userLocation};
+}
+
+export default connect(mapStateToProps)(Home);
