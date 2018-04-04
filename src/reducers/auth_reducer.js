@@ -1,17 +1,22 @@
-import {USERINFO, SIGNIN, SIGNUP, ERROR} from '../actions/index';
+import {USERINFO, SIGNIN, SIGNUP, ERROR, NEWEVENT, SIGNOUT, UPDATEPIC} from '../actions/index';
 
 const DEFAULT_STATE = { profile: {}, events: {}, error: null, logged_in: false };
 
 export default function(state = DEFAULT_STATE, action){
     switch(action.type){
+        case UPDATEPIC:
+            return {...state, profile:{...state.profile, path: action.payload.path} }
         case USERINFO:
-        console.log(action);
-            return {...state, profile: action.payload.profile, events: action.payload.events, error: null};
+            return {...state, profile: action.payload.profile, events: action.payload.events, error: null, logged_in: true};
         case SIGNIN:
         case SIGNUP:
             return { ...state, logged_in: true};
+        case NEWEVENT:
+            return{ ...state, events: action.payload.events}
         case ERROR:
             return { ...state, error:action.error };
+        case SIGNOUT:
+            return { state: DEFAULT_STATE};
         default:
             return state;
     }

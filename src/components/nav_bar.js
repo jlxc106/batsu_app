@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import {Link} from 'react-router-dom';
-
+import {getSignOut} from '../actions/index';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 class NavBar extends Component {
-    // showSettings(event) {
-    //     event.preventDefault();
-    // }
+    constructor(props){
+        super(props);
+
+        this.logOut = this.logOut.bind(this);
+    }
 
     logOut() {
+        this.props.getSignOut();
         document.cookie = "token=" + ";expires=" + new Date(0);
+        $('.bm-cross-button > button').click();
     }
 
     render() {
-        if (location.pathname === "/" || location.pathname === "/sign_up"){
+        if(!this.props.logged_in){
+        // if (location.pathname === "/" || location.pathname === "/sign_up"){
             return null;
         } else {
             return (
@@ -32,4 +39,12 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({getSignOut},dispatch);
+}
+
+function mapStateToProps(state){
+    return {logged_in: state.userInfo.logged_in}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

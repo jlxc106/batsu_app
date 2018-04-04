@@ -609,14 +609,14 @@ div.bm-menu{
     height:50%;
 }
 
-.map_element div:nth-child(2){
+/* .map_element div:nth-child(2){
     position: absolute;
     width: 100vw;
     height: 82vh;
     top: 0%;
     width: 100%;
     height: 100%;
-}
+} */
 
 #eventmap{
     border:2px solid black;
@@ -647,5 +647,9 @@ div.bm-menu{
 .profile_picture{
     height: 180px;
     width: 180px;
+}
+
+.profileInput{
+    width: 285px;
 }
 /*@media screen and (min-width: 700px)*/

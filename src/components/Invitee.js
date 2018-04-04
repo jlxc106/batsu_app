@@ -3,8 +3,6 @@ import React from 'react';
 
 const Invitee = (props) => {
     const {item} = props;
-    console.log("item: ", item);
-    console.log("props: ", props);
     // const itemPath = ""+item.path.substr(1);
     const itemPath = "/poop.png";
     return (

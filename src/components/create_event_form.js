@@ -48,11 +48,10 @@ class CreateEventForm extends Component {
             .then(latLng => {
                 this.handleAxios(latLng)
             })
-            .catch(error => console.error('what is Error', error));
+            //.catch(error => console.error('what is Error', error));
     };
 
     handleAxios(latLong) {
-
         const {form} = this.state;
         const sendData = {...form, location: latLong, token: this.state.token};
         this.props.postNewEvent(sendData);
@@ -68,6 +67,7 @@ class CreateEventForm extends Component {
             }
         };
         this.setState(newState);
+        this.props.exitEventForm();
     };
 
     render() {

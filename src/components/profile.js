@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import {bindActionCreators} from 'redux';
+import {updateProfilePic} from '../actions/index';
 
 class Profile extends Component {
     constructor(props){
         super(props);
         this.state = {
             canEdit : false,
-            imagePreviewUrl: '',
+            imagePreviewUrl: null,
             file:{
                 name: ''
             }
@@ -16,7 +18,6 @@ class Profile extends Component {
     }
 
     handleImageChange(event) {
-        console.log("event: ", event);
         event.preventDefault();
         let reader = new FileReader();
         let file = event.target.files[0];
@@ -30,20 +31,16 @@ class Profile extends Component {
     }
 
     handleSubmit(event) {
-        console.log("event: ",event);
-        event.preventDefault();
         this.setState({
             canEdit:false
         })
-        let filepic = this.state.file;
-        const formData = new FormData();
-        formData.append('profile', filepic);
-        // const sendThisShit = {"formData": formData, "token" : this.state.token};
-        console.log(formData);
-        axios.post('http://jayclim.com/php/form.php?operation=uploadImage&token='+ document.cookie.split("=")[1], formData).then((resp) => {
-            console.log('Axios call update profile resp: ', resp)
-
-        })
+        if(this.state.imagePreviewUrl){
+            event.preventDefault();
+            let filepic = this.state.file;
+            const formData = new FormData();
+            formData.append('profile', filepic);
+            this.props.updateProfilePic(formData);
+        }
     }
 
 
@@ -51,14 +48,14 @@ class Profile extends Component {
         if(_.isEmpty(this.props.profile)){
             return <div>Loading...</div>
         }
-        console.log("profile: ",this.props.profile);
+        let image_src = 'http://www.jayclim.com/php' + this.props.profile.path.substr(1);
         if(this.state.canEdit === false){
             return (
                 <div>
                     <h1 className="card-title">Profile</h1>
                     <div className="card profile_parent">
                         <div className="profile_picture_preview">
-                            <img className="profile_picture" src={this.state.imagePreviewUrl} alt=""/>
+                            <img className="profile_picture" src= {image_src} alt=""/>
                         </div>
                         <div className="card-block">
                             <ul className="list-group list-group-flush container">
@@ -72,12 +69,11 @@ class Profile extends Component {
                 </div>
             )
         } else {
-            let {imagePreviewUrl} = this.state;
             let profilePic = null;
-            if (imagePreviewUrl) {
-                profilePic = (<img className="profile_picture" src={imagePreviewUrl}/>);
+            if (this.state.imagePreviewUrl) {
+                profilePic = (<img className="profile_picture" src={this.state.imagePreviewUrl} alt="Please select an Image for Preview"/>);
             } else {
-                profilePic = (<div className="previewText">Please select an Image for Preview</div>);
+                profilePic = (<img className="profile_picture" src={image_src} alt="Please select an Image for Preview"/>);
             }
             return (
                 <div>
@@ -104,10 +100,13 @@ class Profile extends Component {
     }
 }
 
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({updateProfilePic},dispatch);;
+}
+
 function mapStateToProps(state){
-    console.log("state: ", state);
     return {profile: state.userInfo.profile};
 }
 
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

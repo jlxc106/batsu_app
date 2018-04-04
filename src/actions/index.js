@@ -7,6 +7,10 @@ export const ERROR = 'error';
 export const SIGNIN = 'signin';
 export const LOCATION = 'location';
 export const USERINFO = 'userinfo';
+export const NEWEVENT = 'newevent';
+export const SIGNOUT = 'signout';
+export const UPDATEPIC = 'updateprofilepic';
+
 
 export function getSignIn({email, password}, history){
     return dispatch => {
@@ -19,6 +23,10 @@ export function getSignIn({email, password}, history){
                 now.setTime(expireTime);
                 document.cookie = "token="+resp.data.token+";expires="+now.toUTCString()+";path=/";
                 history.push('/home');
+                dispatch({
+                    type: SIGNIN,
+                    payload: resp
+                });
             }
             else{
                 let message = "";
@@ -27,10 +35,6 @@ export function getSignIn({email, password}, history){
                 })
                 throw new Error(message);
             }
-            dispatch({
-                type: SIGNIN,
-                payload: resp
-            });
         }).catch(error => {
             dispatch(sendError(error.message));
         });
@@ -48,6 +52,10 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
                 now.setTime(expireTime);
                 document.cookie = "token="+resp.data.token+";expires="+now.toUTCString()+";path=/";
                 history.push('/home');
+                dispatch({
+                    type: SIGNUP,
+                    payload: resp
+                }); 
             }
             else{
                 let message = "";
@@ -56,15 +64,17 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
                 })
                 throw new Error(message);
             }
-            dispatch({
-                type: SIGNUP,
-                payload: resp
-            }); 
         }).catch((error) => {
             dispatch(sendError(error.message));
         });
     };
 };
+
+export function getSignOut(){
+    return{
+        type: SIGNOUT
+    }
+}
 
 
 export function storeLocation(userLocation){
@@ -82,15 +92,52 @@ function sendError(msg){
     }
 }
 
+
+export function updateProfilePic(formData){
+    return(dispatch)=>{
+        axios.post('http://jayclim.com/php/form.php?operation=uploadImage&token='+ document.cookie.split("=")[1], formData).then((resp) => {
+            console.log('Axios call update profile resp: ', resp);
+            if(resp.data.success){
+                dispatch({
+                    type: UPDATEPIC,
+                    payload: resp.data.data
+                })
+            }
+            else{
+                let message = "";
+                resp.data.errors.map(function(error_msg){
+                    message += error_msg + ". ";
+                })
+                throw new Error(message);            
+            }
+        }).catch((error) => {
+            dispatch(sendError(error.message));
+    })
+    }
+}
+
+
 export function postNewEvent(sendData){
-    axios.post(`${BASE_URL}?operation=insertEvent`, sendData).then((resp) => {
-        if(resp.data.success === true){
-            this.props.exitEventForm();
-        }
-        else{
-            throw new Error("unable to create new event");
-        }
-    });
+    return (dispatch)=>{
+        axios.post(`${BASE_URL}?operation=insertEvent`, sendData).then((resp) => {
+            console.log("resp from server: ",resp);
+            if(resp.data.success === true){
+                dispatch({
+                    type: NEWEVENT,
+                    payload: resp.data.data
+                });
+            }
+            else{
+                let message = "";
+                resp.data.errors.map(function(error_msg){
+                    message += error_msg + ". ";
+                })
+                throw new Error(message);            
+            }
+        }).catch((error) => {
+            dispatch(sendError(error.message));
+    })
+    }
 };
 
 export function getUserInfo(data){

@@ -14,14 +14,14 @@ $upload_dir = 'upload_images/'; //variable to hold images directory on server
 
 $target_file = $upload_dir; //.$_FILES['profile']['name'];
 
-$uploadOK = true;
+$uploadOK = false;
 
 $file = $_FILES['profile']['tmp_name'];
 
 // Check file size
 if($_FILES['profile']['size'] == 0){
     echo "No file uploaded or the selected file is too large (2MB)";
-    $output['errors'][] = 'No file uploaded or the selected file is too large (2MB)';
+    array_push($output['errors'], 'No file uploaded or the selected file is too large (2MB)');
 }
 // Allow certain file formats
 else{
@@ -41,6 +41,7 @@ else{
 
                 if(mysqli_affected_rows($conn) > 0){
                     $output['success'] = true;
+                    $output['data'] = (object)["path" =>$target_file];
                 }
                 else{
                     echo mysqli_error($conn);

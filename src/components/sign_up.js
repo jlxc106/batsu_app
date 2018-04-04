@@ -90,7 +90,7 @@ SignUp = reduxForm({
 
 function mapStateToProps(state){
     return{
-        signupError: state.auth.error
+        signupError: state.userInfo.error
     }
 }
 
