@@ -16,6 +16,10 @@ class Home extends Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
+    componentWillMount(){
+
+    }
+
     openModal() {
         this.setState({modalIsOpen: true});
     }
@@ -48,6 +52,7 @@ class Home extends Component {
     }
 }
 function mapStateToProps(state){
+    console.log("state: ",state);
     return {position: state.userLocation};
 }
 

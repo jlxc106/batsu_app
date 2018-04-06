@@ -6,65 +6,43 @@ class Timer extends Component {
     constructor(props){
         super(props);
 
+
         this.state = {
             IntervalID : null,
             eventID: props.eventID,
-            eventTime:null,
             days: null,
             hours: null,
             minutes: null,
             seconds: null,
-            distance: null
+            time_difference: null
         }
     }
 
-    componentDidMount() {
-        this.handleAxios();
-        // console.log(this.state);
-    }
-
-//finish axios call
-    handleAxios(){
-        axios.get('http://jayclim.com/php/form.php?operation=getTime&event='+this.state.eventID).then((resp) => {
-            // console.log('this is the response:', resp);
-            this.setState({
-                eventTime: new Date(resp.data.data.dateTime).getTime()
-            })
-            this.changeTime();
-        });
+    componentWillReceiveProps() {
+        this.changeTime();
     }
 
     changeTime() {
-        // const intervalID = setInterval(() => {
-        //     let currentTime = new Date().getTime();
-        //     let distance = this.state.eventTime - currentTime;
-        //     let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        //     let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        //     let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        //     let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        //     console.log("state: ", this.state);
-        //     this.setState({
-        //         days,
-        //         hours,
-        //         minutes,
-        //         seconds,
-        //         distance
-        //     });
-        // }, 1000);
-        this.setState({IntervalID: setInterval(() => {
-            let currentTime = new Date().getTime();
-            let distance = this.state.eventTime - currentTime;
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            this.setState({
-                days,
-                hours,
-                minutes,
-                seconds,
-                distance
-            });
+        this.setState({IntervalID : setInterval(() => {
+            try{
+                let currentTime = new Date().getTime();
+                let time_difference = this.props.eventTime - currentTime;
+                let days = Math.floor(time_difference / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((time_difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((time_difference % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((time_difference % (1000 * 60)) / 1000);
+                this.setState({
+                    days,
+                    hours,
+                    minutes,
+                    seconds,
+                    time_difference
+                });
+            }
+            catch(error){
+                console.error(error);
+                clearInterval(this.state.IntervalID);
+            }
         }, 1000)});
     };
 
@@ -79,10 +57,10 @@ class Timer extends Component {
     }
 
     render() {
-        if(!this.state.distance){
+        if(!this.state.time_difference){
             return <h1>Loading...</h1>
         }
-        if(this.state.distance <= 0){
+        if(this.state.time_difference <= 0){
             return <h1>Event Ended</h1>
         } else {
             return <h1>{this.formatTime()}</h1>

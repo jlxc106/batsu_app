@@ -33,7 +33,7 @@ export default function(ComposedComponent) {
     }
 
     function mapDispatchToProps(dispatch){
-        return bindActionCreators({ getUserInfo},dispatch);;
+        return bindActionCreators({ getUserInfo },dispatch);;
     }
 
     return connect(mapStateToProps, mapDispatchToProps)(Auth);

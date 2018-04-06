@@ -77,10 +77,20 @@ export function getSignOut(){
 }
 
 
-export function storeLocation(userLocation){
-    return {
-        type: LOCATION,
-        payload: userLocation
+export function storeLocation(){
+    return(dispatch)=>{
+        axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB4Ob07sNsJpQo-x5N4d0xjTB99lx15xCc").then((resp)=>{
+            console.log("resp: ",resp);
+            if(resp.status == 200){
+                dispatch({
+                    type: LOCATION,
+                    payload: resp.data
+                })
+            }
+            else{
+
+            }
+        })
     }
 }
 
@@ -90,6 +100,15 @@ function sendError(msg){
         type: ERROR,
         error: msg
     }
+}
+
+
+export function updateCheckIn(userData){
+
+}
+
+export function getEventInfo(){
+
 }
 
 

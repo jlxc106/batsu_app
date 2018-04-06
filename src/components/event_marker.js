@@ -31,6 +31,10 @@ class Maps extends Component {
     }
 
     render(){
+        const image = {
+            url: 'https://cdn1.iconfinder.com/data/icons/pretty-office-part-13-simple-style/512/user-green.png',
+            scaledSize: new google.maps.Size(52, 53)
+        };
         const radius = this.props.radius || {}
         // console.log("State in render:", this.state.position);
         const { lat, lng } = this.state.position;
@@ -45,8 +49,18 @@ class Maps extends Component {
                 defaultZoom={16}
                 defaultCenter={this.props.center}>
                 
-                <Marker
-                    position={this.props.position} />
+
+                {this.props.markers.map((marker, index)=>{
+                    console.log("marker: ",marker);
+                    return(
+                        <Marker
+                        key={index}
+                        position={marker}
+                        icon={image}/>
+                    )
+                })}
+                {/* <Marker
+                    position={this.props.position} /> */}
 
                 <Circle
                     center={this.props.position}

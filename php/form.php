@@ -18,9 +18,6 @@ if($_GET['operation'] === "checkIn"){
 if($_GET['operation'] === "insertUser"){
     include("./insertAccount.php");
 }
-else if($_GET['operation'] === "getTime"){
-    include("./getTime.php");
-}
 else if($_GET['operation'] === "signin"){
     include("./authenticate_login.php");
 }
@@ -46,11 +43,6 @@ elseif($_GET['operation'] === 'getUserInfo'){
 if($output['success'] === false){
     array_push($output['errors'], mysqli_error($conn));
 }
-
-
-//if(count($output['errors'])===0){
-//    $output['errors'] = false;
-//}
 
 
 $outputJSON = json_encode($output);
