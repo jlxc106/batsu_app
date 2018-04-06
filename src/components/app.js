@@ -13,6 +13,7 @@ import NavBar from './nav_bar';
 import './app.css';
 
 
+
 const App = () => (
     <div className="topbar-menu">
         <NavBar /> 
