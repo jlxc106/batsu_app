@@ -51,7 +51,7 @@ class Maps extends Component {
                 
 
                 {this.props.markers.map((marker, index)=>{
-                    console.log("marker: ",marker);
+                    // console.log("marker: ",marker);
                     return(
                         <Marker
                         key={index}

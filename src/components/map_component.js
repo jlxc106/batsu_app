@@ -39,7 +39,7 @@ class Maps extends Component {
         // console.log(state);
 
         let { lat, lng } = this.props;
-        console.log("this.props: ", this.props);
+        // console.log("this.props: ", this.props);
         if (!this.props.lat){
             return <img id="loading" className="map_loading_img" src={LoadingImg} alt=""/>
         }
@@ -48,7 +48,7 @@ class Maps extends Component {
                 defaultZoom={15}
                 defaultCenter={{lat, lng}}>
                 {this.props.markers.map((marker, index)=>{
-                    console.log("marker: ",marker);
+                    // console.log("marker: ",marker);
                     return(
                         <Marker
                         key={index}
@@ -67,7 +67,7 @@ function mapDispatchToProps(dispatch){
 }
 
 function mapStateToProps(state){
-    console.log(state);
+    // console.log(state);
     if(state.userLocation.lat){
         return {lng: state.userLocation.long, lat: state.userLocation.lat};
     }

@@ -18,6 +18,7 @@ export default function(ComposedComponent) {
                 this.props.history.push('/');
             }
         }
+        
         render() {
             if(document.cookie){
                 if(_.isEmpty(this.props.profile) || _.isEmpty(this.props.events)){
