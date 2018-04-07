@@ -9,22 +9,25 @@ class Maps extends Component {
     constructor(props){
         super(props);
 
-        this.getUserPermision = this.getUserPermision.bind(this);
+        // this.getUserPermision = this.getUserPermision.bind(this);
     }
 
     componentWillMount() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.getUserPermision);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
+        this.props.storeLocation();
+
+
+
+        // if (navigator.geolocation) {
+        //     navigator.geolocation.getCurrentPosition(this.getUserPermision);
+        // } else {
+        //     console.log("Geolocation is not supported by this browser.");
+        // }
     }
 
-    getUserPermision(position) {
-        console.log("position", position);
-        this.props.storeLocation(position.coords);
-
-    }
+    // getUserPermision(position) {
+    //     console.log("position", position);
+    //     this.props.storeLocation(position.coords);
+    // }
 
     render(){
         const image = {
@@ -34,8 +37,9 @@ class Maps extends Component {
         // const markers = this.props.markers[0].position || []
         // const radius = this.props.radius || {}
         // console.log(state);
+
         let { lat, lng } = this.props;
-        console.log("this.props: ", this.props);
+        // console.log("this.props: ", this.props);
         if (!this.props.lat){
             return <img id="loading" className="map_loading_img" src={LoadingImg} alt=""/>
         }
@@ -43,19 +47,27 @@ class Maps extends Component {
             <GoogleMap
                 defaultZoom={15}
                 defaultCenter={{lat, lng}}>
-                 <Marker
-                    position={{lat, lng}}
-                    icon={image}/>
+                {this.props.markers.map((marker, index)=>{
+                    // console.log("marker: ",marker);
+                    return(
+                        <Marker
+                        key={index}
+                        position={{lat: marker.position.lat,
+                                lng: marker.position.long}}
+                        icon={image}/>
+                    )
+                })}
+                 
              </GoogleMap>
          )
     }
 }
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({storeLocation},dispatch);;
+    return bindActionCreators({storeLocation},dispatch);
 }
 
 function mapStateToProps(state){
-    console.log(state);
+    // console.log(state);
     if(state.userLocation.lat){
         return {lng: state.userLocation.long, lat: state.userLocation.lat};
     }

@@ -77,13 +77,39 @@ export function getSignOut(){
 }
 
 
-export function storeLocation(userLocation){
-    return {
-        type: LOCATION,
-        payload: userLocation
+export function storeLocation(){
+    return(dispatch)=>{
+        axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB4Ob07sNsJpQo-x5N4d0xjTB99lx15xCc").then((resp)=>{
+            if(resp.status == 200){
+                dispatch({
+                    type: LOCATION,
+                    payload: {
+                        lat:resp.data.location.lat,
+                        lng:resp.data.location.lng,
+                        accuracy:resp.data.accuracy
+                    }
+                })
+            }
+            else{
+                try{
+                    navigator.geolocation.getCurrentPosition((position)=>{
+                        dispatch({
+                            type:LOCATION,
+                            payload: {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                                accuracy: null
+                            }
+                        })
+                    })
+                }
+                catch(error){
+                    console.error(error);
+                }
+            }
+        })
     }
 }
-
 
 function sendError(msg){
     return{
@@ -91,7 +117,6 @@ function sendError(msg){
         error: msg
     }
 }
-
 
 export function updateProfilePic(formData){
     return(dispatch)=>{

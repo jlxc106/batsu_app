@@ -12,7 +12,7 @@ class CreateEventForm extends Component {
             token: document.cookie.split("=")[1],
             form: {
                 event_name: 'event nameu',
-                invitee: 'test_email1@gmail.com, test_email2@gmail.com, test_email4@gmail.com, kelsey1@gmail.com',
+                invitee: 'test_email1@gmail.com, test_email2@gmail.com, test_email4@gmail.com',
                 time: '',
                 date: '',
                 address: '',

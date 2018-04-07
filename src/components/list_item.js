@@ -8,7 +8,7 @@ const EventsListItems = (props) => {
 
     return (
         <li className="list-group-item">
-            <Link to={`/preview_event/${id}`}>
+            <Link to={{pathname: `/preview_event`, state:{id} }}>
                 <span className="col-2">{item.event_name}</span>
                 <span className="col-2">{item.creator_id}</span>
                 <span className="col-2">{item.event_dateTime}</span>

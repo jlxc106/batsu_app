@@ -18,6 +18,7 @@ export default function(ComposedComponent) {
                 this.props.history.push('/');
             }
         }
+        
         render() {
             if(document.cookie){
                 if(_.isEmpty(this.props.profile) || _.isEmpty(this.props.events)){
@@ -33,7 +34,7 @@ export default function(ComposedComponent) {
     }
 
     function mapDispatchToProps(dispatch){
-        return bindActionCreators({ getUserInfo},dispatch);;
+        return bindActionCreators({ getUserInfo },dispatch);;
     }
 
     return connect(mapStateToProps, mapDispatchToProps)(Auth);
