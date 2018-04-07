@@ -40,8 +40,6 @@ class CreatedEvent extends Component{
                 eventLong: ""
             }
         }
-
-        // this.calculate_distance = this.calculate_distance.bind(this);
     }
 
     calculate_distance(){
@@ -56,7 +54,6 @@ class CreatedEvent extends Component{
         let a = Math.pow(Math.sin(dLat/2), 2) + Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(this.props.lat)) * Math.pow(Math.sin(dLon/2), 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         let d = R * c;
-        // console.log("distance: ",d);
         return d;
     }
 
@@ -66,9 +63,7 @@ class CreatedEvent extends Component{
 
     updateCheckIn(){
         const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
-        // console.log(userInfo);
         axios.post('http://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
-            console.log("resp: ", resp);
             if(resp.data.success === true){
                 this.setState({myStatus: resp.data.data[0]});
             }
@@ -76,12 +71,10 @@ class CreatedEvent extends Component{
                 console.error(resp.data.errors);
             }
         })
-
     }
 
     handleAxios(){
         axios.get('http://jayclim.com/php/form.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.token).then((resp) => {
-            // console.log("resp: ", resp);
             if(resp.data.success){
                 this.pageLoaded = true;
                 this.setState({
@@ -99,7 +92,8 @@ class CreatedEvent extends Component{
             this.setState({
                 eventID: Number(this.props.location.state.id)
             }, this.handleAxios);
-            this.props.storeLocation();
+            this.props.storeLocation(() => this.callback);
+            
         }
         catch(error){
             console.error(error);
@@ -109,9 +103,8 @@ class CreatedEvent extends Component{
         }
     }
 
-    componentWillReceiveProps(){
-        // console.log("props: ", this.props);
-        if(this.calculate_distance() < ( this.props.accuracy ? this.props.accuracy/1000: 2)){
+    componentDidUpdate(){
+        if(!this.state.enableCheckIn && this.calculate_distance() < ( this.props.accuracy ? this.props.accuracy/1000: 2)){
             this.setState({
                 enableCheckIn: true
             })
@@ -126,8 +119,6 @@ class CreatedEvent extends Component{
     }
 
     render(){
-        console.log("props: ", this.props);
-        console.log("state: ",this.state);
         if(this.state.error_loading_page){
             return(
                 <h1 className="preview_loading">Invalid event page, access from list of events page</h1>
@@ -143,10 +134,6 @@ class CreatedEvent extends Component{
                 lat:parseFloat(this.state.list.eventLat),
                 lng:parseFloat(this.state.list.eventLong)
             }
-            // const weeblocation = {
-            //     lat: 33.6694649,
-            //     lng:-117.8231107
-            // }
 
 
             let check_in_div = <div>Not within Check-In Distance</div>;
@@ -154,7 +141,7 @@ class CreatedEvent extends Component{
                 check_in_div = <div>Checked-In</div>
             }
             else if(this.state.enableCheckIn === true){
-                check_in_div = <button className="btn btn-primary" onClick={()=>{this.updateCheckIn()}}>Check-In</button>
+                check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn()}}>Check-In</button></div>
             }
             return (
                 <div>
@@ -174,14 +161,15 @@ class CreatedEvent extends Component{
                     <div>{this.state.list.eventPunishment}</div>
                     <div id="eventmap">
                         <Maps
-                            center={eventLocation}
+                            radius = {this.props.accuracy ? this.props.accuracy: 2000}
                             position = {eventLocation}
                             containerElement={<div style={{ height: `24vh` , width: `90vw`,display:`inline-block`}} />}
                             mapElement={<div style={{ height: `24vh` , width: `90vw`}} />}
-                            markers={[eventLocation]}
+                            markers={[eventLocation, {lat: this.props.lat, lng: this.props.lng}]}
                         />
                     </div>
                     {check_in_div}
+                    {/* <div>location services are most accurate with mobile devices</div> */}
                 </div>
             )
         }

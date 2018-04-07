@@ -18,7 +18,7 @@ class Timer extends Component {
         }
     }
 
-    componentWillReceiveProps() {
+    componentWillMount() {
         this.changeTime();
     }
 
@@ -31,20 +31,13 @@ class Timer extends Component {
                 let hours = Math.floor((time_difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let minutes = Math.floor((time_difference % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((time_difference % (1000 * 60)) / 1000);
-                try{
-                    this.setState({
+                this.setState({
                     days,
                     hours,
                     minutes,
                     seconds,
                     time_difference
-                    })
-                }
-                catch(error){
-                    console.log(error);
-                    clearInterval(this.state.IntervalID);
-                }
-                ;
+                });
             }
             catch(error){
                 console.error(error);
@@ -53,7 +46,14 @@ class Timer extends Component {
         }, 1000)});
     };
 
+    componentDidCatch(error, info){
+        console.error(info);
+        clearInterval(this.state.IntervalID);
+    }
+
+
     componentWillUnmount(){
+        console.log(this.state);
         clearInterval(this.state.IntervalID);
     }
 
