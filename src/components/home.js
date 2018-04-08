@@ -3,6 +3,7 @@ import CreateEventForm from './create_event_form';
 import Modal from 'react-modal';
 import Maps from './map_component';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 
 class Home extends Component {
     constructor(props){
@@ -29,6 +30,31 @@ class Home extends Component {
     }
 
     render(){
+        console.log(this.props.events.createdEvents);
+        console.log(this.props.events.invitedEvents);
+        let markers_array = [{lat: this.props.position.lat,
+        lng: this.props.position.lng,
+        type: 'userLocation'}];
+        if(!_.isEmpty(this.props.events.createdEvents)){
+            this.props.events.createdEvents.map((eventInfo)=>{
+                markers_array.push({
+                    lat: eventInfo.latitude,
+                    lng: eventInfo.longitude,
+                    type: "myEvents"
+                });
+            })
+        }
+        if(!_.isEmpty(this.props.events.invitedEvents)){
+            this.props.events.invitedEvents.map((eventInfo)=>{
+                markers_array.push({
+                    lat: eventInfo.latitude,
+                    lng: eventInfo.longitude,
+                    type: "invitedEvents"
+                });
+            })
+        }
+
+
         // console.log(this.props);
         return(
             <div>
@@ -37,9 +63,7 @@ class Home extends Component {
                     // position = {this.props.position}
                     containerElement={<div className='map_element' style={{ height: `82vh` , width: `100vw`, position: `relative`}} />}
                     mapElement={<div style={{ height: `82vh` , width: `100vw`}} />}
-                    markers={[{
-                        position: this.props.position,
-                    }]} 
+                    markers={markers_array} 
                     />
 
                 <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.closeModal} contentLabel="Event Modal">
@@ -52,8 +76,8 @@ class Home extends Component {
     }
 }
 function mapStateToProps(state){
-    // console.log("state: ",state);
-    return {position: state.userLocation};
+    console.log(state);
+    return {position: state.userLocation, events:state.userInfo.events};
 }
 
 export default connect(mapStateToProps)(Home);

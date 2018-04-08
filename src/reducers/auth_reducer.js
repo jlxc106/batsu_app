@@ -12,7 +12,7 @@ export default function(state = DEFAULT_STATE, action){
         case SIGNUP:
             return { ...state, logged_in: true};
         case NEWEVENT:
-            return{ ...state, events: action.payload.events}
+            return{ ...state, events: {...state.events, createdEvents: [...state.events.createdEvents, action.payload ]}} //action.payload.events
         case ERROR:
             return { ...state, error:action.error };
         case SIGNOUT:
@@ -24,7 +24,8 @@ export default function(state = DEFAULT_STATE, action){
 
 // state = {
 //     profile: {
-//         name: 'weeb gang',
+//         fname: 'weeb',
+//         lname: 'gang' 
 //         email: "weebgang@gmail.com",
 //         phone: 1234567890,
 //         profile_pic: './default_pic.jpg'
@@ -33,8 +34,18 @@ export default function(state = DEFAULT_STATE, action){
 //         createdEvents:[{event_name:"",
 //             creator_id: 1,
 //              event_id: 57,
-//                event_time: 12/30/2018
+//              event_time: 12/30/2018
+//              event_address: abcd road
+//              lat: 32.014314
+//              long: -158.67144
+//           }],
+//         invitedEvents:[{event_name:"",
+//             creator_id: 1,
+//              event_id: 57,
+//              event_time: 12/30/2018
+//              event_address: abcd road
+//              lat: 32.014314
+//              long: -158.67144
 //           }]
-//         invitedEvents:{}
 //     }
 // }

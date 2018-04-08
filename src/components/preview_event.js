@@ -179,7 +179,7 @@ class CreatedEvent extends Component{
 
 function mapStateToProps(state){
     if(state.userLocation.lat){
-        return {lng: state.userLocation.long, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
+        return {lng: state.userLocation.lng, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
     }
     return {lng: 0, lat: 0, accuracy: 0};
 }

@@ -49,12 +49,21 @@ class Maps extends Component {
                 defaultCenter={{lat, lng}}>
                 {this.props.markers.map((marker, index)=>{
                     // console.log("marker: ",marker);
+                    if(marker.type === "userLocation"){
+                        return(
+                            <Marker
+                            key={index}
+                            position={{lat: marker.lat,
+                                    lng: marker.lng}}
+                            icon={image}/>
+                        )    
+                    }
                     return(
                         <Marker
                         key={index}
-                        position={{lat: marker.position.lat,
-                                lng: marker.position.long}}
-                        icon={image}/>
+                        position={{lat: marker.lat,
+                                lng: marker.lng}}
+                        />
                     )
                 })}
                  
@@ -69,7 +78,7 @@ function mapDispatchToProps(dispatch){
 function mapStateToProps(state){
     // console.log(state);
     if(state.userLocation.lat){
-        return {lng: state.userLocation.long, lat: state.userLocation.lat};
+        return {lng: state.userLocation.lng, lat: state.userLocation.lat};
     }
     return {lng: 0, lat: 0};
 }
