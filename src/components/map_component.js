@@ -8,38 +8,19 @@ import {bindActionCreators} from 'redux';
 class Maps extends Component {
     constructor(props){
         super(props);
-
-        // this.getUserPermision = this.getUserPermision.bind(this);
     }
 
     componentWillMount() {
         this.props.storeLocation();
-
-
-
-        // if (navigator.geolocation) {
-        //     navigator.geolocation.getCurrentPosition(this.getUserPermision);
-        // } else {
-        //     console.log("Geolocation is not supported by this browser.");
-        // }
     }
-
-    // getUserPermision(position) {
-    //     console.log("position", position);
-    //     this.props.storeLocation(position.coords);
-    // }
 
     render(){
         const image = {
             url: 'https://cdn1.iconfinder.com/data/icons/pretty-office-part-13-simple-style/512/user-green.png',
             scaledSize: new google.maps.Size(52, 53)
         };
-        // const markers = this.props.markers[0].position || []
-        // const radius = this.props.radius || {}
-        // console.log(state);
 
         let { lat, lng } = this.props;
-        // console.log("this.props: ", this.props);
         if (!this.props.lat){
             return <img id="loading" className="map_loading_img" src={LoadingImg} alt=""/>
         }
@@ -48,7 +29,6 @@ class Maps extends Component {
                 defaultZoom={15}
                 defaultCenter={{lat, lng}}>
                 {this.props.markers.map((marker, index)=>{
-                    // console.log("marker: ",marker);
                     if(marker.type === "userLocation"){
                         return(
                             <Marker
@@ -76,7 +56,6 @@ function mapDispatchToProps(dispatch){
 }
 
 function mapStateToProps(state){
-    // console.log(state);
     if(state.userLocation.lat){
         return {lng: state.userLocation.lng, lat: state.userLocation.lat};
     }

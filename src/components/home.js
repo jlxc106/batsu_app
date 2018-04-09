@@ -17,10 +17,6 @@ class Home extends Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
-    // componentWillMount(){
-
-    // }
-
     openModal() {
         this.setState({modalIsOpen: true});
     }
@@ -30,8 +26,6 @@ class Home extends Component {
     }
 
     render(){
-        console.log(this.props.events.createdEvents);
-        console.log(this.props.events.invitedEvents);
         let markers_array = [{lat: this.props.position.lat,
         lng: this.props.position.lng,
         type: 'userLocation'}];
@@ -55,7 +49,6 @@ class Home extends Component {
         }
 
 
-        // console.log(this.props);
         return(
             <div>
                 <Maps
@@ -76,7 +69,6 @@ class Home extends Component {
     }
 }
 function mapStateToProps(state){
-    console.log(state);
     return {position: state.userLocation, events:state.userInfo.events};
 }
 

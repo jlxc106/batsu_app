@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import {  Link } from 'react-router-dom';
-import { getSignUp } from '../actions';
+import { getSignUp, clearErrors } from '../actions';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { renderInput } from './helper_functions';
+import { renderInput } from './render_input';
 
 class SignUp extends Component {
+    constructor(props){
+        super(props);
+    }
+
+    componentWillMount(){
+        this.props.clearErrors();
+    }
+
     handleSignup(vals){
         this.props.getSignUp(vals, this.props.history);
     }
@@ -14,10 +22,9 @@ class SignUp extends Component {
         const {handleSubmit, signupError} = this.props;
         return (
             <div className="signup-page">
-                {/* <NavBar /> */}
                 <h1 className="batsu-title-signup">Sign-Up</h1>
                 <div className="signup-main">
-                    <form onSubmit={handleSubmit(vals => this.handleSignup(vals))}>
+                    <form onSubmit={handleSubmit((vals) => this.handleSignup(vals))}>
                         <div>
                             <h6 className="signin-subtitles">First Name</h6>
                             <Field className="signup_info" name="fname" component={renderInput}/>
@@ -44,8 +51,21 @@ class SignUp extends Component {
                         </div>
                         <div>
                             <h6 className="signin-subtitles">Date of Birth</h6>
-                            <Field className="signup_info" name="dob" type="date" component={renderInput}>{signupError}</Field>
+                            <Field className="signup_info" name="dob" type="date" component={renderInput} />
                         </div>
+                        <ul className="text-danger">
+                        {()=>{
+                            if(signupError){
+                                signupError.map((error_msg, index)=>{
+                                    if(error_msg){
+                                        return(
+                                            <li key={index}>{error_msg}</li>
+                                        );
+                                    }
+                                })
+                            }
+                        }}
+                        </ul>
                         <button className="back-signup-button" type="button"><Link to="/" >Back</Link></button>
                         <button className="submit-signup-button" type="submit">Submit</button>
                     </form>
@@ -70,7 +90,7 @@ function validate(vals){
     if (!vals.email){
         error.email = "Please enter an e-mail";
     }
-    if (!vals.password){
+    if (!vals.password ){
         error.password = "Please enter a password";
     }
     if (vals.password !== vals.password_conf){
@@ -83,10 +103,7 @@ function validate(vals){
     return error;
 }
 
-SignUp = reduxForm({
-    form: 'signup',
-    validate
-})(SignUp);
+
 
 function mapStateToProps(state){
     return{
@@ -94,4 +111,9 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getSignUp})(SignUp);
+export default reduxForm({
+    validate,
+    form: 'signup'
+})(
+    connect(mapStateToProps, {getSignUp, clearErrors})(SignUp)
+);

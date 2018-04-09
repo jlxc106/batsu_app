@@ -24,7 +24,6 @@ class EventList extends Component {
     // }
 
     render(){
-        console.log(this.props);
         if(_.isEmpty(this.props.events)) {
             return (
                 <div className="my_events_loading"> Loading....</div>
