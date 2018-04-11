@@ -28,7 +28,7 @@ class SignIn extends Component {
                     <Field name="email" type="email" component={renderInput} />
                     <h6 className="login-subtitles">Password</h6>
                     <Field name="password" type="password" component={renderInput} />
-                    <ul className="text-danger col-xs-2 col-xs-offset-2">
+                    <ul className="text-danger list-group">
                     {
                         signinError.map((error_msg, index)=>{
                             if(error_msg){

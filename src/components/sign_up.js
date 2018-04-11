@@ -53,18 +53,16 @@ class SignUp extends Component {
                             <h6 className="signin-subtitles">Date of Birth</h6>
                             <Field className="signup_info" name="dob" type="date" component={renderInput} />
                         </div>
-                        <ul className="text-danger">
-                        {()=>{
-                            if(signupError){
-                                signupError.map((error_msg, index)=>{
-                                    if(error_msg){
-                                        return(
-                                            <li key={index}>{error_msg}</li>
-                                        );
-                                    }
-                                })
-                            }
-                        }}
+                        <ul className="text-danger list-group">
+                        {
+                            signupError.map((error_msg, index)=>{
+                                if(error_msg){
+                                    return(
+                                        <li key={index}>{error_msg}</li>
+                                    );
+                                }
+                            })
+                        }
                         </ul>
                         <button className="back-signup-button" type="button"><Link to="/" >Back</Link></button>
                         <button className="submit-signup-button" type="submit">Submit</button>
