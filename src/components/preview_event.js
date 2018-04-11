@@ -179,22 +179,13 @@ class CreatedEvent extends Component{
 
 function mapStateToProps(state){
     if(state.userLocation.lat){
-        return {lng: state.userLocation.long, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
+        return {lng: state.userLocation.lng, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
     }
     return {lng: 0, lat: 0, accuracy: 0};
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({storeLocation},dispatch);;
+    return bindActionCreators({storeLocation},dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatedEvent);
-
-// export default CreatedEvent;
-
-//want: X---1) to pass props using Link
-//      2) to clean up comp state
-//      3) to utilize connect and mapDispatchToProps 
-
-
-//user comes to the page -> triggers componentwillmount -> calls storeLocation -> storeLocation resets app state -> componentWillRecieveProps -> if within range -> u can check in / else check again in 1 min

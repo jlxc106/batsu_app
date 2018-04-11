@@ -2,94 +2,71 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { postNewEvent } from '../actions/index'
+import { postNewEvent, clearErrors } from '../actions/index'
 import { connect } from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
+import { renderInput } from './render_input';
 
 class CreateEventForm extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            token: document.cookie.split("=")[1],
-            form: {
-                event_name: 'event nameu',
-                invitee: 'test_email1@gmail.com, test_email2@gmail.com, test_email4@gmail.com',
-                time: '',
-                date: '',
-                address: '',
-                location:'',
-                description: '',
-                punishment: '50 Push-ups'
-            }
-        };
+            address: ''
+        }
+
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        let name = '';
-        let value = '';
-
-        if(typeof event === 'string') {
-            name = 'address';
-            value = event;
-        } else {
-            name = event.target.name;
-            value = event.target.value;
-        }
-
-        const {form} = this.state;
-        form[name] = value;
-        this.setState({form: {...form}});
+    componentWillMount(){
+        this.props.clearErrors();
     }
 
-    handleFormSubmit(event) {
-        event.preventDefault();
-        geocodeByAddress(this.state.form.address)
-            .then(results => getLatLng(results[0]))
-            .then(latLng => {
-                this.handleAxios(latLng)
-            })
-            //.catch(error => console.error('what is Error', error));
-    };
+    handleChange(event){
+        this.setState({address: event})
+    }
 
-    handleAxios(latLong) {
-        const {form} = this.state;
-        const sendData = {...form, location: latLong, token: this.state.token};
-        this.props.postNewEvent(sendData);
-        const newState = {
-            form: {
-                event_name: '',
-                invitee: '',
-                time: '',
-                date: '',
-                address: '',
-                description: '',
-                punishment: ''
-            }
-        };
-        this.setState(newState);
-        this.props.exitEventForm();
-    };
+    submitForm(vals){
+        geocodeByAddress(this.state.address)
+            .then(results => getLatLng(results[0])) 
+            .then(latLng=>{
+                vals.location = latLng;
+                vals.address = this.state.address
+                vals.token = document.cookie.split("=")[1]
+                this.props.postNewEvent(vals);
+                this.props.exitEventForm();
+
+            })
+
+    }
 
     render() {
+        let {handleSubmit, errors} = this.props;
+
         const inputProps = {
-            value: this.state.form.address,
+            value : this.state.address,
             onChange: this.handleChange
         };
-        const {event_name, invitee, time, date, description, punishment} = this.state.form;
+
+        if(errors === undefined){
+            errors = [];
+        }
         return (
             <div className="event_modal container">
                 <h1>Event</h1>
                 <div className="modal-body">
-                    <form onSubmit={(event) => {this.handleFormSubmit(event)}}>
+
+                {/* non-redux-form method */}
+                    {/* <form onSubmit={(event) => {this.handleFormSubmit(event)}}>
                         <div className="form-group row">
                             <label>Event Name</label>
-                            <input placeholder="name" name="event_name" value={event_name}
+                            <input name="event_name" value={event_name}
                                    onChange={(event) => this.handleChange(event)} maxLength={25} type="text"
                                    className="form-control"/>
                         </div>
                         <div className="form-group row">
                             <label>Invite Poeple</label>
-                            <input placeholder="invite people" name="invitee" value={invitee}
+                            <input name="invitee" value={invitee}
                                    onChange={(event) => this.handleChange(event)} type="text" className="form-control"/>
                         </div>
                         <div className="form-group row">
@@ -99,7 +76,7 @@ class CreateEventForm extends Component {
                         </div>
                         <div className="form-group row">
                             <label>Date</label>
-                            <input placeholder="date" name="date" value={date}
+                            <input name="date" value={date}
                                    onChange={(event) => this.handleChange(event)} type="date" className="form-control"/>
                         </div>
                         <div className="form-group row">
@@ -108,7 +85,7 @@ class CreateEventForm extends Component {
                         </div>
                         <div className="form-group row">
                             <label>description</label>
-                            <input placeholder="description" name="description" value={description} maxLength={140}
+                            <input name="description" value={description} maxLength={140}
                                    onChange={(e) => this.handleChange(e)} type="text" className="form-control"/>
                         </div>
                         <div className="form-group row">
@@ -121,10 +98,59 @@ class CreateEventForm extends Component {
                                 <option value="No Punishment">No Punishment</option>
                             </select>
                         </div>
-                        <button type="submit" className="btn btn-outline-success">
-                            Confirm
+                        <button type="submit" className="btn btn-outline-success">Confirm</button>
+                        <button type="button" className="btn btn-outline-danger mr-2" onClick={this.props.exitEventForm}>
+                            Cancel
                         </button>
+                    </form> */}
 
+
+                    <form onSubmit={handleSubmit(vals => this.submitForm(vals))}>
+                        <div className="form-group row event-input">
+                            <label>Event Name*</label>
+                            <Field className="form-control" name="event_name" type="text" component={renderInput}/>
+                        </div>
+                        <div className="form-group row event-input">
+                            <label>Invite People</label>
+                            <Field className="form-control" name="invitee" type="text" component={renderInput} />
+                        </div>
+                        <div className="form-group row event-input">
+                            <label>Time*</label>
+                            <Field className="form-control" name="time" type="time" component={renderInput} />
+                        </div>
+                        <div className="form-group row event-input">
+                            <label>Date*</label>
+                            <Field className="form-control" name="date" type="date" component={renderInput} />
+                        </div>
+                        <div className="form-group row event-input">
+                            <label>Address*</label>
+                            <PlacesAutocomplete className="form-control" inputProps={inputProps}/>
+                        </div>
+                        <div className="form-group row event-input">
+                            <label>description</label>
+                            <Field className="form-control" name="description" type="text" component={renderInput} />
+                        </div>
+                        <div className="form-group row event-input">
+                            <label>Punishment*</label>
+                            <Field className="form-control" name="punishment" component="select">
+                                <option value="50 Push-ups">50 Push-ups</option>
+                                <option value="Buy Winners Lunch">Buy Winners Lunch</option>
+                                <option value="Eat a Jar of Mayo">Eat a Jar of Mayo</option>
+                                <option value="No Punishment">No Punishment</option>
+                            </Field>
+                        </div>
+                        <ul className="text-danger list-group">
+                        {
+                            errors.map((error_msg, index)=>{
+                                if(error_msg){
+                                    return(
+                                        <li key={index}>{error_msg}</li>
+                                    );
+                                }
+                            })
+                        }                        
+                        </ul>
+                        <button type="submit" className="btn btn-outline-success">Confirm</button>
                         <button type="button" className="btn btn-outline-danger mr-2" onClick={this.props.exitEventForm}>
                             Cancel
                         </button>
@@ -135,4 +161,33 @@ class CreateEventForm extends Component {
     }
 }
 
-export default connect (null, {postNewEvent})(CreateEventForm);
+function validate(vals){
+    const error ={};
+
+    if(!vals.event_name){
+        error.event_name ="please enter an event name"
+    }
+    if(!vals.time){
+        error.time = "pleae enter an event time"
+    }
+    if(!vals.date){
+        error.date = "please enter an event date";
+    }
+    if(!vals.punishment){
+        error.punishment = "please select a punishment"
+    }
+    return error;
+}
+
+
+function mapStateToProps(state){
+    return{
+        errors: state.userInfo.error
+    }
+}
+
+
+export default reduxForm({
+    form: 'event_creation',
+    validate
+    })(connect (mapStateToProps, {postNewEvent, clearErrors})(CreateEventForm));

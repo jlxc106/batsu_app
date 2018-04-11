@@ -2,22 +2,25 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import SignUp from './sign_up.js';
-import { renderInput } from './helper_functions';
+import { renderInput } from './render_input';
 import { connect } from 'react-redux';
-import { getSignIn } from '../actions/index';
+import { getSignIn, clearErrors } from '../actions/index';
 
 
 class SignIn extends Component {
+    constructor(props){
+        super(props);
+    }
 
-    // componentWillReceiveProps(nextProps){
-    //     if(document.cookie && nextProps.logged_in){
-    //         this.props.history.push('/home');
-    //     }
-    // }
+    componentWillMount(){
+        this.props.clearErrors();
+    }
 
     render(){
-
-        const {handleSubmit, signinError} = this.props;
+        let {handleSubmit, signinError} = this.props;
+        if(signinError === undefined){
+            signinError = [];
+        }
         return(
             <div className="login_page">
                 <form onSubmit={handleSubmit(vals => this.props.getSignIn(vals, this.props.history))}> 
@@ -25,15 +28,23 @@ class SignIn extends Component {
                     <Field name="email" type="email" component={renderInput} />
                     <h6 className="login-subtitles">Password</h6>
                     <Field name="password" type="password" component={renderInput} />
-                    
-                     <p className="text-danger">{signinError}</p> 
+                    <ul className="text-danger list-group">
+                    {
+                        signinError.map((error_msg, index)=>{
+                            if(error_msg){
+                                return(
+                                    <li key={index}>{error_msg}</li>
+                                )
+                            }
+                        })
+                    }
+                    </ul>
                     <button type="submit" className="login-button" >Log In</button>
                 </form>
                 <div className="signup-top-div">
                     <button className="signup-button">
                         <Link to="/sign_up">Sign Up</Link>
                     </button>
-                    {/*<Route path="/signup_page" component={SignupPage} />*/}
                 </div>
             </div>
         )
@@ -52,17 +63,13 @@ function validate(vals){
     return error;
 }
 
-SignIn = reduxForm({
-    form: 'signin',
-    validate
-})(SignIn);
-
 function mapStateToProps(state){
-    console.log(state);
     return{
         signinError: state.userInfo.error,
-        // auth: state.userInfo.authorized
     }
 }
 
-export default connect(mapStateToProps, {getSignIn})(SignIn);
+export default reduxForm({
+    form: 'signin',
+    validate
+    })(connect(mapStateToProps, {getSignIn, clearErrors})(SignIn));

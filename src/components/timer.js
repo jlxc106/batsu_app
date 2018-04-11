@@ -53,7 +53,6 @@ class Timer extends Component {
 
 
     componentWillUnmount(){
-        console.log(this.state);
         clearInterval(this.state.IntervalID);
     }
 

@@ -1,20 +1,22 @@
-import {USERINFO, SIGNIN, SIGNUP, ERROR, NEWEVENT, SIGNOUT, UPDATEPIC} from '../actions/index';
+import {USERINFO, SIGNIN, SIGNUP, ERROR, NEWEVENT, SIGNOUT, UPDATEPIC, CLEARERRORS} from '../actions/index';
 
-const DEFAULT_STATE = { profile: {}, events: {}, error: null, logged_in: false };
+const DEFAULT_STATE = { profile: {}, events: {}, error: [], logged_in: false };
 
 export default function(state = DEFAULT_STATE, action){
     switch(action.type){
         case UPDATEPIC:
             return {...state, profile:{...state.profile, path: action.payload.path} }
         case USERINFO:
-            return {...state, profile: action.payload.profile, events: action.payload.events, error: null, logged_in: true};
+            return {...state, profile: action.payload.profile, events: action.payload.events, error: [], logged_in: true};
         case SIGNIN:
         case SIGNUP:
             return { ...state, logged_in: true};
         case NEWEVENT:
-            return{ ...state, events: action.payload.events}
+            return{ ...state, events: {...state.events, createdEvents: [...state.events.createdEvents, action.payload ]}} //action.payload.events
         case ERROR:
-            return { ...state, error:action.error };
+            return { ...state, error:action.payload };
+        case CLEARERRORS:
+            return {...state, error: []};
         case SIGNOUT:
             return { state: DEFAULT_STATE};
         default:
@@ -24,7 +26,8 @@ export default function(state = DEFAULT_STATE, action){
 
 // state = {
 //     profile: {
-//         name: 'weeb gang',
+//         fname: 'weeb',
+//         lname: 'gang' 
 //         email: "weebgang@gmail.com",
 //         phone: 1234567890,
 //         profile_pic: './default_pic.jpg'
@@ -33,8 +36,18 @@ export default function(state = DEFAULT_STATE, action){
 //         createdEvents:[{event_name:"",
 //             creator_id: 1,
 //              event_id: 57,
-//                event_time: 12/30/2018
+//              event_time: 12/30/2018
+//              event_address: abcd road
+//              lat: 32.014314
+//              long: -158.67144
+//           }],
+//         invitedEvents:[{event_name:"",
+//             creator_id: 1,
+//              event_id: 57,
+//              event_time: 12/30/2018
+//              event_address: abcd road
+//              lat: 32.014314
+//              long: -158.67144
 //           }]
-//         invitedEvents:{}
 //     }
 // }
