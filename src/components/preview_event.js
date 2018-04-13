@@ -61,11 +61,12 @@ class CreatedEvent extends Component{
         return deg * (Math.PI/180)
     }
 
-    updateCheckIn(){
-        const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
+    updateCheckIn(update_status){
+        // const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
+        const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": update_status};
         axios.post('http://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
             if(resp.data.success === true){
-                this.setState({myStatus: resp.data.data[0]});
+                this.setState({list:{...this.state.list, myStatus: resp.data.data[0]}});
             }
             else{
                 console.error(resp.data.errors);
@@ -141,7 +142,7 @@ class CreatedEvent extends Component{
                 check_in_div = <div>Checked-In</div>
             }
             else if(this.state.enableCheckIn === true){
-                check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn()}}>Check-In</button></div>
+                check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn('Checked In')}}>Check-In</button></div>
             }
             return (
                 <div>

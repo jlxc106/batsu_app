@@ -1,4 +1,5 @@
 <?php
+    //No longer in use
 
     $token = $_GET['token'];
     $stmt = $conn -> prepare("SELECT ID FROM accounts WHERE token=?");

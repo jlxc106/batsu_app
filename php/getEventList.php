@@ -1,5 +1,7 @@
-<?php
 
+
+<?php
+//No longer in use
 //$four = ;
 $token = $_GET['token'];
 
