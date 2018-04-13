@@ -14,7 +14,10 @@ if(mysql_num_rows($conn) === 1){
     $invitedEventList = [];
 
     $profile = (object)["fname" => $first_name, "lname" =>$last_name, "email" =>$email,"phone" =>$phone, "path" =>$path];
-    $stmt1 = $conn -> prepare("SELECT e.EVENT_ID, e.Event_Name, e.Event_DateTime, e.Event_Address, ea.isCreator FROM events as e INNER JOIN event_attendees as ea on e.Event_ID = ea.Event_ID WHERE ea.Attendee_ID = ?");
+    $stmt1 = $conn -> prepare("SELECT e.EVENT_ID, e.Event_Name, e.Event_DateTime, e.Event_Address, ea.isCreator 
+        FROM events as e 
+        INNER JOIN event_attendees as ea on e.Event_ID = ea.Event_ID 
+        WHERE ea.Attendee_ID = ? AND e.Event_DateTime >= DATE_ADD(NOW(), INTERVAL -1 DAY)");
     $stmt1 -> bind_param("i", $id);
     $stmt1 -> execute();
     $stmt1 -> bind_result($event_id, $event_name, $event_datetime, $event_address, $isCreator);

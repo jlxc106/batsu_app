@@ -91,6 +91,9 @@ function validate(vals){
     if (!vals.password ){
         error.password = "Please enter a password";
     }
+    if(vals.password && vals.password.length < 8){
+        error.password = "password must be 8 char's long"
+    }
     if (vals.password !== vals.password_conf){
         error.password_conf = "Passwords must match";
     }

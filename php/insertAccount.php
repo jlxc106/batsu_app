@@ -13,8 +13,9 @@ if($_POST['password'] !== $_POST['password_conf']){
     array_push($output['errors'], "enter two identical passwords");
 }
 //regex for password: atleast 1 uppercase, 1 lowercase, 1 number, between 8 and 32 characters
-if(!preg_match( "/^[a-zA-Z](?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{7,31}$/", $_POST['password'])){
+if(!preg_match( "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/", $_POST['password'])){
     array_push($output['errors'], "enter valid password");
+    array_push($output['errors'], 'password must contain 1 uppercase, 1 lowercase, and 1 numeric characters. Password length must be between 8 and 32 characters.');
 }
 
 //email regex - built in php
