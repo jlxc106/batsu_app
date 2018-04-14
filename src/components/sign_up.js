@@ -98,12 +98,9 @@ function validate(vals){
         error.password = "Please enter a password";
     }
     if(vals.password){
-        if(vals.password.length < 8 || vals.password.length > 32){
-            error.password = "password must be between 8 and 32 char's long"
-        }
         const re_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/;
         if(!re_pw.test(vals.password)){
-            error.password = "enter valid password"
+            error.password = "password must be between 8 and 32 characters long and contain at least 1 lowercase, uppercase, and numeric character"
         }
     }
     if (vals.password !== vals.password_conf){

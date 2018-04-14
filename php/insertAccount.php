@@ -27,6 +27,9 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 if(!preg_match("/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" ,$phone)){
     array_push($output['errors'], "invalid U.S. phone number");
 }
+
+$formated_phone = str_replace(array('-','(', ")", "+", " ", "."), "", $phone);
+
 if(time() < $min){
     //user must be atleast 10 years or older
     array_push($output['errors'], "must be older than 10 years old to sign up");
@@ -34,7 +37,7 @@ if(time() < $min){
 if(count($output['errors']) === 0 ){
     $output['data'] = [];
     $stmt = $conn->prepare("INSERT INTO accounts (first_name, last_name, email, phone, password, DOB) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss", $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phone'], $encryped_pw, $_POST['dob']);
+    $stmt->bind_param("ssssss", $_POST['fname'], $_POST['lname'], $_POST['email'], $formated_phone, $encryped_pw, $_POST['dob']);
     $stmt->execute();
 
     if (mysqli_affected_rows($conn) === 1) {
