@@ -9,8 +9,6 @@ $stmt -> bind_result($id, $my_fname, $my_lname);
 $stmt -> fetch();
 $stmt -> close();
 
-$output['data'] = [];
-
 $date = $_POST['date'];
 $time = $_POST['time'];
 
@@ -21,8 +19,6 @@ $pending = 'Pending';
 $true = 1;
 $false = 0;
 
-
-
 $combinedDT = date('Y-m-d H:i:s', $datetime);
 
 $stmt1 = $conn->prepare("INSERT INTO events (Creator_ID, Event_Name, Event_DateTime, Event_Latitude, Event_Longitude, Event_Address, Event_Description) VALUES (?,?,?,?,?,?,?)");
@@ -30,7 +26,6 @@ $stmt1->bind_param("sssssss", $id, $_POST["event_name"], $combinedDT, $_POST["lo
 $stmt1->execute();
 
 if(mysqli_affected_rows($conn) === 1){
-
     $event_table_id = mysqli_stmt_insert_id($stmt1);
     $stmt1->close();
 

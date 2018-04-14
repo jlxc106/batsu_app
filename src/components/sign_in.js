@@ -57,8 +57,20 @@ function validate(vals){
     if (!vals.email){
         error.email = "Please enter an e-mail";
     }
+    if(vals.email){
+        const re_email = /^([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(!re_email.test(vals.email)){
+            error.email = "enter a valid email address"
+        }
+    }
     if (!vals.password){
         error.password = "Please enter a password";
+    }
+    if(vals.password){
+        const re_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/;
+        if(!re_pw.test(vals.password)){
+            error.password = "enter valid password"
+        }
     }
     return error;
 }

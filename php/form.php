@@ -40,11 +40,6 @@ elseif($_GET['operation'] === 'getUserInfo'){
     include('./getUserInfo.php');
 }
 
-if($output['success'] === false){
-    array_push($output['errors'], mysqli_error($conn));
-}
-
-
 $outputJSON = json_encode($output);
 echo($outputJSON);
 exit();

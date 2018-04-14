@@ -53,7 +53,6 @@ if(count($output['errors']) === 0 ){
 
     } else {
         array_push($output["errors"], 'insert error');
-        array_push($output['errors'], mysqli_error($conn));
     }
 
 }

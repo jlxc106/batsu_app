@@ -35,7 +35,7 @@ class SignUp extends Component {
                         </div>
                         <div>
                             <h6 className="signin-subtitles">Phone Number</h6>
-                            <Field className="signup_info" name="phone" type="number" component={renderInput}/>
+                            <Field className="signup_info" name="phone" type="tel" component={renderInput}/>
                         </div>
                         <div>
                             <h6 className="signin-subtitles">E-mail Address</h6>
@@ -88,11 +88,23 @@ function validate(vals){
     if (!vals.email){
         error.email = "Please enter an e-mail";
     }
+    if(vals.email){
+        const re_email = /^([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(!re_email.test(vals.email)){
+            error.email = "enter a valid email address"
+        }
+    }
     if (!vals.password ){
         error.password = "Please enter a password";
     }
-    if(vals.password && vals.password.length < 8){
-        error.password = "password must be 8 char's long"
+    if(vals.password){
+        if(vals.password.length < 8 || vals.password.length > 32){
+            error.password = "password must be between 8 and 32 char's long"
+        }
+        const re_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/;
+        if(!re_pw.test(vals.password)){
+            error.password = "enter valid password"
+        }
     }
     if (vals.password !== vals.password_conf){
         error.password_conf = "Passwords must match";

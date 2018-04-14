@@ -20,7 +20,6 @@ $file = $_FILES['profile']['tmp_name'];
 
 // Check file size
 if($_FILES['profile']['size'] == 0){
-    echo "No file uploaded or the selected file is too large (2MB)";
     array_push($output['errors'], 'No file uploaded or the selected file is too large (2MB)');
 }
 // Allow certain file formats
@@ -59,7 +58,6 @@ else{
     else{
         $uploadOK = false;
         $output['success'] = false;
-        echo "incorrect file type";
         array_push($output['errors'], 'incorrect file type');
     }
 }
