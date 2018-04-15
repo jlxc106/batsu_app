@@ -13,7 +13,7 @@ Use the built in event creation form to invite your friends to the gym or to a h
 * PHP/MYSQL
 
 ## **Future Features:**
-* SSL/HTTPS([enables more accurate user position])(https://developers.google.com/web/updates/2016/04/geolocation-on-secure-contexts-only)
+* SSL/HTTPS([enables more accurate user position](https://developers.google.com/web/updates/2016/04/geolocation-on-secure-contexts-only))
 * More intuitive way to invite friends(unique username/id)
 * CSS
 * Interaction with map on home page
