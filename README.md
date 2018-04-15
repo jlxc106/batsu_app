@@ -23,4 +23,4 @@ Use the built in event creation form to invite your friends to the gym or to a h
   * [Learning-Fuze](https://learningfuze.com/)
   * Dan
   
-## Author: Jay Lim
+### Author: Jay Lim
