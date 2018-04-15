@@ -5,9 +5,9 @@
 }
 
 .signup-main{
-    width: 300px;
+    width: 80vw;
     margin: 0 auto;
-    height: 430px;
+    /* height: 430px; */
     border: 2px solid black;
     overflow-y: auto;
     padding: 5px;
@@ -196,6 +196,10 @@ input, select{
             1px 1px 0 black,
             1px 1px 0 black,
             1px 1px 6px black;
+}
+
+.event-input input{
+    margin-left: 30px;
 }
 
 .form-control{

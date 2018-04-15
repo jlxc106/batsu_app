@@ -27,23 +27,18 @@ else if($_GET['operation'] === "insertEvent"){
 else if($_GET['operation'] === "uploadImage"){
     include("./updateProfilePic.php");
 }
-elseif($_GET['operation'] === "profile"){
-    include("./getProfile.php");
-}
 elseif($_GET['operation'] === 'eventinfo'){
     include("./getEventInfo.php");
 }
-elseif($_GET['operation'] === 'eventlist'){
-    include("./getEventList.php");
-}
+// elseif($_GET['operation'] === "profile"){
+//     include("./getProfile.php");
+// }
+// elseif($_GET['operation'] === 'eventlist'){
+//     include("./getEventList.php");
+// }
 elseif($_GET['operation'] === 'getUserInfo'){
     include('./getUserInfo.php');
 }
-
-if($output['success'] === false){
-    array_push($output['errors'], mysqli_error($conn));
-}
-
 
 $outputJSON = json_encode($output);
 echo($outputJSON);

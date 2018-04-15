@@ -61,11 +61,12 @@ class CreatedEvent extends Component{
         return deg * (Math.PI/180)
     }
 
-    updateCheckIn(){
-        const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
+    updateCheckIn(update_status){
+        // const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
+        const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": update_status};
         axios.post('http://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
             if(resp.data.success === true){
-                this.setState({myStatus: resp.data.data[0]});
+                this.setState({list:{...this.state.list, myStatus: resp.data.data[0]}});
             }
             else{
                 console.error(resp.data.errors);
@@ -141,7 +142,7 @@ class CreatedEvent extends Component{
                 check_in_div = <div>Checked-In</div>
             }
             else if(this.state.enableCheckIn === true){
-                check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn()}}>Check-In</button></div>
+                check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn('Checked In')}}>Check-In</button></div>
             }
             return (
                 <div>
@@ -179,22 +180,13 @@ class CreatedEvent extends Component{
 
 function mapStateToProps(state){
     if(state.userLocation.lat){
-        return {lng: state.userLocation.long, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
+        return {lng: state.userLocation.lng, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
     }
     return {lng: 0, lat: 0, accuracy: 0};
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({storeLocation},dispatch);;
+    return bindActionCreators({storeLocation},dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatedEvent);
-
-// export default CreatedEvent;
-
-//want: X---1) to pass props using Link
-//      2) to clean up comp state
-//      3) to utilize connect and mapDispatchToProps 
-
-
-//user comes to the page -> triggers componentwillmount -> calls storeLocation -> storeLocation resets app state -> componentWillRecieveProps -> if within range -> u can check in / else check again in 1 min

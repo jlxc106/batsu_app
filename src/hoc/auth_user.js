@@ -11,6 +11,11 @@ export default function(ComposedComponent) {
             if(!document.cookie){
                 this.props.history.push('/');
             }
+            else if(document.cookie){
+                if(_.isEmpty(this.props.profile) || _.isEmpty(this.props.events)){
+                    this.props.getUserInfo({ token: document.cookie.split("=")[1]});
+                }
+            }
         }
 
         componentWillUpdate(nextProps) {
@@ -20,11 +25,6 @@ export default function(ComposedComponent) {
         }
         
         render() {
-            if(document.cookie){
-                if(_.isEmpty(this.props.profile) || _.isEmpty(this.props.events)){
-                    this.props.getUserInfo({ token: document.cookie.split("=")[1]});
-                }
-            }
             return <ComposedComponent {...this.props}/>
         }
     }

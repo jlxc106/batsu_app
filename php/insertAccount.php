@@ -13,8 +13,9 @@ if($_POST['password'] !== $_POST['password_conf']){
     array_push($output['errors'], "enter two identical passwords");
 }
 //regex for password: atleast 1 uppercase, 1 lowercase, 1 number, between 8 and 32 characters
-if(!preg_match( "/^[a-zA-Z](?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{7,31}$/", $_POST['password'])){
+if(!preg_match( "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/", $_POST['password'])){
     array_push($output['errors'], "enter valid password");
+    array_push($output['errors'], 'password must contain 1 uppercase, 1 lowercase, and 1 numeric characters. Password length must be between 8 and 32 characters.');
 }
 
 //email regex - built in php
@@ -26,6 +27,9 @@ if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 if(!preg_match("/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" ,$phone)){
     array_push($output['errors'], "invalid U.S. phone number");
 }
+
+$formated_phone = str_replace(array('-','(', ")", "+", " ", "."), "", $phone);
+
 if(time() < $min){
     //user must be atleast 10 years or older
     array_push($output['errors'], "must be older than 10 years old to sign up");
@@ -33,7 +37,7 @@ if(time() < $min){
 if(count($output['errors']) === 0 ){
     $output['data'] = [];
     $stmt = $conn->prepare("INSERT INTO accounts (first_name, last_name, email, phone, password, DOB) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss", $_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phone'], $encryped_pw, $_POST['dob']);
+    $stmt->bind_param("ssssss", $_POST['fname'], $_POST['lname'], $_POST['email'], $formated_phone, $encryped_pw, $_POST['dob']);
     $stmt->execute();
 
     if (mysqli_affected_rows($conn) === 1) {
@@ -52,7 +56,6 @@ if(count($output['errors']) === 0 ){
 
     } else {
         array_push($output["errors"], 'insert error');
-        array_push($output['errors'], mysqli_error($conn));
     }
 
 }

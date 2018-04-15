@@ -6,14 +6,11 @@ export default function(ComposedComponent) {
 
         componentWillMount() {
             if(document.cookie){
-                console.log("props: ", this.props);
-                console.log("state: ", this.state);
                 this.props.history.push('/home');
             }
         }
 
         componentWillUpdate(nextProps) {
-            console.log("nextprops: ", nextProps);
             if(document.cookie){
                 this.props.history.push('/home');
             }
