@@ -11,6 +11,7 @@ export const NEWEVENT = 'newevent';
 export const SIGNOUT = 'signout';
 export const UPDATEPIC = 'updateprofilepic';
 export const CLEARERRORS = 'clearerrors';
+export const RESETLOCATION = 'resetlocation';
 
 export function clearErrors(){
     return{
@@ -31,7 +32,7 @@ export function getSignIn({email, password}, history){
                 history.push('/home');
                 dispatch({
                     type: SIGNIN,
-                    payload: resp
+                    // payload: resp
                 });
             }
             else{
@@ -67,7 +68,7 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
                 history.push('/home');
                 dispatch({
                     type: SIGNUP,
-                    payload: resp
+                    // payload: resp
                 }); 
             }
             else{
@@ -96,8 +97,13 @@ export function getSignUp({fname, lname, phone, email, password, password_conf, 
 
 
 export function getSignOut(){
-    return{
-        type: SIGNOUT
+    return (dispatch) => {
+        dispatch({
+            type: SIGNOUT
+        });
+        dispatch({
+            type: RESETLOCATION
+        });
     }
 }
 

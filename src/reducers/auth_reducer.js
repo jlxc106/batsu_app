@@ -10,44 +10,16 @@ export default function(state = DEFAULT_STATE, action){
             return {...state, profile: action.payload.profile, events: action.payload.events, error: [], logged_in: true};
         case SIGNIN:
         case SIGNUP:
-            return { ...state, logged_in: true};
+            return {...state, logged_in: true};
         case NEWEVENT:
-            return{ ...state, events: {...state.events, createdEvents: [...state.events.createdEvents, action.payload ]}} //action.payload.events
+            return{...state, events: {...state.events, createdEvents: [...state.events.createdEvents, action.payload ]}} //action.payload.events
         case ERROR:
-            return { ...state, error:action.payload };
+            return {...state, error:action.payload };
         case CLEARERRORS:
             return {...state, error: []};
         case SIGNOUT:
-            return { state: DEFAULT_STATE};
+            return DEFAULT_STATE;
         default:
             return state;
     }
 }
-
-// state = {
-//     profile: {
-//         fname: 'weeb',
-//         lname: 'gang' 
-//         email: "weebgang@gmail.com",
-//         phone: 1234567890,
-//         profile_pic: './default_pic.jpg'
-//     },
-//     events:{
-//         createdEvents:[{event_name:"",
-//             creator_id: 1,
-//              event_id: 57,
-//              event_time: 12/30/2018
-//              event_address: abcd road
-//              lat: 32.014314
-//              long: -158.67144
-//           }],
-//         invitedEvents:[{event_name:"",
-//             creator_id: 1,
-//              event_id: 57,
-//              event_time: 12/30/2018
-//              event_address: abcd road
-//              lat: 32.014314
-//              long: -158.67144
-//           }]
-//     }
-// }

@@ -64,6 +64,7 @@ class Home extends Component {
                 </Modal>
 
                 <button className="btn btn-default btn-circle create_event_button" onClick={this.openModal} >Create Event!</button>
+                <div>use wifi for optimal geolocation results</div>
             </div>
         )
     }
