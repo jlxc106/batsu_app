@@ -64,7 +64,7 @@ class CreatedEvent extends Component{
     updateCheckIn(update_status){
         // const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
         const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": update_status};
-        axios.post('http://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
+        axios.post('https://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
             if(resp.data.success === true){
                 this.setState({list:{...this.state.list, myStatus: resp.data.data[0]}});
             }
@@ -75,7 +75,7 @@ class CreatedEvent extends Component{
     }
 
     handleAxios(){
-        axios.get('http://jayclim.com/php/form.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.token).then((resp) => {
+        axios.get('https://jayclim.com/php/form.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.token).then((resp) => {
             if(resp.data.success){
                 this.pageLoaded = true;
                 this.setState({

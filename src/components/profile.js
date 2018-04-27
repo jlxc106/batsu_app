@@ -48,7 +48,7 @@ class Profile extends Component {
         if(_.isEmpty(this.props.profile)){
             return <div>Loading...</div>
         }
-        let image_src = 'http://www.jayclim.com/php' + this.props.profile.path.substr(1);
+        let image_src = 'https://www.jayclim.com/php' + this.props.profile.path.substr(1);
         if(this.state.canEdit === false){
             return (
                 <div>
