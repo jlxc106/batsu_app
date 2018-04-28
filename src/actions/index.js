@@ -1,4 +1,5 @@
 import axios from "axios";
+import { get } from "https";
 
 const BASE_URL = "https://jayclim.com/php/form.php";
 
@@ -38,26 +39,11 @@ export function getSignIn({ email, password }, history) {
 					history.push("/home");
 					dispatch({
 						type: SIGNIN
-						// payload: resp
 					});
 				} else {
 					dispatch(sendError(resp.data.errors));
-
-					// dispatch({
-					//     type: ERROR,
-					//     payload: resp.data.errors
-					// })
-
-					// let message = "";
-					// resp.data.errors.map(function(error_msg){
-					//     message += error_msg + ". ";
-					// })
-					// throw new Error(message);
 				}
 			});
-		// .catch(error => {
-		//     dispatch(sendError(error.message));
-		// });
 	};
 }
 
@@ -91,27 +77,11 @@ export function getSignUp(
 					history.push("/home");
 					dispatch({
 						type: SIGNUP
-						// payload: resp
 					});
 				} else {
 					dispatch(sendError(resp.data.errors));
-					// dispatch({
-					//     type: ERROR,
-					//     payload: resp.data.errors
-					// })
-
-					// let message = "";
-					// resp.data.errors.map(function(error_msg){
-					//     message += error_msg + ". ";
-					// })
-					// throw new Error(resp.data.errors);
 				}
 			});
-		// .catch((error) => {
-		//     console.log(typeof(error));
-		//     console.log(error);
-		//     dispatch(sendError(error));
-		// });
 	};
 }
 
@@ -128,103 +98,48 @@ export function getSignOut() {
 
 export function storeLocation() {
 	return dispatch => {
-		try {
-			navigator.geolocation.getCurrentPosition(position => {
-                console.log('wao', position);
+		navigator.geolocation.getCurrentPosition(
+			position => {
 				dispatch({
 					type: LOCATION,
 					payload: {
 						lat: position.coords.latitude,
 						lng: position.coords.longitude,
-						accuracy: null
+						accuracy: position.coords.accuracy,
+						showPermissionMsg: false
 					}
 				});
-			});
-		} catch (error) {
-			console.error(error);
-			axios
-				.post(
-					"https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB4Ob07sNsJpQo-x5N4d0xjTB99lx15xCc"
-				)
-				.then(resp => {
-					if (resp.status == 200) {
-						dispatch({
-							type: LOCATION,
-							payload: {
-								lat: resp.data.location.lat,
-								lng: resp.data.location.lng,
-								accuracy: resp.data.accuracy
-							}
-						});
-					} else {
-						dispatch(sendError(resp.data.errors));
-					}
-				});
-		}
+			},
+			error => {
+				console.warn(`ERROR(${error.code}): ${error.message}`);
+				console.error(`ENABLE LOCATION FOR ACCURATE RESULTS`);
+				axios
+					.post(
+						"https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB4Ob07sNsJpQo-x5N4d0xjTB99lx15xCc"
+					)
+					.then(resp => {
+						if (resp.status == 200) {
+							dispatch({
+								type: LOCATION,
+								payload: {
+									lat: resp.data.location.lat,
+									lng: resp.data.location.lng,
+									accuracy: resp.data.accuracy,
+									showPermissionMsg: true
+								}
+							});
+						} else {
+							dispatch(sendError(resp.data.errors));
+						}
+					});
+			},
+			{
+				enableHighAccuracy: true,
+				timeout: 10000, //10 seconds
+				maximumAge: 0
+			}
+		);
 	};
-	// axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB4Ob07sNsJpQo-x5N4d0xjTB99lx15xCc").then((resp)=>{
-	//     if(resp.status == 200){
-	//         dispatch({
-	//             type: LOCATION,
-	//             payload: {
-	//                 lat:resp.data.location.lat,
-	//                 lng:resp.data.location.lng,
-	//                 accuracy:resp.data.accuracy
-	//             }
-	//         })
-	//     }
-	//     else{
-	//         try{
-	//             navigator.geolocation.getCurrentPosition((position)=>{
-	//                 dispatch({
-	//                     type:LOCATION,
-	//                     payload: {
-	//                         lat: position.coords.latitude,
-	//                         lng: position.coords.longitude,
-	//                         accuracy: null
-	//                     }
-	//                 })
-	//             })
-	//         }
-	//         catch(error){
-	//             console.error(error);
-	//             dispatch(sendError(resp.data.errors));
-	//         }
-	//     }
-	// })
-
-	// return(dispatch)=>{
-	//     axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB4Ob07sNsJpQo-x5N4d0xjTB99lx15xCc").then((resp)=>{
-	//         if(resp.status == 200){
-	//             dispatch({
-	//                 type: LOCATION,
-	//                 payload: {
-	//                     lat:resp.data.location.lat,
-	//                     lng:resp.data.location.lng,
-	//                     accuracy:resp.data.accuracy
-	//                 }
-	//             })
-	//         }
-	//         else{
-	//             try{
-	//                 navigator.geolocation.getCurrentPosition((position)=>{
-	//                     dispatch({
-	//                         type:LOCATION,
-	//                         payload: {
-	//                             lat: position.coords.latitude,
-	//                             lng: position.coords.longitude,
-	//                             accuracy: null
-	//                         }
-	//                     })
-	//                 })
-	//             }
-	//             catch(error){
-	//                 console.error(error);
-	//                 dispatch(sendError(resp.data.errors));
-	//             }
-	//         }
-	//     })
-	// }
 }
 
 function sendError(msg) {
@@ -252,9 +167,6 @@ export function updateProfilePic(formData) {
 					dispatch(sendError(resp.data.errors));
 				}
 			});
-		// .catch((error) => {
-		//     dispatch(sendError(error.message));
-		//})
 	};
 }
 
@@ -268,21 +180,12 @@ export function postNewEvent(sendData) {
 				});
 			} else {
 				dispatch(sendError(resp.data.errors));
-
-				// let message = "";
-				// resp.data.errors.map(function(error_msg){
-				//     message += error_msg + ". ";
-				// })
-				// throw new Error(message);
 			}
 		});
-		//     .catch((error) => {
-		//         dispatch(sendError(error.message));
-		// })
 	};
 }
 
-export function getUserInfo(data) {
+export function getUserInfo(data, history) {
 	return dispatch => {
 		axios.post(`${BASE_URL}?operation=getUserInfo`, data).then(resp => {
 			if (resp.data.success === true) {
@@ -291,17 +194,16 @@ export function getUserInfo(data) {
 					payload: resp.data.data
 				});
 			} else {
+				document.cookie = "token=" + ";expires=" + new Date(0);
+				dispatch({
+					type: SIGNOUT
+				});
+				dispatch({
+					type: RESETLOCATION
+				});
 				dispatch(sendError(resp.data.errors));
-
-				// let message = "";
-				// resp.data.errors.map(function(error_msg){
-				//     message += error_msg + ". ";
-				// })
-				// throw new Error(message);
+				history.push("/");
 			}
 		});
-		// .catch((error) => {
-		//     dispatch(sendError(error.message));
-		// })
 	};
 }

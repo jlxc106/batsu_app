@@ -13,7 +13,7 @@ export default function(ComposedComponent) {
             }
             else if(document.cookie){
                 if(_.isEmpty(this.props.profile) || _.isEmpty(this.props.events)){
-                    this.props.getUserInfo({ token: document.cookie.split("=")[1]});
+                    this.props.getUserInfo({ token: document.cookie.split("=")[1]}, this.props.history);
                 }
             }
         }

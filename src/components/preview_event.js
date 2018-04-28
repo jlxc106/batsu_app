@@ -105,13 +105,14 @@ class CreatedEvent extends Component{
     }
 
     componentDidUpdate(){
-        if(!this.state.enableCheckIn && this.calculate_distance() < ( this.props.accuracy ? this.props.accuracy/1000: 2)){
+        //if user is not within range to checkin - keep calling every 60 sec?
+        if(!this.state.enableCheckIn && this.calculate_distance() < ( this.props.accuracy < 500 ? this.props.accuracy/1000: 0.5)){
             this.setState({
                 enableCheckIn: true
             })
         }
         else{
-            this.timer_id = setTimeout(this.props.storeLocation(), 60000);
+            this.timer_id = setTimeout(this.props.storeLocation(), 10000);
         }
     }
 
@@ -136,7 +137,6 @@ class CreatedEvent extends Component{
                 lng:parseFloat(this.state.list.eventLong)
             }
 
-
             let check_in_div = <div>Not within Check-In Distance</div>;
             if(this.state.list.myStatus === 'Checked In'){
                 check_in_div = <div>Checked-In</div>
@@ -144,6 +144,13 @@ class CreatedEvent extends Component{
             else if(this.state.enableCheckIn === true){
                 check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn('Checked In')}}>Check-In</button></div>
             }
+
+            let PermissionMsg = "";
+
+            if(this.props.showPermissionMsg){
+                PermissionMsg = "Enable Geolocation for accurate results";
+            } 
+
             return (
                 <div>
                     {this.state.list.eventName}
@@ -162,7 +169,7 @@ class CreatedEvent extends Component{
                     <div>{this.state.list.eventPunishment}</div>
                     <div id="eventmap">
                         <Maps
-                            radius = {this.props.accuracy ? this.props.accuracy: 2000}
+                            radius = {this.props.accuracy < 500 ? this.props.accuracy: 500}
                             position = {eventLocation}
                             containerElement={<div style={{ height: `24vh` , width: `90vw`,display:`inline-block`}} />}
                             mapElement={<div style={{ height: `24vh` , width: `90vw`}} />}
@@ -170,7 +177,7 @@ class CreatedEvent extends Component{
                         />
                     </div>
                     {check_in_div}
-                    {/* <div>location services are most accurate with mobile devices</div> */}
+                    <div>{PermissionMsg}</div>
                 </div>
             )
         }
@@ -180,9 +187,9 @@ class CreatedEvent extends Component{
 
 function mapStateToProps(state){
     if(state.userLocation.lat){
-        return {lng: state.userLocation.lng, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy};
+        return {lng: state.userLocation.lng, lat: state.userLocation.lat, accuracy: state.userLocation.accuracy, showPermissionMsg: state.userLocation.showPermissionMsg};
     }
-    return {lng: 0, lat: 0, accuracy: 0};
+    return {lng: 0, lat: 0, accuracy: 0, showPermissionMsg: false};
 }
 
 function mapDispatchToProps(dispatch){
