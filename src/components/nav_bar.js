@@ -14,12 +14,12 @@ class NavBar extends Component {
 
     logOut() {
         this.props.getSignOut();
-        document.cookie = "token=" + ";expires=" + new Date(0);
+        document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         $('.bm-cross-button > button').click();
     }
 
     render() {
-        if(!this.props.logged_in){
+        if(!this.props.logged_in && !document.cookie){
         // if (location.pathname === "/" || location.pathname === "/sign_up"){
             return null;
         } else {

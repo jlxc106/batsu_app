@@ -195,14 +195,13 @@ export function getUserInfo(data, history) {
 				});
 			} else {
 				//rethink this
-				document.cookie = "token=" + ";expires=" + new Date(0);
+				document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 				dispatch({
 					type: SIGNOUT
 				});
 				dispatch({
 					type: RESETLOCATION
 				});
-				dispatch(sendError(resp.data.errors));
 				// history.push("/");
 			}
 		});
