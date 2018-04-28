@@ -194,6 +194,7 @@ export function getUserInfo(data, history) {
 					payload: resp.data.data
 				});
 			} else {
+				//rethink this
 				document.cookie = "token=" + ";expires=" + new Date(0);
 				dispatch({
 					type: SIGNOUT
@@ -202,7 +203,7 @@ export function getUserInfo(data, history) {
 					type: RESETLOCATION
 				});
 				dispatch(sendError(resp.data.errors));
-				history.push("/");
+				// history.push("/");
 			}
 		});
 	};

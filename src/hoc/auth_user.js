@@ -30,11 +30,11 @@ export default function(ComposedComponent) {
     }
 
     function mapStateToProps(state){
-        return { profile: state.userInfo.profile, events: state.userInfo.events}
+        return { profile: state.userInfo.profile, events: state.userInfo.events, userLocation: state.userLocation};
     }
 
     function mapDispatchToProps(dispatch){
-        return bindActionCreators({ getUserInfo },dispatch);;
+        return bindActionCreators({ getUserInfo },dispatch);
     }
 
     return connect(mapStateToProps, mapDispatchToProps)(Auth);
