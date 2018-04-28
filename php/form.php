@@ -4,10 +4,13 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 require("./mysql_connect.php");
 
+$date = date('m/d/Y h:i:s a');
+
 $output = [
     'success'=> false, //we assume we will fail
     'errors'=>[],
-    'data'=>[]
+    'data'=>[],
+    'timestamp'=> $date
 ];
 
 $_POST = json_decode(file_get_contents('php://input'), true);
@@ -30,12 +33,6 @@ else if($_GET['operation'] === "uploadImage"){
 elseif($_GET['operation'] === 'eventinfo'){
     include("./getEventInfo.php");
 }
-// elseif($_GET['operation'] === "profile"){
-//     include("./getProfile.php");
-// }
-// elseif($_GET['operation'] === 'eventlist'){
-//     include("./getEventList.php");
-// }
 elseif($_GET['operation'] === 'getUserInfo'){
     include('./getUserInfo.php');
 }

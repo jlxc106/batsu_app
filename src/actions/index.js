@@ -136,7 +136,7 @@ export function storeLocation() {
 			{
 				enableHighAccuracy: true,
 				timeout: 10000, //10 seconds
-				maximumAge: 0
+				maximumAge: 10000
 			}
 		);
 	};
@@ -194,7 +194,6 @@ export function getUserInfo(data, history) {
 					payload: resp.data.data
 				});
 			} else {
-				//rethink this
 				document.cookie = "token=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 				dispatch({
 					type: SIGNOUT
@@ -202,7 +201,6 @@ export function getUserInfo(data, history) {
 				dispatch({
 					type: RESETLOCATION
 				});
-				// history.push("/");
 			}
 		});
 	};

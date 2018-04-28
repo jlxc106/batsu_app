@@ -16,8 +16,10 @@ class CreatedEvent extends Component{
         this.pageLoaded = false;
         this.token = document.cookie.split("=")[1];
         this.timer_id = null;
+        this.current_time = null;
 
         this.state = {
+            secondsUntilEvent: null,
             error_loading_page: false,
             eventID: null,
             enableCheckIn: false,
@@ -63,23 +65,34 @@ class CreatedEvent extends Component{
 
     updateCheckIn(update_status){
         // const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
-        const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": update_status};
-        axios.post('https://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
-            if(resp.data.success === true){
-                this.setState({list:{...this.state.list, myStatus: resp.data.data[0]}});
-            }
-            else{
-                console.error(resp.data.errors);
-            }
-        })
+        if(this.state.secondsUntilEvent <= 3600){
+            const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": update_status};
+            axios.post('https://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
+                if(resp.data.success === true){
+                    this.setState({list:{...this.state.list, myStatus: resp.data.data[0]}});
+                }
+                else{
+                    console.error(resp.data.errors);
+                }
+            })
+        }
+        else{
+            console.log("can't check-in until 1hr before event time")
+        }
     }
 
     handleAxios(){
         axios.get('https://jayclim.com/php/form.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.token).then((resp) => {
             if(resp.data.success){
                 this.pageLoaded = true;
+                this.current_time = new Date(`${resp.data.timestamp} UTC`);
                 this.setState({
                     list: resp.data.data
+                }, ()=>{
+                    this.setState({
+                        secondsUntilEvent: (new Date(this.state.list.eventDateTime).getTime() - this.current_time.getTime())/1000
+                    })
+                    //this.state.secondsUntilEvent = (new Date(this.state.list.eventDateTime).getTime() - this.current_time.getTime())/1000;
                 })
             }
             else{
@@ -93,7 +106,7 @@ class CreatedEvent extends Component{
             this.setState({
                 eventID: Number(this.props.location.state.id)
             }, this.handleAxios);
-            this.props.storeLocation(() => this.callback);
+            this.props.storeLocation();
             
         }
         catch(error){
@@ -105,19 +118,24 @@ class CreatedEvent extends Component{
     }
 
     componentDidUpdate(){
-        //if user is not within range to checkin - keep calling every 60 sec?
-        if(!this.state.enableCheckIn && this.calculate_distance() < ( this.props.accuracy < 500 ? this.props.accuracy/1000: 0.5)){
-            this.setState({
-                enableCheckIn: true
-            })
-        }
-        else{
-            this.timer_id = setTimeout(this.props.storeLocation(), 10000);
+        /*
+        Note: only watch user location when event is about to start
+        */
+        //if user is not within range to checkin - keep calling every 30 sec
+        if(this.state.secondsUntilEvent <= 3600 && this.state.secondsUntilEvent){ //1 hr prior to event
+            if(!this.state.enableCheckIn && this.calculate_distance() < ( this.props.accuracy < 500 ? this.props.accuracy/1000: 0.5)){ 
+                this.setState({
+                    enableCheckIn: true
+                })
+            }
+            else if(this.timer_id === null){
+                this.timer_id = setInterval(()=>{this.props.storeLocation()}, 30000); //watch user location
+            }
         }
     }
 
     componentWillUnmount(){
-        clearTimeout(this.timer_id);
+        clearInterval(this.timer_id);
     }
 
     render(){
@@ -140,6 +158,9 @@ class CreatedEvent extends Component{
             let check_in_div = <div>Not within Check-In Distance</div>;
             if(this.state.list.myStatus === 'Checked In'){
                 check_in_div = <div>Checked-In</div>
+            }
+            else if(this.state.secondsUntilEvent > 3600 && this.state.secondsUntilEvent){
+                check_in_div = <div>Check-in enabled 1 hr prior to event</div>;
             }
             else if(this.state.enableCheckIn === true){
                 check_in_div = <div><button className="btn btn-primary" onClick={()=>{this.updateCheckIn('Checked In')}}>Check-In</button></div>

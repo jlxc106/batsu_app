@@ -1,6 +1,6 @@
 # Batsu - accountability app
 
-[Live Page](http://www.batsu.io)
+[Live Page](https://www.batsu.io)
 
 Batsu is an app designed for you to use with your friends to keep each other accountable.
 
@@ -8,15 +8,18 @@ Use the built in event creation form to invite your friends to the gym or to a h
 
 ## **Technologies/API's Used:**
 * React & Redux libraries
-* Google Geolocation
+* Geolocation
+* Google Geolocation(backup)
 * Nodejs/Express
 * PHP/MYSQL
 
 ## **Future Features:**
-* SSL/HTTPS([enables more accurate user position](https://developers.google.com/web/updates/2016/04/geolocation-on-secure-contexts-only))
 * More intuitive way to invite friends(unique username/id)
 * CSS
 * Interaction with map on home page
+* customizable punishments
+* timezones
+* check-in only possible 1 hr prior to event
 
 ## Acknowledgments
   * [C5.17 Accountability Team](https://github.com/Learning-Fuze/c5.17_accountability)
@@ -24,3 +27,15 @@ Use the built in event creation form to invite your friends to the gym or to a h
   * Dan
   
 ## Author: Jay Lim
+
+
+### Change Log: 
+
+4/28/18:
+ * enabled ssl installation/configuration
+ * Automatically log out upon altered/false token check
+ * enabled geolocation
+ * issued warnings to enable location to users who disabled location feature
+ * altered check-in radius to 0.5km max
+ * check-in only enabled for 1 hr prior to event start
+ * tracking enabled every 30 seconds from 1 hr prior to event start until user finally checks in
