@@ -26,6 +26,7 @@ class Home extends Component {
     }
 
     render(){
+
         let markers_array = [{lat: this.props.position.lat,
         lng: this.props.position.lng,
         type: 'userLocation'}];
@@ -48,6 +49,12 @@ class Home extends Component {
             })
         }
 
+        let PermissionMsg = "";
+
+        if(this.props.position.showPermissionMsg){
+            PermissionMsg = "Enable Geolocation for accurate results";
+        }
+
 
         return(
             <div>
@@ -64,7 +71,7 @@ class Home extends Component {
                 </Modal>
 
                 <button className="btn btn-default btn-circle create_event_button" onClick={this.openModal} >Create Event!</button>
-                <div>use wifi for optimal geolocation results</div>
+                <div>{PermissionMsg}</div>
             </div>
         )
     }
