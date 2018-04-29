@@ -67,7 +67,7 @@ class CreatedEvent extends Component{
         // const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": this.state.list.myStatus};
         if(this.state.secondsUntilEvent <= 3600){
             const userInfo = {"token": this.token, "eventID": this.state.eventID, "myStatus": update_status};
-            axios.post('https://jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
+            axios.post('https://www.jayclim.com/php/form.php?operation=checkIn', userInfo).then((resp) => {
                 if(resp.data.success === true){
                     this.setState({list:{...this.state.list, myStatus: resp.data.data[0]}});
                 }
@@ -82,7 +82,7 @@ class CreatedEvent extends Component{
     }
 
     handleAxios(){
-        axios.get('https://jayclim.com/php/form.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.token).then((resp) => {
+        axios.get('https://www.jayclim.com/php/form.php?operation=eventinfo&eventID='+this.state.eventID+"&token="+this.token).then((resp) => {
             if(resp.data.success){
                 this.pageLoaded = true;
                 this.current_time = new Date(`${resp.data.timestamp} UTC`);

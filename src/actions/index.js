@@ -1,7 +1,7 @@
 import axios from "axios";
 import { get } from "https";
 
-const BASE_URL = "https://jayclim.com/php/form.php";
+const BASE_URL = "https://www.jayclim.com/php/form.php";
 
 export const SIGNUP = "signup";
 export const ERROR = "error";
