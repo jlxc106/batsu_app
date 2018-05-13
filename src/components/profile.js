@@ -48,7 +48,7 @@ class Profile extends Component {
         if(_.isEmpty(this.props.profile)){
             return <div>Loading...</div>
         }
-        let image_src = 'https://www.jayclim.com/php' + this.props.profile.path.substr(1);
+        const image_src = 'https://www.jayclim.com/php' + this.props.profile.path.substr(1);
         if(this.state.canEdit === false){
             return (
                 <div>
@@ -58,7 +58,7 @@ class Profile extends Component {
                             <img className="profile_picture" src= {image_src} alt=""/>
                         </div>
                         <div className="card-block">
-                            <ul className="list-group list-group-flush container">
+                            <ul className="profile-user-info-container list-group list-group-flush container">
                                 <li className="list-group-item">Email: {this.props.profile.email}</li>
                                 <li className="list-group-item">Name: {this.props.profile.fname.concat(" ").concat(this.props.profile.lname)}</li>
                                 <li className="list-group-item">Phone: {this.props.profile.phone}</li>
@@ -85,7 +85,7 @@ class Profile extends Component {
                         <form onSubmit={(e) => {this.handleSubmit(e)}}>
                             <input id="file" className="profileInput" type="file" name="profile" onChange={(e)=>this.handleImageChange(e)}/>
                             <div className="card-block">
-                                <ul className="list-group list-group-flush container">
+                                <ul className="profile-user-info-container list-group list-group-flush container">
                                     <li className="list-group-item">Email: {this.props.profile.email}</li>
                                     <li className="list-group-item">Name: {this.props.profile.fname.concat(" ").concat(this.props.profile.lname)}</li>
                                     <li className="list-group-item">Phone: {this.props.profile.phone}</li>

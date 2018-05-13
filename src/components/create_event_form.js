@@ -17,10 +17,8 @@ class CreateEventForm extends Component {
 		this.state = {
 			address: "",
 			address_input_msg: ""
-			// show_custom_punishment: false
 		};
 		this.show_custom_punishment = false;
-		// this.div_custom_punishment = null;
 		this.handleChange = this.handleChange.bind(this);
 	}
 
@@ -72,9 +70,9 @@ class CreateEventForm extends Component {
 
 		return (
 			<div className="event_modal container">
-				<h1>Event</h1>
+				<h1>Event Creation</h1>
 				<div className="modal-body">
-					<form onSubmit={handleSubmit(vals => this.submitForm(vals))}>
+					<form id="event_form" onSubmit={handleSubmit(vals => this.submitForm(vals))}>
 						<div className="form-group row event-input">
 							<label>
 								Event Name<span className="text-danger">*</span>
@@ -219,9 +217,6 @@ function validate(vals) {
 	return error;
 }
 
-// function mapStateToProps(state){
-
-// }
 CreateEventForm = reduxForm({
 	form: "event_creation",
 	validate
@@ -229,18 +224,9 @@ CreateEventForm = reduxForm({
 
 const selector = formValueSelector("event_creation");
 
-// export default reduxForm({
-// 	form: "event_creation",
-// 	validate
-// })(connect(null, { postNewEvent })(CreateEventForm));
-
 CreateEventForm = connect(
 	state => {
-		// can select values individually
 		const customize_punishment = selector(state, "punishment");
-		// const favoriteColorValue = selector(state, 'favoriteColor')
-		// // or together as a group
-		// const { firstName, lastName } = selector(state, 'firstName', 'lastName')
 		return {
 			customize_punishment
 		};

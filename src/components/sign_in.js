@@ -23,7 +23,7 @@ class SignIn extends Component {
         }
         return(
             <div className="login_page">
-                <form onSubmit={handleSubmit(vals => this.props.getSignIn(vals, this.props.history))}> 
+                <form id="login_form"onSubmit={handleSubmit(vals => this.props.getSignIn(vals, this.props.history))}> 
                     <h6 className="login-subtitles">E-mail</h6>
                     <Field name="email" type="email" component={renderInput} />
                     <h6 className="login-subtitles">Password</h6>
