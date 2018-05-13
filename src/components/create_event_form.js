@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng
+} from "react-places-autocomplete";
 import { postNewEvent } from "../actions/index";
 import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, formValueSelector } from "redux-form";
 import { renderInput, renderInput_invitee } from "./render_input";
 
 class CreateEventForm extends Component {
@@ -14,8 +17,10 @@ class CreateEventForm extends Component {
 		this.state = {
 			address: "",
 			address_input_msg: ""
+			// show_custom_punishment: false
 		};
-
+		this.show_custom_punishment = false;
+		// this.div_custom_punishment = null;
 		this.handleChange = this.handleChange.bind(this);
 	}
 
@@ -55,7 +60,10 @@ class CreateEventForm extends Component {
 
 	render() {
 		let { address_input_msg } = this.state;
-		let { handleSubmit } = this.props;
+		let { handleSubmit, customize_punishment } = this.props;
+
+		const show_custom_punishment =
+			customize_punishment === "custom punishment" ? true : false;
 
 		const inputProps = {
 			value: this.state.address,
@@ -147,10 +155,29 @@ class CreateEventForm extends Component {
 							>
 								<option value="No Punishment">No Punishment</option>
 								<option value="50 Push-ups">50 Push-ups</option>
-								<option value="Buy Winners Lunch">Buy Winners Lunch</option>
-								<option value="Eat a Jar of Mayo">Eat a Jar of Mayo</option>
+								<option value="Buy Winners Lunch">
+									Buy Winners Lunch
+								</option>
+								<option value="Eat a Jar of Mayo">
+									Eat a Jar of Mayo
+								</option>
+								<option value="custom punishment">
+									custom punishment
+								</option>
 							</Field>
 						</div>
+						{show_custom_punishment && (
+							<div>
+								<label>Enter punishment</label>
+								<Field
+									className="form-control"
+									name="custom_punishment"
+									component={renderInput}
+									type="text"
+									label="custom_punishment"
+								/>
+							</div>
+						)}
 						<button type="submit" className="btn btn-outline-success">
 							Confirm
 						</button>
@@ -192,7 +219,33 @@ function validate(vals) {
 	return error;
 }
 
-export default reduxForm({
+// function mapStateToProps(state){
+
+// }
+CreateEventForm = reduxForm({
 	form: "event_creation",
 	validate
-})(connect(null, { postNewEvent })(CreateEventForm));
+})(CreateEventForm);
+
+const selector = formValueSelector("event_creation");
+
+// export default reduxForm({
+// 	form: "event_creation",
+// 	validate
+// })(connect(null, { postNewEvent })(CreateEventForm));
+
+CreateEventForm = connect(
+	state => {
+		// can select values individually
+		const customize_punishment = selector(state, "punishment");
+		// const favoriteColorValue = selector(state, 'favoriteColor')
+		// // or together as a group
+		// const { firstName, lastName } = selector(state, 'firstName', 'lastName')
+		return {
+			customize_punishment
+		};
+	},
+	{ postNewEvent }
+)(CreateEventForm);
+
+export default CreateEventForm;

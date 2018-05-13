@@ -172,6 +172,10 @@ export function updateProfilePic(formData) {
 
 export function postNewEvent(sendData) {
 	return dispatch => {
+		if(sendData.punishment=== "custom punishment"){
+			sendData.punishment = sendData.custom_punishment;
+			sendData.custom_punishment = null;
+		}
 		axios.post(`${BASE_URL}?operation=insertEvent`, sendData).then(resp => {
 			if (resp.data.success === true) {
 				dispatch({
