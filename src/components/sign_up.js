@@ -24,7 +24,7 @@ class SignUp extends Component {
             <div className="signup-page">
                 <h1 className="batsu-title-signup">Sign-Up</h1>
                 <div className="signup-main">
-                    <form onSubmit={handleSubmit((vals) => this.handleSignup(vals))}>
+                    <form id="signup_form" onSubmit={handleSubmit((vals) => this.handleSignup(vals))}>
                         <div>
                             <h6 className="signin-subtitles">First Name</h6>
                             <Field className="signup_info" name="fname" component={renderInput}/>

@@ -12,6 +12,9 @@ const Login_Page = (props) => {
                 <SignIn history={props.history} />
                 <div className="line_space"></div>
             </div>
+            <div>
+            <Link className="login-batsu-info" to="/what_is_batsu">What's Batsu?</Link>
+            </div>
         </div>
     )
 }

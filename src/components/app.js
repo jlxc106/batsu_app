@@ -21,7 +21,7 @@ const App = () => (
       <Route path="/home" component={authUser(Home)} />
       <Route path="/profile" component={authUser(Profile)} />
       <Route path="/events" component={authUser(EventList)} />
-      <Route path="/what_is_batsu" component={authUser(WhatIsBatsu)} />
+      <Route path="/what_is_batsu" component={WhatIsBatsu} />
       <Route path="/preview_event" component={authUser(CreatedEvent)} />
       <Route path="/" component={authUser(Home)} />
     </Switch>

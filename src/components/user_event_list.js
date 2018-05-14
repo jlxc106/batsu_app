@@ -9,20 +9,6 @@ class EventList extends Component {
         super(props);
     }
 
-    // componentWillMount(){
-    //     this.getData();
-    // }
-
-    // getData(){
-    //     axios.get('https://jayclim.com/php/getData.php?operation=eventlist&token='+document.cookie.split('=')[1]).then((resp) => {
-    //         this.Loaded = true;
-    //         this.setState({
-    //             createdEventsList: resp.data.data.createdEventList,
-    //             invitedEventsList: resp.data.data.invitedEventList  
-    //         })
-    //     });
-    // }
-
     render(){
         if(_.isEmpty(this.props.events)) {
             return (
@@ -32,14 +18,14 @@ class EventList extends Component {
             return (
                 <div>
                     <h1 className="myEvents_title">My Events</h1>
-                    <h3 className="myEvents_subtitle">All of Your Events in One Place!</h3>
+                    {/* <h3 className="myEvents_subtitle">All of Your Events in One Place!</h3> */}
 
-                    <h4 className="events_box_title">My Created Events</h4>
-                    <div className="my_created_events_box">
+                    <h4 className="events_box_title">Created Events</h4>
+                    <div className="events_box">
                         <ListOfEvents className="list_info" eventsList={this.props.events.createdEvents} />
                     </div>
-                    <h4 className="events_box_title">Other Created Events</h4>
-                    <div className="other_created_events_box">
+                    <h4 className="events_box_title">Invited Events</h4>
+                    <div className="events_box">
                         <ListOfEvents className="list_info" eventsList={this.props.events.invitedEvents} />
                     </div>
                 </div>

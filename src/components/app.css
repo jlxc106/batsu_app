@@ -1,659 +1,576 @@
-.batsu-app{
-    width: 100%;
-    margin: 0 auto;
-    height: 100%;
+.batsu-app {
+	width: 100%;
+	margin: 0 auto;
+	height: 100%;
 }
 
-.signup-main{
-    width: 80vw;
-    margin: 0 auto;
-    /* height: 430px; */
-    border: 2px solid black;
-    overflow-y: auto;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+.signup-main {
+	margin: 0 auto;
+	overflow-y: auto;
+	padding: 5px;
+	border-radius: 5px;
 }
 
-.topHeader{
-    width: 100vw;
-    height: 55px;
-    border-bottom: 1px black solid;
-    box-shadow: 0 3px 8px 0 grey;
+.login-batsu-info {
+	font-size: 23px;
+}
+#login_form * {
+	font-size: 20px;
 }
 
-div.card{
-    border: 0;
+.topHeader {
+	width: 100vw;
+	/* height: 55px; */
+	border-bottom: 1px black solid;
+	box-shadow: 0 3px 8px 0 grey;
+}
+
+div.card {
+	border: 0;
 }
 
 .card-img-top {
-    height:200px;
-    width: 200px;
-    margin: 0 auto;
-    border: 2px solid black;
+	height: 200px;
+	width: 200px;
+	margin: 0 auto;
+	border: 2px solid black;
 }
 
-.card-title{
-    margin: 30px 0 20px;
-    font-family: crowbar;
-    font-size: 50px;
-    color: red;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+.card-title {
+	margin: 40px 0 20px;
+	font-family: crowbar;
+	font-size: 45px;
+	color: red;
+	text-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
-.topbar-menu{
-    text-align: center;
-    font-family: crowbar;
+.profile-user-info-container {
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.topbar-menu {
+	text-align: center;
+	font-family: crowbar;
 }
 
 .error {
-    border: 1px solid red;
+	border: 1px solid red;
 }
 
-.topbar-links{
-    margin: 0 15px;
+.topbar-links {
+	margin: 0 15px;
 }
 
-.batsu-title{
-    text-align: center;
-    font-family: rocks_rg;
-    color: red;
-    font-style: oblique;
-    font-size: 100px;
-    margin: 70px 0 20px;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+.batsu-title {
+	text-align: center;
+	font-family: rocks_rg;
+	color: red;
+	font-style: oblique;
+	font-size: 100px;
+	margin: 70px 0 20px;
+	text-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
-.batsu-title-signup{
-    text-align: center;
-    font-family: rocks_rg;
-    color: red;
-    font-style: oblique;
-    font-size: 70px;
-    margin: 50px 0 20px;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+.batsu-title-signup {
+	text-align: center;
+	font-family: rocks_rg;
+	color: red;
+	font-style: oblique;
+	font-size: 70px;
+	margin: 50px 0 20px;
+	text-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
 .login_page {
-    color: black;
-    text-align: center;
-    padding: 20px 0 0;
+	color: black;
+	text-align: center;
+	padding: 20px 0 0;
 }
 
 .title_img {
-    text-align: center;
-    margin-top: 75px;
+	text-align: center;
+	margin-top: 75px;
 }
 
-.login-subtitles{
-    margin: 10px 0 2px;
-
+.login-subtitles {
+	margin: 10px 0 2px;
 }
 
-.signin-subtitles{
-    margin: 10px 0 2px;
+.signin-subtitles {
+	margin: 10px 0 2px;
 }
 
 .fileInput {
-    width:auto;
-    border:0;
-    font-size:10px;
-    line-height: normal;
+	width: auto;
+	border: 0;
+	font-size: 10px;
+	line-height: normal;
 }
 
-.fileButton{
-    font-size:10px;
-    border-radius:0px;
-}
-/***changing CSS3 for google places module***/
-
-#PlacesAutocomplete__root {
-    width:100% !important;
+.fileButton {
+	font-size: 10px;
+	border-radius: 0px;
 }
 
 #PlacesAutocomplete__root > input {
-    height:41px !important;
+	min-width: 50vw;
 }
 
-/* .map_loading_img{
-    height: 100px;
-    width: 100px;
-} */
-
-.login-button{
-    font-family: crowbar;
-    width: 100px;
-    background-color: greenyellow;
-    color: black;
-    font-size: 15px;
-    margin: 20px 0 0;
-    padding: 5px 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 10px black;
+.login-button {
+	font-family: crowbar;
+	width: 100px;
+	background-color: greenyellow;
+	color: black;
+	font-size: 20px;
+	margin: 20px 0 0;
+	padding: 5px 15px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 10px black;
 }
 
-.topHeaderTitle{
-    text-align: center;
-    font-size: 39px;
-    font-family: rocks_rg;
-    color: red;
-    font-style: oblique;
-    margin-bottom:6px;
-    padding-top: 6px;
-    text-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 3px black;
+.topHeaderTitle {
+	text-align: center;
+	font-size: 50px;
+	font-family: rocks_rg;
+	color: red;
+	font-style: oblique;
+	margin-bottom: 6px;
+	padding-top: 6px;
+	text-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 3px black;
 }
 
 #topHeaderLink {
-    color: red;
+	color: red;
 }
 
-
-
-.signup-top-div{
-    text-align: center;
+.signup-top-div {
+	text-align: center;
 }
 
-input, select{
-    width: 185px;
-    border: 2px solid black;
-    border-radius: 5px;
-    margin: 0;
-    font-size: 20px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+#signup_form * {
+	font-size: 20px;
 }
 
-.event-input input{
-    margin-left: 30px;
+#signup_form > div {
+	padding-top: 1px;
 }
 
-.form-control{
-    width: 230px;
-    display: inline-block;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+input,
+select {
+	width: 185px;
+	border: 2px solid black;
+	border-radius: 5px;
+	margin: 0;
+	font-size: 20px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
+}
+
+.form-control {
+	min-width: 360px;
+	max-width: 500px;
+	display: inline-block;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
 }
 
 #option_menu,
-#option_menu option{
-    width: 185px;
+#option_menu option {
+	width: 185px;
 }
 
-.signup-button{
-    font-family: crowbar;
-    background-color: orange;
-    color: black;
-    width: 100px;
-    font-size: 15px;
-    margin: 10px 10px 20px;
-    padding: 5px 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.signup-button {
+	font-family: crowbar;
+	background-color: orange;
+	color: black;
+	width: 100px;
+	font-size: 20px;
+	margin: 10px 10px 20px;
+	padding: 5px 15px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
 }
 
 .back-signup-button {
-    font-family: crowbar;
-    color: black;
-    background-color: orange;
-    width: 100px;
-    font-size: 15px;
-    margin: 20px 10px 25px;
-    padding: 5px 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+	font-family: crowbar;
+	color: black;
+	background-color: orange;
+	width: 100px;
+	font-size: 15px;
+	margin: 20px 10px 25px;
+	padding: 5px 15px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
 }
 
-.submit-signup-button{
-    font-family: crowbar;
-    color: black;
-    background-color: greenyellow;
-    width: 100px;
-    font-size: 15px;
-    margin: 18px 10px 25px;
-    padding: 5px 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.submit-signup-button {
+	font-family: crowbar;
+	color: black;
+	background-color: greenyellow;
+	width: 100px;
+	font-size: 15px;
+	margin: 18px 10px 25px;
+	padding: 5px 15px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
 }
 
-.my_events_loading{
-    margin: 165px 0 0;
-    font-size: 40px;
-    text-shadow:
-            1px 1px 0 grey,
-            1px 1px 0 grey,
-            1px 1px 0 grey,
-            1px 1px 0 grey,
-            1px 1px 3px grey;
+.my_events_loading {
+	margin: 165px 0 0;
+	font-size: 40px;
+	text-shadow: 1px 1px 0 grey, 1px 1px 0 grey, 1px 1px 0 grey, 1px 1px 0 grey,
+		1px 1px 3px grey;
 }
 
-.preview_loading{
-    margin: 165px 0 0;
-    font-size: 40px;
-    text-shadow:
-            1px 1px 0 grey,
-            1px 1px 0 grey,
-            1px 1px 0 grey,
-            1px 1px 0 grey,
-            1px 1px 3px grey;
-}  
-
-.profile_button{
-    margin: 0 auto;
-    font-family: crowbar;
-    color: black;
-    width: 100px;
-    font-size: 15px;
-    padding: 5px 15px;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.preview_loading {
+	margin: 165px 0 0;
+	font-size: 40px;
+	text-shadow: 1px 1px 0 grey, 1px 1px 0 grey, 1px 1px 0 grey, 1px 1px 0 grey,
+		1px 1px 3px grey;
 }
 
-a:hover, a:visited, a:link, a:active,
-button:hover, button:visited, button:link, button:active{
-    text-decoration: none;
-    color: black;
+.profile_button {
+	margin: 0 auto;
+	font-family: crowbar;
+	color: black;
+	width: 100px;
+	font-size: 15px;
+	padding: 5px 15px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
 }
 
-.line_space{
-    border: 1px solid black;
-    width: 90%;
-    height: 0;
-    margin: 0 auto;
-    margin-bottom: 20px;
+a:hover,
+a:visited,
+a:link,
+a:active,
+button:hover,
+button:visited,
+button:link,
+button:active {
+	text-decoration: none;
+	color: black;
 }
 
-.login_trouble{
-    font-size: 13px;
-    text-align: center;
-    margin: 83px 0 5px;
-    color: red;
+.line_space {
+	border: 1px solid black;
+	width: 90%;
+	height: 0;
+	margin: 0 auto;
+	margin-bottom: 20px;
 }
 
-.login_trouble-signup{
-    font-size: 13px;
-    text-align: center;
-    margin: 46px 0 5px;
-    color: red;
+.login_trouble {
+	font-size: 13px;
+	text-align: center;
+	margin: 83px 0 5px;
+	color: red;
 }
 
-.title_bottom_links{
-    text-align: center;
+.login_trouble-signup {
+	font-size: 13px;
+	text-align: center;
+	margin: 46px 0 5px;
+	color: red;
 }
 
-.title_bottom_links-signup{
-    text-align: center;
-    margin-bottom: 15px;
+.title_bottom_links {
+	text-align: center;
 }
 
-.title_routes{
-    margin:0 25px;
+.title_bottom_links-signup {
+	text-align: center;
+	margin-bottom: 15px;
 }
 
-.create_event_button{
-    font-family: crowbar;
-    text-align: center;
-    width: 100px;
-    background-color: greenyellow;
-    color: black;
-    font-size: 15px;
-    padding: 10px;
-    margin: 10px 0 0;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.title_routes {
+	margin: 0 25px;
 }
 
-.map_modal_button{
-    font-family: crowbar;
-    text-align: center;
-    width: 100px;
-    background-color: greenyellow;
-    color: black;
-    font-size: 15px;
-    padding: 10px;
-    margin: 20px 0 0;
-    border: 2px solid black;
-    border-radius: 5px;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.event_modal > h1:first-child {
+	font-size: 40px;
+	font-family: rocks_rg;
+	margin: 20px 0 15px;
+}
+.event_modal {
+	text-align: center;
 }
 
+.event-input {
+	padding: 1px 10px 1px 10px;
+}
+
+.event-input label {
+	margin-right: 30px;
+}
+
+#event_form {
+	margin: 0px auto;
+}
+
+.create_event_button {
+	font-family: crowbar;
+	text-align: center;
+	background-color: greenyellow;
+	color: black;
+	font-size: 18px;
+	padding: 10px;
+	margin: 10px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
+}
+
+.map_modal_button {
+	font-family: crowbar;
+	text-align: center;
+	width: 100px;
+	background-color: greenyellow;
+	color: black;
+	font-size: 15px;
+	padding: 10px;
+	margin: 20px 0 0;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
+}
 
 /* burger menu  */
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    left: 17px;
-    top: 18px;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 17px;
+	top: 18px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    background-color: darkred;
+	background-color: darkred;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-    height: 25px;
-    width: 25px;
+	height: 25px;
+	width: 25px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-    background: #bdc3c7;
+	background: #bdc3c7;
 }
 
 /* General sidebar styles */
 .bm-menu {
-    background: #373a47;
-    padding: 31px;
-    font-size: 14px;
+	background: #373a47;
+	padding: 31px;
+	font-size: 14px;
 }
 
-.bm-menu-wrap{
-    width: 175px;
-    height: 250px;
-    padding: 0;
+.bm-menu-wrap {
+	width: 175px;
+	height: 250px;
+	padding: 0;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-    fill: #373a47;
+	fill: #373a47;
 }
 
-.event_title{
-    margin-top: 30px;
-    font-family: crowbar;
-    font-size: 50px;
+.event_title {
+	margin-top: 30px;
+	font-family: crowbar;
+	font-size: 50px;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
+	color: #b8b7ad;
+	padding: 0.8em;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+	background: rgba(0, 0, 0, 0.3);
 }
 
-a.menu-item{
-    font-family: crowbar;
-    color: white;
-    font-size: 30px;
-    padding: 15px 0;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+a.menu-item {
+	font-family: crowbar;
+	color: white;
+	font-size: 30px;
+	padding: 15px 0;
+	text-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
-nav.bm-item-list{
-    text-align: left;
-    padding: 0;
+nav.bm-item-list {
+	text-align: left;
+	padding: 0;
 }
 
-div.bm-menu{
-    background-color: #cc0000;
-    box-shadow: inset -8px 0 18px -7px #000000, inset 0 20px 20px -20px #000000;
+div.bm-menu {
+	background-color: #cc0000;
+	box-shadow: inset -8px 0 18px -7px #000000, inset 0 20px 20px -20px #000000;
 }
 
-/* my_events page css */
-.myEvents_title{
-    margin: 30px 0 5px;
-    font-size: 50px;
-    color: red;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+.myEvents_title {
+	margin: 50px 0 50px;
+	font-size: 50px;
+	color: red;
+	text-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
-.myEvents_subtitle{
-    color: orange;
-    font-size: 20px;
-    margin: 5px 0 30px;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 3px black;
+.events_box_title {
+	font-size: 40px;
+	margin-top: 15px;
+	color: black;
 }
 
-.events_box_title{
-    margin-top: 15px;
-    color: black;
+.list-group-item a {
+	margin: 0px auto;
 }
 
-.my_created_events_box{
-    margin: 0 auto;
-    border: 2px solid black;
-    width: 300px;
-    height: 150px;
-    border-radius: 5px;
-    overflow-y: scroll;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.events_box {
+	font-size: 25px;
+	margin: 40px auto 40px;
+	border: 2px solid black;
+	width: 800px;
+	min-height: 300px;
+	max-height: 600px;
+	border-radius: 5px;
+	overflow-y: auto;
+	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
+		1px 1px 0 black, 1px 1px 6px black;
 }
 
-.other_created_events_box{
-    margin: 0 auto;
-    border: 2px solid black;
-    width: 300px;
-    height: 150px;
-    border-radius: 5px;
-    overflow-y: scroll;
-    box-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 6px black;
+.list_info {
+	width: 100vw;
+	height: 80vh;
 }
 
-.list_info{
-    width: 100vw;
-    height: 80vh;
+.howto_title_top {
+	margin: 50px 0 50px;
+	font-size: 50px;
+	color: red;
+	text-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
-/* How To Page */
-.howto_title_top{
-    margin: 30px 0 0px;
-    font-size: 50px;
-    color: red;
-    text-shadow:
-        2px 2px 0 black,
-        2px 2px 0 black,
-        2px 2px 0 black,
-        2px 2px 0 black,
-        2px 2px 6px black;
+.howto_inner_text {
+	margin: 0 auto;
+	border: 2px solid black;
+	font-size: 23px;
+	padding: 5px;
+	width: 600px;
+	border-radius: 5px;
+	overflow-y: auto;
+	box-shadow: 2px 2px 0 black, 2px 2px 0 black, 2px 2px 0 black,
+		2px 2px 0 black, 2px 2px 6px black;
 }
 
-.howto_title_bottom{
-    margin: 5px 0 10px;
-    font-size: 20px;
-    color: red;
-    text-shadow:
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 0 black,
-            1px 1px 3px black;
+#loading {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	height: 50%;
 }
 
-.howto_group_pic{
-    margin: 10px 0 20px;
-    width: 289px;
-    height: auto;
-    border: 2px solid black;
-    box-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+#eventmap {
+	border: 2px solid black;
+	width: 92vw;
+	height: 24.7vh;
+	display: inline-block;
+	margin-bottom: 1vh;
 }
 
-.howto_inner_text{
-    margin: 0 auto;
-    border: 2px solid black;
-    font-size: 23px;
-    padding: 5px;
-    width: 350px;
-    height: 250px;
-    border-radius: 5px;
-    overflow-y: scroll;
-    box-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 6px black;
+.attendee_pic {
+	height: 80px;
+	width: 80px;
+}
+.attendee_img_contain {
+	display: inline-block;
+	width: 25vw;
+	list-style-type: none;
+}
+.attendee_list {
+	list-style-type: none;
 }
 
-.howto_subtitle{
-    margin: 20px 0 0;
-    font-size: 25px;
+.friends_picture_container {
+	overflow: auto;
+	white-space: nowrap;
 }
 
-.card-title {
-    margin: 20px 0 20px !important;
+.profile_picture {
+	height: 200px;
+	width: 200px;
 }
 
-#loading{
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position:absolute;
-    height:50%;
+.profileInput {
+	width: 285px;
+	margin: 15px 0 5px;
 }
 
-/* .map_element div:nth-child(2){
-    position: absolute;
-    width: 100vw;
-    height: 82vh;
-    top: 0%;
-    width: 100%;
-    height: 100%;
-} */
+@media only screen and (max-width: 768px) {
+	/* event creation */
+	.form-control {
+		min-width: 90%;
+		max-width: 100%;
+	}
+	.ReactModal__Content--after-open {
+		width: 90vw !important;
+		top: 50% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%);
+		height: 90vh !important;
+	}
 
-#eventmap{
-    border:2px solid black;
-    width:92vw;
-    height:24.7vh;
-    display: inline-block; 
-    margin-bottom:1vh;
-}
+	.container {
+		padding: 0px;
+	}
 
-.attendee_pic{
-    height: 80px;
-    width: 80px;
-}
-.attendee_img_contain{
-    display: inline-block;
-    width: 25vw;
-    list-style-type: none;
-}
-.attendee_list{
-    list-style-type: none;
-}
+	.event-input * {
+		margin: 0 auto !important;
+	}
+	.event-input label {
+		width: 80%;
+	}
 
-.friends_picture_container{
-    overflow: auto;
-    white-space: nowrap;
-}
+	/* what is batsu */
+	.howto_inner_text {
+		width: 90vw;
+		margin-bottom: 30px;
+	}
 
-.profile_picture{
-    height: 180px;
-    width: 180px;
-}
+	.profile_button {
+		margin-bottom: 20px;
+    }
+    
+    .events_box{
+        min-width: 80vw;
+        max-width: 80vw;
+    }
 
-.profileInput{
-    width: 285px;
 }
-/*@media screen and (min-width: 700px)*/
