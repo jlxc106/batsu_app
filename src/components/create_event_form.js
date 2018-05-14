@@ -48,11 +48,11 @@ class CreateEventForm extends Component {
 						this.props.postNewEvent(vals);
 						this.props.exitEventForm();
 					} else {
-						this.setState({ address_input_msg: "enter valid address" });
+						this.setState({ address_input_msg: "<li>enter valid address</li>" });
 					}
 				});
 		} else {
-			this.setState({ address_input_msg: "no address" });
+			this.setState({ address_input_msg: "<li>no address</li>" });
 		}
 	}
 
@@ -128,7 +128,7 @@ class CreateEventForm extends Component {
 								inputProps={inputProps}
 							/>
 							<ul className="text-danger list-group">
-								<li>{address_input_msg}</li>
+								{address_input_msg}
 							</ul>
 						</div>
 						<div className="form-group row event-input">
@@ -165,7 +165,7 @@ class CreateEventForm extends Component {
 							</Field>
 						</div>
 						{show_custom_punishment && (
-							<div>
+							<div className="form-group row event-input">
 								<label>Enter punishment</label>
 								<Field
 									className="form-control"

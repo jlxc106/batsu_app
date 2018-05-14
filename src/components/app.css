@@ -11,15 +11,12 @@
 	border-radius: 5px;
 }
 
-
-
-.login-batsu-info{
-    font-size: 23px;
+.login-batsu-info {
+	font-size: 23px;
 }
-#login_form *{
-    font-size: 20px;
+#login_form * {
+	font-size: 20px;
 }
-
 
 .topHeader {
 	width: 100vw;
@@ -40,7 +37,7 @@ div.card {
 }
 
 .card-title {
-    margin: 40px 0 20px;
+	margin: 40px 0 20px;
 	font-family: crowbar;
 	font-size: 45px;
 	color: red;
@@ -48,9 +45,9 @@ div.card {
 		2px 2px 0 black, 2px 2px 6px black;
 }
 
-.profile-user-info-container{
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+.profile-user-info-container {
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .topbar-menu {
@@ -120,7 +117,7 @@ div.card {
 }
 
 #PlacesAutocomplete__root > input {
-    min-width: 50vw;
+	min-width: 50vw;
 }
 
 .login-button {
@@ -158,11 +155,11 @@ div.card {
 }
 
 #signup_form * {
-    font-size: 20px;
+	font-size: 20px;
 }
 
-#signup_form > div{
-    padding-top: 1px;
+#signup_form > div {
+	padding-top: 1px;
 }
 
 input,
@@ -176,14 +173,9 @@ select {
 		1px 1px 0 black, 1px 1px 6px black;
 }
 
-/* .event-input input {
-	margin-left: 30px;
-} */
-
 .form-control {
-    min-width: 200px;
-    max-width: 500px;
-	/* width: 270px; */
+	min-width: 360px;
+	max-width: 500px;
 	display: inline-block;
 	box-shadow: 1px 1px 0 black, 1px 1px 0 black, 1px 1px 0 black,
 		1px 1px 0 black, 1px 1px 6px black;
@@ -310,32 +302,30 @@ button:active {
 	margin: 0 25px;
 }
 
-
-.event_modal > h1:first-child{
-    font-size: 40px;
-    font-family: rocks_rg;
+.event_modal > h1:first-child {
+	font-size: 40px;
+	font-family: rocks_rg;
+	margin: 20px 0 15px;
 }
-.event_modal{
-    text-align: center;
-}
-
-.event-input{
-    padding: 1px 10px 1px 10px;
+.event_modal {
+	text-align: center;
 }
 
-.event-input label{
-    margin-right: 30px;
+.event-input {
+	padding: 1px 10px 1px 10px;
 }
 
-#event_form{
-    margin: 0px auto;
+.event-input label {
+	margin-right: 30px;
 }
 
+#event_form {
+	margin: 0px auto;
+}
 
 .create_event_button {
 	font-family: crowbar;
 	text-align: center;
-	/* width: 100px; */
 	background-color: greenyellow;
 	color: black;
 	font-size: 18px;
@@ -365,7 +355,7 @@ button:active {
 /* burger menu  */
 /* Position and sizing of burger button */
 .bm-burger-button {
-	position: fixed;
+	position: absolute;
 	width: 20px;
 	height: 20px;
 	left: 17px;
@@ -442,7 +432,6 @@ div.bm-menu {
 	box-shadow: inset -8px 0 18px -7px #000000, inset 0 20px 20px -20px #000000;
 }
 
-/* my_events page css */
 .myEvents_title {
 	margin: 50px 0 50px;
 	font-size: 50px;
@@ -451,34 +440,22 @@ div.bm-menu {
 		2px 2px 0 black, 2px 2px 6px black;
 }
 
-/* .myEvents_subtitle{
-    color: orange;
-    font-size: 20px;
-    margin: 5px 0 30px;
-    text-shadow:
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 0 black,
-            2px 2px 3px black;
-} */
-
 .events_box_title {
 	font-size: 40px;
 	margin-top: 15px;
 	color: black;
 }
 
-.list-group-item a{
-    margin: 0px auto;
+.list-group-item a {
+	margin: 0px auto;
 }
 
 .events_box {
-    font-size: 25px;
+	font-size: 25px;
 	margin: 40px auto 40px;
 	border: 2px solid black;
 	width: 800px;
-    min-height: 300px;
+	min-height: 300px;
 	max-height: 600px;
 	border-radius: 5px;
 	overflow-y: auto;
@@ -511,11 +488,6 @@ div.bm-menu {
 		2px 2px 0 black, 2px 2px 6px black;
 }
 
-/* .howto_subtitle{
-    margin: 20px 0 0;
-    font-size: 25px;
-} */
-
 #loading {
 	position: relative;
 	top: 50%;
@@ -524,15 +496,6 @@ div.bm-menu {
 	position: absolute;
 	height: 50%;
 }
-
-/* .map_element div:nth-child(2){
-    position: absolute;
-    width: 100vw;
-    height: 82vh;
-    top: 0%;
-    width: 100%;
-    height: 100%;
-} */
 
 #eventmap {
 	border: 2px solid black;
@@ -566,7 +529,48 @@ div.bm-menu {
 }
 
 .profileInput {
-    width: 285px;
-    margin: 15px 0 5px;
+	width: 285px;
+	margin: 15px 0 5px;
 }
-/*@media screen and (min-width: 700px)*/
+
+@media only screen and (max-width: 768px) {
+	/* event creation */
+	.form-control {
+		min-width: 90%;
+		max-width: 100%;
+	}
+	.ReactModal__Content--after-open {
+		width: 90vw !important;
+		top: 50% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%);
+		height: 90vh !important;
+	}
+
+	.container {
+		padding: 0px;
+	}
+
+	.event-input * {
+		margin: 0 auto !important;
+	}
+	.event-input label {
+		width: 80%;
+	}
+
+	/* what is batsu */
+	.howto_inner_text {
+		width: 90vw;
+		margin-bottom: 30px;
+	}
+
+	.profile_button {
+		margin-bottom: 20px;
+    }
+    
+    .events_box{
+        min-width: 80vw;
+        max-width: 80vw;
+    }
+
+}
