@@ -9,7 +9,7 @@ export function renderInput_invitee({input, type, meta: {pristine, visited, erro
             {...input} 
             className={`form-control ${hasError ? 'form-control-danger' : ''}`}
             type={type ? type : 'text'} />
-            <div>{showExample ? 'ex: test_email1@gmail.com, test_email2@gmail.com, test_email3@gmail.com, test_email4@gmail.com' : ''}</div>
+            <div>{showExample ? 'ex: test_email1@gmail.com, test_email2@gmail.com' : ''}</div>
             <div className="form-control-feedback">{hasError ? error : ''}</div>
         </div>
     )
