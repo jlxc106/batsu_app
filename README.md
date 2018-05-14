@@ -15,9 +15,7 @@ Use the built in event creation form to invite your friends to the gym or to a h
 
 ## **Future Features:**
 * More intuitive way to invite friends(unique username/id)
-* CSS
 * Interaction with map on home page
-* customizable punishments
 
 ## Acknowledgments
   * [C5.17 Accountability Team](https://github.com/Learning-Fuze/c5.17_accountability)
@@ -30,9 +28,9 @@ Use the built in event creation form to invite your friends to the gym or to a h
 ### Change Log: 
 
 5/13/18:
- * customizable punishment
- * code clean-up
- * css
+ * customizable punishments
+ * code redundancy clean-up
+ * improved css for desktop & mobile
 
 4/28/18:
  * enabled ssl installation/configuration
